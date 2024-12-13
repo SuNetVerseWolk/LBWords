@@ -1,0 +1,32 @@
+.bordered {
+	border: theme(colors.foreground.aBitT) 1px solid;
+
+	&:hover {
+		background: theme(colors.secondary.main);
+		transition: .5s;
+	}
+	&:focus {
+		background: theme(colors.secondary.main);
+	}
+
+	&.dark {
+		border-color: transparent;
+		background: theme(colors.foreground.main);
+		color: #fff;
+
+		&:hover {
+			background: theme(colors.secondary.dark);
+			transition: .5s;
+		}
+		&:focus {
+			background: theme(colors.foreground.main);
+		}
+	}
+}
+
+.roundedLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: theme(spacing[0.5]);
+}

@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "HachiMaruPop";
+	src: url("../fonts/HachiMaruPop-Regular.ttf");
+}
+@font-face {
+	font-family: "Pangolin";
+	src: url("../fonts/Pangolin-Regular.ttf");
+}
+@font-face {
+	font-family: "Shantell_Sans";
+	src: url("../fonts/Shantell_Sans/ShantellSans-VariableFont_BNCE,INFM,SPAC,wght.ttf");
+}
+
+:root {
+	--color-foreground: theme(colors.foreground.main);
+	--color-foregroundABitT: theme(colors.foreground.aBitT);
+	--color-foregroundBitT: theme(colors.foreground.bitT);
+	--color-primary: theme(colors.primary.main);
+	--color-secondary-main: theme(colors.secondary.main);
+	--color-secondary-dark: theme(colors.secondary.dark);
+}
+
+* {
+	outline: none;
+}
+
+body {
+	font-family: "HachiMaruPop";
+}
