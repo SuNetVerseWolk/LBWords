@@ -37,6 +37,7 @@ export const options: NextAuthOptions = {
 	pages: {
 		signIn: '/in',
 		newUser: '/up',
+		error: '/error',
 	},
 	debug: true,
 	secret: "071cb66eda7d36ff126f0609207c4c55c03d19f62a76eed2e0297705c24c93dc",

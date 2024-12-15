@@ -3,11 +3,11 @@ import Popup from '@/components/Popup'
 
 export default function page() {
 	return (
-		<Popup className={'rounded-none text-cats-lightBeige'} >
+		<Popup className={'rounded-none text-cats-lightBeige text-center md:text-start'} >
 			<h1 className='text-center text-4xl text-cats-lightCoral'>
 				Ошибка сервера
 			</h1>
-			<p>
+			<p className='text-center md:text-s'>
 				Ошибка конфигурации сервера.
 			</p>
 			<p>
