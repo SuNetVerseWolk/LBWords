@@ -8,7 +8,7 @@ export default function Popup({ children, isShown } : {
   return (isShown ? (
 		<motion.div
       animate={{ opacity: 1 }}
-      className='grid-center absolute font-shantell_Sans bg-[#000000dd] text-lg hw-full z-50'
+      className='grid-center absolute font-shantell_Sans bg-[#000000dd] text-lg hw-full z-50 md:rounded-3'
     >
       <motion.div
         initial={{ scale: 0.7 }}
