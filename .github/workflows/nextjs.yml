@@ -29,41 +29,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "${{ github.workspace }}/front/yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/front/package.json" ]; then
-            echo "manager=pnpm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
-
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: front/package-lock.json # Specify the path to your lock file
+          node-version: '20' # Specify your Node.js version
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2 # Use pnpm action to install pnpm
+        with:
+          version: '7' # Specify the version of pnpm you want to use
 
       - name: Install dependencies
-        run: cd front && ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: cd front && pnpm install # Navigate to front folder and install dependencies
 
       - name: Build with Next.js
-        run: cd front && ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: cd front && pnpm run build # Navigate to front folder and build the project
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: front/out
+          path: front/out # Adjust this if your output folder is different
 
   # Deployment job
   deploy:
