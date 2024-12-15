@@ -4,15 +4,17 @@ import Center from './Center';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-export default function Loading({ children } : {
-	children: React.ReactNode
+export default function Loading({ children, time=1700, isLoading=false } : {
+	children: React.ReactNode,
+	time?: number,
+	isLoading?: boolean,
 }) {
 	const [showLoading, setShowLoading] = useState(true);
 
 	useEffect(() => {
 		let timer = setTimeout(() => {
-			setShowLoading(false);
-		}, 1700);
+			setShowLoading(isLoading);
+		}, time);
 
 		return () => clearTimeout(timer);
 	}, []);
@@ -32,7 +34,7 @@ export default function Loading({ children } : {
 							/>
 					</motion.div>
 				</Center>
-			) : children || null }
+			) : children || <></> }
 		</>
 	)
 }

@@ -4,12 +4,14 @@ import { UserContext } from "@/contexts/UserContext";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
+import { isDeviceType } from "@/services/checkDeviceType";
 
 export default function page() {
   const [isBoolean, setBoolaen] = useState({
     providerPopupShown: false,
     logoutPopupShown: false,
   });
+	const {isPhone} = isDeviceType();
   const session = useContext(UserContext);
 
   return (
@@ -40,13 +42,13 @@ export default function page() {
         </p>
         <div className="flex justify-evenly gap-3">
           <button
-            className="bg-secondary-main text-dark-brown py-0.5 px-10 rounded-md text-lg"
+            className="bg-secondary-main text-dark-brown py-0.5 px-10 md:px-4 rounded-md text-lg"
             onClick={() => signOut({ callbackUrl: "/" })}
           >
             Да
           </button>
           <button
-            className="bg-secondary-main text-dark-brown py-0.5 px-10 rounded-md text-lg"
+            className="bg-secondary-main text-dark-brown py-0.5 px-10 md:px-4 rounded-md text-lg"
             onClick={() =>
               setBoolaen((prev) => ({ ...prev, logoutPopupShown: false }))
             }
@@ -55,19 +57,24 @@ export default function page() {
           </button>
         </div>
       </Popup>
-      <div className="flex flex-col gap-3 w-full px-5">
+      <div className="flex flex-col gap-3 px-5">
         <h1 className="text-3xl font-bold font-pangolin">Настройки профиля</h1>
         <div className="flex gap-3">
-          <Image
-            alt="user image"
-            src={session?.user?.image || ""}
-            width={50}
-            height={50}
-            className="rounded-full min-w-[20vw] aspect-square border-2 border-black md:w-full"
-          />
-          {/*<p className="flex-center text-cats-lightCoral text-lg font-semibold">Не изменяемый</p>*/}
+          {isPhone ? (
+						<Image
+							alt="user image"
+							src={session?.user?.image || ""}
+							width={50}
+							height={50}
+							className="rounded-full w-[20vw] md:w-auto aspect-square border-2 border-black"
+						/>
+					) : (
+						<button className="rounded-full dark bordered py-0.5 px-1 bg-transparent">
+							Изменить фото
+						</button>
+					)}
           <p
-            className="text-xs font-mono relative h-fit text-cats-lightCoral"
+            className="text-xs font-mono relative h-fit text-cats-lightCoral cursor-pointer"
             onClick={() =>
               setBoolaen((prev) => ({ ...prev, providerPopupShown: true }))
             }
@@ -94,7 +101,7 @@ export default function page() {
         />
       </div>
       <button
-        className="bg-black hover:bg-dark-richBrown text-cats-lightBeige rounded-3xl text-sm sm:text-base text-nowrap py-0.5 px-4 my-0.5 font-mono"
+        className="bg-black hover:bg-dark-richBrown text-cats-lightBeige rounded-3 text-sm sm:text-base text-nowrap py-0.5 px-4 my-0.5"
         onClick={() =>
           setBoolaen((prev) => ({ ...prev, logoutPopupShown: true }))
         }

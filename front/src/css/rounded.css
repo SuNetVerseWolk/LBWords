@@ -11,7 +11,7 @@
 
 	&.dark {
 		border-color: transparent;
-		background: theme(colors.foreground.main);
+		background: theme(colors.dark.brown);
 		color: #fff;
 
 		&:hover {
@@ -19,7 +19,7 @@
 			transition: .5s;
 		}
 		&:focus {
-			background: theme(colors.foreground.main);
+			background: theme(colors.dark.brown);
 		}
 	}
 }
