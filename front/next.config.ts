@@ -15,7 +15,11 @@ const nextConfig: NextConfig = {
 				hostname: 'avatars.githubusercontent.com'
 			},
 		]
-	}
+	},
+};
+
+module.exports = {
+	output: 'export',
 };
 
 export default nextConfig;
