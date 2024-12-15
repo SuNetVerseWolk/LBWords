@@ -55,24 +55,6 @@ export default {
 				'11': 'clamp(2.75rem, 11vw + .25rem, 11rem)',
 				'12': 'clamp(3rem, 12vw + .25rem, 12rem)',
 			},
-			borderRadius: {
-				'0.5': 'clamp(.125rem, .5vw + .25rem, .5rem)',
-				'1': 'clamp(.25rem, 1vw + .25rem, 1rem)',
-				'1.5': 'clamp(.375rem, 1.5vw + .25rem, 1.5rem)',
-				'2': 'clamp(.5rem, 2vw + .25rem, 2rem)',
-				'2.5': 'clamp(.625rem, 2.5vw + .25rem, 2.5rem)',
-				'3': 'clamp(.75rem, 3vw + .25rem, 3rem)',
-				'3.5': 'clamp(.875rem, 3.5vw + .25rem, 3.5rem)',
-				'4': 'clamp(1rem, 4vw + .25rem, 4rem)',
-				'5': 'clamp(1.25rem, 5vw + .25rem, 5rem)',
-				'6': 'clamp(1.5rem, 6vw + .25rem, 6rem)',
-				'7': 'clamp(1.75rem, 7vw + .25rem, 7rem)',
-				'8': 'clamp(2rem, 8vw + .25rem, 8rem)',
-				'9': 'clamp(2.25rem, 9vw + .25rem, 9rem)',
-				'10': 'clamp(2.5rem, 10vw + .25rem, 10rem)',
-				'11': 'clamp(2.75rem, 11vw + .25rem, 11rem)',
-				'12': 'clamp(3rem, 12vw + .25rem, 12rem)',
-			},
 			fontSize: {
 				'parent': 'inherit',
 				'xb': 'clamp(.55rem, .7vw + .5rem, .75rem)',
@@ -91,7 +73,6 @@ export default {
 			fontFamily: {
 				pangolin: 'Pangolin',
 				shantell_Sans: 'Shantell_Sans',
-				hachiMaruPop: 'HachiMaruPop',
 			}
     },
   },

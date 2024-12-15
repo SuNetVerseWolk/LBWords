@@ -6,8 +6,8 @@ export default function page() {
   return (
     <SignForm src="/tryHi.png" type="up" >
       <input
-        className="rounded-full bordered py-0.5 px-2 sm:px-1 bg-transparent placeholder-cats-darkTaupe font-pangolin placeholder:font-hachiMaruPop w-full"
-        type="password"
+        className="rounded-full bordered py-0.5 px-1 bg-transparent placeholder-fXgrey w-full"
+        type="repassword"
         name="repassword"
         placeholder="Повторите пароль"
       />

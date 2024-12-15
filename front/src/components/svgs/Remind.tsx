@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion, SVGMotionProps, TargetAndTransition } from "framer-motion";
+import { motion, SVGMotionProps } from "framer-motion";
 
 export const Remind: React.FC<SVGMotionProps<SVGSVGElement>> = ({ ...rest }) => {
   const [hovered, setHovered] = useState(0);
@@ -9,9 +9,9 @@ export const Remind: React.FC<SVGMotionProps<SVGSVGElement>> = ({ ...rest }) => 
     <motion.svg
       viewBox="0 0 24 24"
       animate={{
-				scale: hovered ? [0.95, 1] : 1,
+        scale: hovered ? [0.95, 1] : 1,
         transition: {
-					type: "spring",
+          type: "spring",
           stiffness: 500,
           damping: 10,
         },
