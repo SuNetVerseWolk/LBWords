@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+.bordered {
+	border: var(--color-foreground-main) 1px solid;
+
+	&:hover {
+		background: var(--color-secondary-main);
+		transition: .5s;
+	}
+	&:focus {
+		background: var(--color-secondary-main);
+	}
+
+	&.dark {
+		border-color: transparent;
+		background: var(--color-dark-brown);
+		color: #fff;
+
+		&:hover {
+			background: var(--color-secondary-dark);
+			transition: .5s;
+		}
+		&:focus {
+			background: var(--color-dark-brown);
+		}
+	}
+}
+
+.roundedLink {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-1);
+}

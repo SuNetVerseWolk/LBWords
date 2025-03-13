@@ -1,19 +1,20 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Center from './Center';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-export default function Loading({ children, time=1700, isLoading=false } : {
+export default function Loading({ children, time=1800, isLoading=false } : {
 	children: React.ReactNode,
 	time?: number,
 	isLoading?: boolean,
 }) {
-	const [showLoading, setShowLoading] = useState(true);
+	const [timeGoing, setGoing] = useState(true);
+	const showLoading = useMemo(() => timeGoing || isLoading, [timeGoing, isLoading])
 
 	useEffect(() => {
 		let timer = setTimeout(() => {
-			setShowLoading(isLoading);
+			setGoing(false);
 		}, time);
 
 		return () => clearTimeout(timer);
@@ -34,7 +35,7 @@ export default function Loading({ children, time=1700, isLoading=false } : {
 							/>
 					</motion.div>
 				</Center>
-			) : children || <></> }
+			) : children }
 		</>
 	)
 }

@@ -1,5 +1,5 @@
 'use client'
-import React, { PropsWithoutRef } from "react";
+import React from "react";
 import { motion, MotionProps } from "framer-motion";
 
 const Popup: React.FC<MotionProps & {
@@ -9,9 +9,9 @@ const Popup: React.FC<MotionProps & {
 }> = ({ children, isShown=true, className, ...rest }) => {
   return (isShown ? (
 		<motion.div
-      animate={{ opacity: 1 }}
-      className={`grid-center absolute font-shantell_Sans bg-[#000000dd] text-lg hw-full z-50 rounded-3 sm:rounded-none' ${className}`}
 			{...rest}
+      animate={{ opacity: 1 }}
+      className={`c absolute font-shantell_Sans bg-[#000000dd] text-lg w-full h-full z-50 md:rounded-4xl ${className}`}
     >
       <motion.div
         initial={{ scale: 0.7 }}

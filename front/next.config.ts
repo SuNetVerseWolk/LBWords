@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-	devIndicators: {
-		appIsrStatus: false,
-	},
+	devIndicators: false,
 	images: {
 		remotePatterns: [
 			{
@@ -14,6 +12,9 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'avatars.githubusercontent.com'
 			},
+			{
+				hostname: 'cvgwvrgsohroacxitwym.supabase.co'
+			}
 		]
 	},
 };

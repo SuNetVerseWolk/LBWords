@@ -1,13 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { motion } from "framer-motion";
+import CustomSVGProps from "@/types/customSVG";
 
-export const ProfileSvg = () => {
+export const ProfileSvg: FC<CustomSVGProps> = ({ className, pathProps, ...rest }) => {
   const [hovered, setHovered] = useState(0);
 
   return (
     <motion.svg
-      className="w-2"
+			{...rest}
+      className={`w-2 ${className}`}
       viewBox="0 0 24 24"
       animate={{
         scale: hovered ? [0.9, 1] : 1,
@@ -23,6 +25,7 @@ export const ProfileSvg = () => {
       onTouchEnd={() => setHovered(0)}
     >
       <path
+				{...pathProps}
         d="M5.8,17.1c0.9-0.6,1.8-1.2,2.8-1.5S10.9,15,12,15s2.2,0.2,3.3,0.6s2,0.9,2.8,1.5c0.6-0.7,1-1.5,1.4-2.3
 				C19.8,13.9,20,13,20,12c0-2.2-0.8-4.1-2.3-5.7S14.2,4,12,4S7.9,4.8,6.3,6.3S4,9.8,4,12c0,1,0.2,1.9,0.5,2.8
 				C4.8,15.6,5.3,16.4,5.8,17.1z M12,13c-1,0-1.8-0.3-2.5-1c-0.7-0.7-1-1.5-1-2.5s0.3-1.8,1-2.5C10.2,6.3,11,6,12,6s1.8,0.3,2.5,1

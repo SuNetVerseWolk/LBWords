@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import "@/app/globals.css";
-import "@/css/i.css";
-import "@/css/home.css";
-import "@/css/rounded.css";
-import "@/css/underlineAnim.css";
+import "@/styles/global.css";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
-  title: "LearnBooksWords",
-  description: "WebSite for learning english words by books",
+  title: "LBWords",
+  description: "WebSite for learning english words from books",
 };
 
 export default async function RootLayout({
@@ -17,7 +14,11 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="h-dvh bg-primary-main text-base">{children}</body>
+				<body className="h-dvh grid place-items-center text-base bg-main">
+					<ReactQueryProvider>
+						{children}
+					</ReactQueryProvider>
+				</body>
     </html>
   );
 }

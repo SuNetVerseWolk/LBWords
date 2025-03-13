@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@font-face {
+	font-family: "HachiMaruPop";
+	src: url("../fonts/HachiMaruPop-Regular.ttf");
+}
+@font-face {
+	font-family: "Pangolin";
+	src: url("../fonts/Pangolin-Regular.ttf");
+}
+@font-face {
+	font-family: "Shantell_Sans";
+	src: url("../fonts/Shantell_Sans/ShantellSans-VariableFont_BNCE,INFM,SPAC,wght.ttf");
+}
+
+@theme {
+	--color-main: #ffddbb;
+	--color-main-2: #ffd9b8;
+	--color-main-accent: #f7ceac;
+	--color-main-hover: #ffd5b0;
+	--color-main-darken: #efbd90;
+	--color-brown: #4e2a0b;
+	--color-brown-dark: #170c02;
+	--color-cat-beige-light: #f5e6d4;
+	--color-cat-warm: #c59d71;
+	--color-cat-brown-medium: #b38e65;
+	--color-cat-dark: #8d755c;
+	--color-cat-coral-light: #ff7777;
+
+	--text-parent: inherit;
+	--font-pangolin: 'Pangolin';
+	--font-shantell_Sans: 'Shantell_Sans';
+	--font-hachiMaruPop: 'HachiMaruPop';
+
+  --spacing-0-5: clamp(0.125rem, 0.5vw + 0.25rem, 0.5rem);
+  --spacing-1: clamp(0.25rem, 1vw + 0.25rem, 1rem);
+  --spacing-1-5: clamp(0.375rem, 1.5vw + 0.25rem, 1.5rem);
+  --spacing-2: clamp(0.5rem, 2vw + 0.25rem, 2rem);
+  --spacing-2-5: clamp(0.625rem, 2.5vw + 0.25rem, 2.5rem);
+  --spacing-3: clamp(0.75rem, 3vw + 0.25rem, 3rem);
+  --spacing-3-5: clamp(0.875rem, 3.5vw + 0.25rem, 3.5rem);
+  --spacing-4: clamp(1rem, 4vw + 0.25rem, 4rem);
+  --spacing-5: clamp(1.25rem, 5vw + 0.25rem, 5rem);
+  --spacing-6: clamp(1.5rem, 6vw + 0.25rem, 6rem);
+  --spacing-7: clamp(1.75rem, 7vw + 0.25rem, 7rem);
+  --spacing-8: clamp(2rem, 8vw + 0.25rem, 8rem);
+  --spacing-9: clamp(2.25rem, 9vw + 0.25rem, 9rem);
+  --spacing-10: clamp(2.5rem, 10vw + 0.25rem, 10rem);
+  --spacing-11: clamp(2.75rem, 11vw + 0.25rem, 11rem);
+  --spacing-12: clamp(3rem, 12vw + 0.25rem, 12rem);
+}
+
+@layer base {
+	* {
+		outline: none;
+	}
+
+	body {
+		font-family: "HachiMaruPop";
+	}
+	body > *:not(main, .tsqd-parent-container) {
+		display: none;
+	}
+	
+	svg, button {
+		cursor: pointer;
+	}
+
+	.tsqd-parent-container {
+		position: fixed;
+		bottom: 0;
+		z-index: 999;
+	}
+}
+
+@utility bordered-ui {
+	border: var(--color-main-accent) 1px solid;
+}
+
+@utility active-black {
+	background-color: var(--color-brown-dark);
+	color: white;
+}
+
+@utility cp {
+	cursor: pointer;
+}
+@utility c {
+	display: grid;
+	place-items: center;
+}
