@@ -6,7 +6,7 @@ import AuthTypeParams from "@/types/authType";
 import React, { Usable, use } from "react";
 
 interface SelectorProps {
-  auth: Usable<AuthTypeParams>;
+  auth: AuthTypeParams;
   isNameChosen: boolean;
   setChosen: React.Dispatch<React.SetStateAction<boolean>>;
   isHovered: {
@@ -28,7 +28,7 @@ export const Selector = ({
   isHovered,
   setHovered,
 }: SelectorProps) => {
-  const { type } = use<AuthTypeParams>(auth);
+  const { type } = auth;
   const emailBtn = (
     <button
       className={`bordered py-0.5 px-1 cp ${

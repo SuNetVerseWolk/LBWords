@@ -7,8 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, Usable, use, useState } from "react";
 
-export default function page({ params }: { params: Usable<AuthTypeParams> }) {
-  const { type } = use<AuthTypeParams>(params);
+export default function page({ params }: { params: AuthTypeParams }) {
+  const { type } = params;
   const [isNameChosen, setChosen] = useState(type === "up" ? false : true);
   const [isHovered, setHovered] = useState({ github: false, google: false });
 	const [formData, setFromData] = useState({
