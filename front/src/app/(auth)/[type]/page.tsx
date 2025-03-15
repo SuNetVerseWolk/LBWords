@@ -1,14 +1,14 @@
 "use client";
 import { Selector } from "@/components/layouts/auth/Selector";
 import { supabase } from "@/lib/supabaseClient";
-import AuthTypeParams from "@/types/authType";
+import { AuthTypeParams } from "@/types/authType";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { FormEvent, Usable, use, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import React, { FormEvent, useState } from "react";
 
-export default function page({ params }: { params: AuthTypeParams }) {
-  const { type } = params;
+export default function page() {
+  const { type }: { type: AuthTypeParams } = useParams();
   const [isNameChosen, setChosen] = useState(type === "up" ? false : true);
   const [isHovered, setHovered] = useState({ github: false, google: false });
 	const [formData, setFromData] = useState({
@@ -65,7 +65,7 @@ export default function page({ params }: { params: AuthTypeParams }) {
         </h1>
         {type === "in" && (
           <Selector
-            auth={params}
+            type={type}
             isHovered={isHovered}
             isNameChosen={isNameChosen}
             setChosen={setChosen}
@@ -122,7 +122,7 @@ export default function page({ params }: { params: AuthTypeParams }) {
       </div>
       {type === "up" && (
         <Selector
-          auth={params}
+          type={type}
           isHovered={isHovered}
           isNameChosen={isNameChosen}
           setChosen={setChosen}

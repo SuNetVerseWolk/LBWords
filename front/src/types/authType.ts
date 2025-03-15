@@ -1,3 +1,1 @@
-export default interface AuthTypeParams {
-  type: "in" | "up";
-}
+export type AuthTypeParams = "in" | "up";

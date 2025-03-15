@@ -2,11 +2,11 @@
 import { GitHubSVG } from "@/components/svgs/GitHub";
 import { GoogleSVG } from "@/components/svgs/Google";
 import { supabase } from "@/lib/supabaseClient";
-import AuthTypeParams from "@/types/authType";
-import React, { Usable, use } from "react";
+import React from "react";
+import { AuthTypeParams } from "@/types/authType";
 
 interface SelectorProps {
-  auth: AuthTypeParams;
+  type: AuthTypeParams;
   isNameChosen: boolean;
   setChosen: React.Dispatch<React.SetStateAction<boolean>>;
   isHovered: {
@@ -22,13 +22,12 @@ interface SelectorProps {
 }
 
 export const Selector = ({
-  auth,
+  type,
   isNameChosen,
   setChosen,
   isHovered,
   setHovered,
 }: SelectorProps) => {
-  const { type } = auth;
   const emailBtn = (
     <button
       className={`bordered py-0.5 px-1 cp ${
