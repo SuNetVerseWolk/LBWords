@@ -23,17 +23,38 @@ export default function page() {
     e.preventDefault();
 		
 		if (type === 'in') {
+			console.log(formData)
 			if (formData.password) {
-				if (formData.email) {
+				if (!isNameChosen && formData.email) {
 					const { error, data } = await supabase.auth.signInWithPassword({
 						email: formData.email,
 						password: formData.password
 					})
 
+					console.log('first')
 					if (error) {
 						console.log(error)
 					} else {
 						router.replace('/profile')
+					}
+				} else if (isNameChosen && formData.name) {
+					// fetch to backend
+				}
+			}
+		} else {
+			if (formData.confirmPassword != '') {
+				if (formData.confirmPassword === formData.password) {
+					if (formData.email) {
+						const { error, data } = await supabase.auth.signUp({
+							email: formData.email,
+							password: formData.password
+						})
+	
+						if (error) {
+							console.log(error)
+						} else {
+							router.replace('/profile')
+						}
 					}
 				}
 			}

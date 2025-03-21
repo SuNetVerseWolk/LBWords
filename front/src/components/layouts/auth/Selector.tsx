@@ -40,7 +40,7 @@ export const Selector = ({
       Почта
     </button>
   );
-	const redirectUrl = `${window.location.origin}/profile`;
+	const redirectUrl = `${process.env.NEXT_PUBLIC_HOST}/profile`;
 	const googleHandler = async () => {
 		const value = await supabase.auth.signInWithOAuth({
 			provider: 'google',
