@@ -16,7 +16,7 @@ export default function page() {
   });
 
   return (
-    <main className="h-full flex items-center lg:items-end pb-3 relative font-bold ">
+    <main className="h-full flex items-center lg:items-end pb-5 relative font-bold ">
       <div className="flex flex-col items-center">
         <div className="flex flex-col gap-2 items-center lg:items-start w-fit mb-5">
           <Image

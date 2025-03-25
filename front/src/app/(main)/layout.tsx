@@ -1,12 +1,19 @@
-import Profile from "@/components/layouts/Profile";
-import Loading from "@/components/Loading";
+'use client';
+import WelcomeLoading from "@/components/layouts/WelcomeLoading";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const Profile = dynamic(
+	() => import("@/components/layouts/Profile"),
+	{
+		loading: () => <WelcomeLoading />,
+		ssr: false,
+	}
+)
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Loading>
-      <Profile>{children}</Profile>
-    </Loading>
+		<Profile>{children}</Profile>
   );
 };
 
