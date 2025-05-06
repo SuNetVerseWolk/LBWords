@@ -18,7 +18,7 @@ export default function page() {
   return (
     <main className="h-full flex items-center md:items-end md:pb-8 lg:pb-5 relative font-bold ">
       <div className="flex flex-col items-center">
-        <div className="flex flex-col gap-2 items-center md:items-start w-fit md:mb-10 lg:mb-8">
+        <div className="flex flex-col gap-7 md:gap-2 items-center md:items-start w-fit md:mb-10 lg:mb-8">
           <Image
             className="w-1/2 sm:w-[60%] select-none"
             src="/LBWordsNoP.svg"
@@ -27,14 +27,14 @@ export default function page() {
             height={50}
             priority
           />
-          <ol className="flex flex-col gap-2 md:gap-1.5 lg:gap-1 mb-1 lg:mb-1 md:mb-1.5 list-inside list-decimal text-xs md:text-base lg:text-sm text-nowrap">
+          <ul className="flex flex-col gap-4 md:gap-1.5 lg:gap-1 mb-1 lg:mb-1 md:mb-1.5 list-inside list-disc text-[.8rem] md:text-base lg:text-sm text-nowrap">
             <li>Учи слова</li>
             <li>Читая книги на Английском</li>
-          </ol>
+          </ul>
           <div className="flex flex-col gap-3 items-center">
             <div className="flex gap-2 items-stretch justify-center md:justify-start flex-row w-full text-base md:text-2xl lg:text-xl">
               <Link
-                className="flex justify-center items-center gap-1 active-black hover:bg-brown py-0-5 px-2 rounded-4xl select-none"
+                className="c gap-1 md:gap-0-5 active-black hover:bg-brown py-1-5 sm:py-0-5 md:py-1 px-5 sm:px-3-5 md:px-2 rounded-4xl select-none"
                 href="/in"
                 onMouseEnter={() =>
                   setHovered((prev) => ({ ...prev, login: true }))
@@ -56,7 +56,7 @@ export default function page() {
                 <span className="text-nowrap">Вход</span>
               </Link>
               <Link
-                className="c py-0-5 px-3 bordered-ui rounded-4xl hover:bg-main-hover select-none"
+                className="c py-1-5 sm:py-0-5 md:py-1 px-5 sm:px-4 md:px-3-5 bordered-ui rounded-4xl hover:bg-main-hover select-none"
                 href="/up"
               >
                 Новый

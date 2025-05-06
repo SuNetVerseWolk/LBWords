@@ -36,31 +36,32 @@ export const Selector = ({
           : "active-black hover:bg-brown"
       } ${type === "up" ? "col-span-4" : "col-span-3 rounded-e-4xl"}`}
       onClick={() => setChosen(false)}
+      type="button"
     >
       Почта
     </button>
   );
-	const redirectUrl = `${process.env.NEXT_PUBLIC_HOST}/profile`;
-	const googleHandler = async () => {
-		const value = await supabase.auth.signInWithOAuth({
-			provider: 'google',
-			options: {
-				redirectTo: redirectUrl,
-			}
-		})
-	}
-	const githubHandler = async () => {
-		const value = await supabase.auth.signInWithOAuth({
-			provider: 'github',
-			options: {
-				redirectTo: redirectUrl,
-			}
-		})
-	}
+  const redirectUrl = `${process.env.NEXT_PUBLIC_HOST}/profile`;
+  const googleHandler = async () => {
+    const value = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: redirectUrl,
+      },
+    });
+  };
+  const githubHandler = async () => {
+    const value = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: redirectUrl,
+      },
+    });
+  };
 
   return (
-    <div className="grid grid-cols-8 gap-0-5 text-xs mb-1.5 sm:mb-0.5 w-full">
-      {type === "in" && (
+    <div className="grid grid-cols-8 gap-0-5 text-xs mb-0.5 md:mb-1.5 w-full">
+      {type != "up" && (
         <button
           className={`bordered py-0-5 px-1 col-span-3 rounded-s-full cp ${
             isNameChosen
@@ -68,6 +69,7 @@ export const Selector = ({
               : "bordered-ui hover:bg-main-hover"
           }`}
           onClick={() => setChosen(true)}
+          type="button"
         >
           Никнэим
         </button>
@@ -78,9 +80,13 @@ export const Selector = ({
         className={`grid place-items-center bordered-ui hover:bg-main-hover p-0-5 cp ${
           type === "up" && "rounded-s-4xl col-span-4"
         }`}
-        onClick={() => {}}
+        type="button"
       >
-        <GitHubSVG className="h-7 lg:h-1-5" hovered={isHovered.github} onClick={githubHandler} />
+        <GitHubSVG
+          className="h-7 sm:h-5 md:h-3 lg:h-1-5"
+          hovered={isHovered.github}
+          onClick={githubHandler}
+        />
       </button>
       <button
         onMouseEnter={() => setHovered((prev) => ({ ...prev, google: true }))}
@@ -88,11 +94,15 @@ export const Selector = ({
         className={`grid place-items-center bordered-ui hover:bg-main-hover p-0-5 cp ${
           type === "up" && "col-span-4 rounded-e-4xl"
         }`}
-        onClick={() => {}}
+        type="button"
       >
-        <GoogleSVG className="h-7 lg:h-1-5" hovered={isHovered.google} onClick={googleHandler} />
+        <GoogleSVG
+          className="h-7 sm:h-5 md:h-3 lg:h-1-5"
+          hovered={isHovered.google}
+          onClick={googleHandler}
+        />
       </button>
-			{type === 'in' && emailBtn}
+      {type != "up" && emailBtn}
     </div>
   );
 };

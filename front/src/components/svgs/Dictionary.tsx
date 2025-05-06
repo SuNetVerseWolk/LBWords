@@ -20,6 +20,7 @@ export const Dictionary: React.FC<SVGMotionProps<SVGSVGElement>> = ({ ...rest })
       onMouseLeave={() => setHovered(0)}
       onTouchStart={() => setHovered(1)}
       onTouchEnd={() => setHovered(0)}
+			onClick={() => {}}
 			{...rest}
     >
       <path

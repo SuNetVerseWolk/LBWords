@@ -7,7 +7,6 @@ export const MarkedBook: React.FC<SVGMotionProps<SVGSVGElement>> = ({ ...rest })
 
   return (
     <motion.svg
-      //className="w-2"
       viewBox="0 0 24 24"
       animate={{
         scale: hovered ? [.95, 1] : 1,

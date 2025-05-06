@@ -13,7 +13,7 @@ export const ReadSVG = ({ hovered }: { hovered: boolean }) => {
           damping: 10,
         },
       }}
-      className="w-3 lg:w-2"
+      className="w-5 lg:w-2"
       viewBox="0 0 24 24"
     >
       <path

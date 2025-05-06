@@ -1,1 +1,1 @@
-export type AuthTypeParams = "in" | "up";
+export type AuthTypeParams = "in" | "up" | "lost";

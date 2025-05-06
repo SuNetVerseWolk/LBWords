@@ -21,7 +21,7 @@ export const LearnSVG: FC<CustomSVGProps> = ({
           damping: 10,
         },
       }}
-      className={`w-3 lg:w-2 ${className}`}
+      className={`w-5 lg:w-2 ${className}`}
       viewBox="0 0 24 24"
     >
       <path

@@ -19,14 +19,20 @@ export default function Profile({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const isPage = {
     i: usePathname() === "/profile",
+    books:
+      usePathname().includes("/books") && !usePathname().includes("marked"),
+    markedBooks: usePathname() === "/books/marked",
+    dictionary:
+      usePathname().includes("/dictionary") &&
+      !usePathname().includes("marked"),
+    markedTerms: usePathname() === "/dictionary/marked",
     profileSettings: usePathname() === "/profile/settings",
-    n: false,
   };
   const { data: user, isLoading, error } = useUser();
 
   return error ? (
-		<SpinerLoading />
-	) : (
+    <SpinerLoading />
+  ) : (
     <div className="overflow-hidden grid w-full h-full md:place-items-center md:px-4">
       <motion.div
         initial={{
@@ -121,14 +127,24 @@ export default function Profile({ children }: { children: React.ReactNode }) {
           </div>
           {!isPhone && (
             <>
-              <Book className="fill-cat-dark w-4/5" />
-              <MarkedBook className="fill-cat-dark w-4/5" />
+              <Book
+                className={`fill-cat-dark md:w-4/5 ${
+                  isPage.books && "fill-cat-warm"
+                }`}
+                onClick={() => router.push("/books")}
+              />
+              <MarkedBook
+                className={`fill-cat-dark md:w-4/5 ${
+                  isPage.markedBooks && "fill-cat-warm"
+                }`}
+                onClick={() => router.push("/books/marked")}
+              />
             </>
           )}
         </motion.header>
         <main
           className="
-								c
+								flex
 								row-span-10 md:row-span-1
 								md:col-span-10
 								bg-main-hover
@@ -137,6 +153,10 @@ export default function Profile({ children }: { children: React.ReactNode }) {
 								md:rounded-4xl
 								md:shadow-main-darken
 								md:shadow-[0px_30px_30px_-10px]
+								overflow-y-scroll
+								no-scrollbar
+								font-sans
+								p-2
 								z-10
 								relative
 							"
@@ -168,13 +188,15 @@ export default function Profile({ children }: { children: React.ReactNode }) {
 							"
         >
           <Dictionary
+            onClick={() => router.push("/dictionary")}
             className={`fill-cat-dark md:w-4/5 ${
-              isPage.n && "fill-cats-warmTan"
+              isPage.dictionary && "fill-cat-warm"
             }`}
           />
           <BookMark
+            onClick={() => router.push("/dictionary/marked")}
             className={`fill-cat-dark md:w-4/5 ${
-              isPage.n && "fill-cats-warmTan"
+              isPage.markedTerms && "fill-cat-warm"
             }`}
           />
           <Remind
@@ -184,10 +206,16 @@ export default function Profile({ children }: { children: React.ReactNode }) {
           {isPhone && (
             <>
               <Book
-                className={`fill-cat-dark ${isPage.n && "fill-cats-warmTan"}`}
+                className={`fill-cat-dark ${
+                  isPage.books && "fill-cat-warm"
+                }`}
+                onClick={() => router.push("/books")}
               />
               <MarkedBook
-                className={`fill-cat-dark ${isPage.n && "fill-cats-warmTan"}`}
+                className={`fill-cat-dark ${
+                  isPage.markedBooks && "fill-cat-warm"
+                }`}
+                onClick={() => router.push("/books/marked")}
               />
             </>
           )}
@@ -201,5 +229,5 @@ export default function Profile({ children }: { children: React.ReactNode }) {
         className="absolute bottom-0 left-0 hidden md:block"
       />
     </div>
-  )
+  );
 }

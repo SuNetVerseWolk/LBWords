@@ -14,7 +14,7 @@ export const RelaxSVG: FC<CustomSVGProps> = ({ hovered, pathProps, pathMotionPro
           damping: 10,
         },
       }}
-      className={`w-3 lg:w-2 ${rest.className}`}
+      className={`w-5 lg:w-2 ${rest.className}`}
       viewBox="0 0 24 24"
     >
       <path

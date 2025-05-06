@@ -4,7 +4,7 @@ import CustomSVGProps from "@/types/customSVG";
 
 export const LoginSVG: FC<CustomSVGProps> = ({ hovered, pathProps, pathMotionProps, className, ...rest }) => {
   return (
-    <motion.svg {...rest} className={`w-2-5 max-h-none lg:max-h-4 ${className}`} viewBox="0 0 24 24">
+    <motion.svg {...rest} className={`w-5 sm:w-4 md:w-2-58 lg:w-2 ${className}`} viewBox="0 0 24 24">
       <path
 				{...pathProps}
         className="fill-white"
