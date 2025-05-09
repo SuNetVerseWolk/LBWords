@@ -27098,7 +27098,7 @@ export namespace Prisma {
   }
 
   export type booksCreateInput = {
-    created_at: Date | string
+    created_at?: Date | string
     title: string
     description?: string | null
     image?: string | null
@@ -27107,7 +27107,7 @@ export namespace Prisma {
   }
 
   export type booksUncheckedCreateInput = {
-    created_at: Date | string
+    created_at?: Date | string
     title: string
     description?: string | null
     image?: string | null
@@ -27134,7 +27134,7 @@ export namespace Prisma {
   }
 
   export type booksCreateManyInput = {
-    created_at: Date | string
+    created_at?: Date | string
     title: string
     description?: string | null
     image?: string | null
