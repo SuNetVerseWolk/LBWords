@@ -2,11 +2,9 @@
 import SpinerLoading from "@/components/layouts/SpinerLoading";
 import RefetchButton from "@/components/ui/RefetchButton";
 import Roles from "@/enums/roles";
-import { useRole } from "@/hooks/useUser";
-import Image from "next/image";
+import { useRole } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { useBooks } from "@/hooks/useBooks";
 import BookCard from "@/components/layouts/BookCard";
 
@@ -71,7 +69,7 @@ const page = () => {
             <BookCard
               key={book.id}
               book={book}
-              role={role}
+              role={role!}
               onUpdate={updateBook}
               onDelete={deleteBook}
               onRead={(id) => router.push(`books/${id}`)}

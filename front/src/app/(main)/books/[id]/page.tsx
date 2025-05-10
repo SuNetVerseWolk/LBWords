@@ -4,7 +4,7 @@ import DefinitionPopup from "@/components/ui/DefinitionPopup";
 import RefetchButton from "@/components/ui/RefetchButton";
 import Roles from "@/enums/roles";
 import { useBooks } from "@/hooks/useBooks";
-import { useRole } from "@/hooks/useUser";
+import { useRole } from "@/hooks/useAuth";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 

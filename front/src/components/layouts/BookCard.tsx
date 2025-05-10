@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Book } from "@/types/dbTypes";
 import Roles from "@/enums/roles";
 import { UseMutationResult } from "@tanstack/react-query";
+import EmptyCover from "../../../public/placeholder.jpg";
 
 const BookCard = ({
   book,
@@ -35,7 +36,7 @@ const BookCard = ({
     <div className="grid grid-cols-3 gap-y-1 place-items-stretch bg-amber-50 p-1 rounded-3xl">
       <div className="c flex-col gap-0-5">
         <Image
-          src={book.image!}
+          src={book.image || EmptyCover.src}
           alt="Book's image"
           width={500}
           height={500}

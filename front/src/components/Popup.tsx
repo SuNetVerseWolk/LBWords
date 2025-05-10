@@ -11,7 +11,7 @@ const Popup: React.FC<MotionProps & {
 		<motion.div
 			{...rest}
       animate={{ opacity: 1 }}
-      className={`c absolute font-shantell_Sans bg-[#000000dd] text-lg w-full h-full z-50 md:rounded-4xl ${className}`}
+      className={`c absolute top-0 left-0 font-shantell_Sans bg-[#000000dd] text-lg w-full h-full z-50 md:rounded-4xl ${className}`}
     >
       <motion.div
         initial={{ scale: 0.7 }}

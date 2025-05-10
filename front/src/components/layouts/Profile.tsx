@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { isDeviceType } from "@/services/checkDeviceType";
-import { useUser } from "@/hooks/useUser";
+import { useAuth, useUser } from "@/hooks/useAuth";
 import SpinerLoading from "./SpinerLoading";
 
 export default function Profile({ children }: { children: React.ReactNode }) {
@@ -28,7 +28,7 @@ export default function Profile({ children }: { children: React.ReactNode }) {
     markedTerms: usePathname() === "/dictionary/marked",
     profileSettings: usePathname() === "/profile/settings",
   };
-  const { data: user, isLoading, error } = useUser();
+		const { user, profile, updateProfile, error } = useAuth();
 
   return error ? (
     <SpinerLoading />
@@ -93,19 +93,19 @@ export default function Profile({ children }: { children: React.ReactNode }) {
               href="/profile/settings"
               className="flex-center gap-4 h-full md:w-full md:h-auto md:aspect-square"
             >
-              {user?.user_metadata.avatar_url ? (
+              {profile?.image || user?.user_metadata.avatar_url ? (
                 <>
                   <Image
                     alt="user image"
-                    src={user.user_metadata.avatar_url}
+                    src={profile?.image || user?.user_metadata.avatar_url || null}
                     width={50}
                     height={50}
-                    className="rounded-full h-full w-auto aspect-square border-2 border-black"
+                    className="rounded-full h-full w-auto aspect-square border-2 border-black object-cover"
                     priority
                   />
                   {isPhone ? (
                     <p className="text-lg font-semibold font-shantell_Sans">
-                      {user.email}
+                      {user?.email}
                     </p>
                   ) : (
                     <></>
@@ -123,6 +123,7 @@ export default function Profile({ children }: { children: React.ReactNode }) {
               alt="cat"
               src="/cat.gif"
               className="w-full h-full"
+							unoptimized
             />
           </div>
           {!isPhone && (
@@ -226,6 +227,7 @@ export default function Profile({ children }: { children: React.ReactNode }) {
         height={200}
         alt="cat"
         src="/cat.gif"
+				unoptimized
         className="absolute bottom-0 left-0 hidden md:block"
       />
     </div>
