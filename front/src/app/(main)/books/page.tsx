@@ -1,35 +1,44 @@
 "use client";
-import SpinerLoading from "@/components/layouts/SpinerLoading";
-import RefetchButton from "@/components/ui/RefetchButton";
-import Roles from "@/enums/roles";
-import { useRole } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useBooks } from "@/hooks/useBooks";
+import { useRole } from "@/hooks/useAuth";
+import Roles from "@/enums/roles";
 import BookCard from "@/components/layouts/BookCard";
+import RefetchButton from "@/components/ui/RefetchButton";
+import SpinerLoading from "@/components/layouts/SpinerLoading";
 
-const page = () => {
+const BooksPage = () => {
   const router = useRouter();
   const {
-		useBooks: {
-			data: books,
-			isLoading,
-			isError,
-			error,
-			refetch,
-		},
+    booksQuery: {
+      data: books,
+      isLoading,
+      isError,
+      error,
+      refetch,
+    },
+		updateBook,
+		deleteBook,
     createBook,
-    updateBook,
-    deleteBook,
-    isMutating
+    isMutating,
   } = useBooks();
+  
   const { data: role, isLoading: isRoleLoading } = useRole();
   const [newBookTitle, setNewBookTitle] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCreateBook = async () => {
     if (!newBookTitle.trim()) return;
-    createBook.mutate({ title: newBookTitle });
+
+    createBook.mutate({ 
+      title: newBookTitle
+    });
+    
     setNewBookTitle("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   if (isLoading || isRoleLoading) {
@@ -42,10 +51,10 @@ const page = () => {
 
   return (
     <div className="flex flex-col w-full rounded-3xl h-full">
-      <div className="flex justify-between pl-5 pr-3 py-0-5">
-        <h1 className="text-2xl text-center font-bold pb-1">Книги</h1>
+      <div className="c justify-between pl-5 pr-3 py-0-5 pb-1">
+        <h1 className="text-2xl text-center font-bold">Книги</h1>
         {role === Roles.admin && (
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <input
               type="text"
               value={newBookTitle}
@@ -53,6 +62,7 @@ const page = () => {
               placeholder="Название книги"
               className="border-2 p-0-5 rounded-lg"
             />
+            
             <button
               onClick={handleCreateBook}
               disabled={!newBookTitle.trim() || isMutating}
@@ -63,6 +73,7 @@ const page = () => {
           </div>
         )}
       </div>
+
       <div className="flex flex-col gap-1 ml-2 pr-0-5 h-full overflow-y-scroll thin-scrollbar rounded-3xl">
         {books?.length ? (
           books.map((book) => (
@@ -83,4 +94,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default BooksPage;

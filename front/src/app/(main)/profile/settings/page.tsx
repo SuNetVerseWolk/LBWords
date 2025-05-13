@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import Popup from "@/components/Popup";
 import Bye from "@/components/layouts/Bye";
 import GoodBye from "@/components/layouts/GoodBye";
+import { Profile } from "@/types/dbTypes";
 
 export default function page() {
   const router = useRouter();
@@ -23,19 +24,46 @@ export default function page() {
     userOff: false,
   });
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [localNickname, setLocalNickname] = useState("");
 
   const { isPhone } = isDeviceType();
-	const { user, profile, updateProfile } = useAuth();
+  const { user, profile, updateProfile } = useAuth();
 
+  // Initialize localNickname when profile or user data is available
+  React.useEffect(() => {
+    if (profile?.nickname || user?.user_metadata.full_name) {
+      setLocalNickname(profile?.nickname || user?.user_metadata.full_name || "noname");
+    }
+  }, [profile, user]);
 
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       setSelectedImage(e.target.files[0]);
       updateProfile({
         id: user!.id,
         data: {},
-        avatar: e.target.files[0]
+        avatar: e.target.files[0],
       });
+    }
+  };
+
+  const handleNicknameBlur = async () => {
+    try {
+      const updatedProfile = await updateProfile({
+        id: user!.id,
+        data: { nickname: localNickname },
+      });
+
+      if (updatedProfile) {
+        queryClient.setQueryData(["user"], (oldData: Profile) => ({
+          ...oldData,
+          nickname: localNickname
+        }));
+      }
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+      // Revert to the previous value if the update fails
+      setLocalNickname(profile?.nickname || user?.user_metadata.full_name || "noname");
     }
   };
 
@@ -49,7 +77,8 @@ export default function page() {
   });
 
   const { mutate: deleteUser } = useMutation({
-    mutationFn: async (e: any) => await supabaseAdmin.auth.admin.deleteUser(user!.id),
+    mutationFn: async (e: any) =>
+      await supabaseAdmin.auth.admin.deleteUser(user!.id),
     onSuccess() {
       queryClient.resetQueries();
       setBoolaen((prev) => ({ ...prev, userOff: true }));
@@ -112,17 +141,15 @@ export default function page() {
           </div>
           <input
             type="text"
-            value={profile?.nickname || user?.user_metadata.full_name || "noname"}
-						onChange={(e) => updateProfile({
-							id: user!.id,
-							data: { nickname: e.target.value }
-						})}
+            value={localNickname}
+            onChange={(e) => setLocalNickname(e.target.value)}
+            onBlur={handleNicknameBlur}
             className="rounded-full bordered-ui py-0-5 px-1 bg-transparent placeholder-gray-200 w-full font-shantell_Sans"
           />
           <input
             type="text"
             value={user?.email || "no email"}
-						readOnly
+            readOnly
             className="rounded-full bordered-ui py-0-5 px-1 bg-transparent placeholder-gray-200 w-full font-shantell_Sans"
           />
         </div>
@@ -146,7 +173,7 @@ export default function page() {
           </button>
         </div>
       </div>
-      <Popup isShown={isBoolean.providerPopupShown}>
+			<Popup isShown={isBoolean.providerPopupShown}>
         <h1 className="text-xl text-cat-warm">
           Ваши видимые данные — это всё, что мы используем.
         </h1>

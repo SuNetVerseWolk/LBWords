@@ -3,15 +3,17 @@ import SpinerLoading from "@/components/layouts/SpinerLoading";
 import DefinitionPopup from "@/components/ui/DefinitionPopup";
 import RefetchButton from "@/components/ui/RefetchButton";
 import Roles from "@/enums/roles";
-import { useBooks } from "@/hooks/useBooks";
 import { useRole } from "@/hooks/useAuth";
+import { useBooks } from "@/hooks/useBooks";
+import { Chapter } from "@/types/dbTypes";
 import { useParams } from "next/navigation";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const BookPage = () => {
+  const [localChapters, setLocalChapters] = useState<Chapter[]>([]);
   const { id } = useParams();
   const {
-    useBook: { data: book, isLoading, isError, refetch, error },
+    bookQuery: { data: book, isLoading, isError, refetch, error },
     updateBook,
     isMutating,
   } = useBooks(id as string);
@@ -24,11 +26,11 @@ const BookPage = () => {
     left: number;
   } | null>(null);
 
-	const [mutations, setMutations] = useState({
-		isDeleteChapter: false,
-		isAddChapter: false,
-		isAddParagraph: false,
-	});
+  const [mutations, setMutations] = useState({
+    isDeleteChapter: false,
+    isAddChapter: false,
+    isAddParagraph: false,
+  });
 
   const handleTextSelection = useCallback(() => {
     setPopupPosition(null);
@@ -49,115 +51,87 @@ const BookPage = () => {
 
   const generateChapterId = () => Date.now();
 
-  const handleUpdateChapterName = (chapterId: number, newName: string) => {
-    if (!book) return;
-
-    const updatedChapters = book.chapters.map((chapter) =>
-      chapter.id === chapterId ? { ...chapter, name: newName } : chapter
-    );
-
-    updateBook.mutate({
-      id: id as string,
-      data: { ...book, chapters: updatedChapters },
+  const handleUpdateChapterName = (newName: string) => {
+    setLocalChapters(prev => {
+      const updated = [...prev];
+      updated[selectedChapterIndex] = {
+        ...updated[selectedChapterIndex],
+        name: newName
+      };
+      return updated;
     });
   };
 
-  const handleUpdateParagraph = (
-    chapterId: number,
-    paragraphIndex: number,
-    newValue: string
-  ) => {
-    if (!book) return;
-
-    const updatedChapters = book.chapters.map((chapter) => {
-      if (chapter.id === chapterId) {
-        const updatedValues = [...chapter.values];
-        updatedValues[paragraphIndex] = newValue;
-        return { ...chapter, values: updatedValues };
-      }
-      return chapter;
-    });
-
-    updateBook.mutate({
-      id: id as string,
-      data: { ...book, chapters: updatedChapters },
+  const handleUpdateParagraph = (paragraphIndex: number, newValue: string) => {
+    setLocalChapters(prev => {
+      const updated = [...prev];
+      updated[selectedChapterIndex] = {
+        ...updated[selectedChapterIndex],
+        values: updated[selectedChapterIndex].values.map((v, i) => 
+          i === paragraphIndex ? newValue : v
+        )
+      };
+      return updated;
     });
   };
 
   const handleAddParagraph = (chapterId: number) => {
-    if (!book) return;
+    const chapterIndex = localChapters.findIndex(c => c.id === chapterId);
+    if (chapterIndex === -1) return;
 
-    const updatedChapters = book.chapters.map((chapter) =>
-      chapter.id === chapterId
-        ? { ...chapter, values: [...chapter.values, ""] }
-        : chapter
-    );
+    const updatedChapters = [...localChapters];
+    updatedChapters[chapterIndex] = {
+      ...updatedChapters[chapterIndex],
+      values: [...updatedChapters[chapterIndex].values, ""]
+    };
 
+    setLocalChapters(updatedChapters);
     updateBook.mutate({
       id: id as string,
-      data: { ...book, chapters: updatedChapters },
+      data: { ...book!, chapters: updatedChapters }
     });
-		setMutations(prev => ({
-			...prev,
-			isAddParagraph: true,
-		}))
+    setMutations(prev => ({ ...prev, isAddParagraph: true }));
   };
 
   const handleAddChapter = () => {
-    if (!book) {
-      const newChapter = {
-        id: generateChapterId(),
-        name: "Chapter 1",
-        image: null,
-        values: [],
-      };
-
-      updateBook.mutate({
-        id: id as string,
-        data: { chapters: [newChapter] },
-      });
-      return;
-    }
-
     const newChapter = {
       id: generateChapterId(),
-      name: `Chapter ${book.chapters.length + 1}`,
+      name: `Chapter ${localChapters.length + 1}`,
       image: null,
       values: [],
     };
 
+    const updatedChapters = [...localChapters, newChapter];
+    setLocalChapters(updatedChapters);
+    setSelectedChapterIndex(updatedChapters.length - 1);
+
     updateBook.mutate({
       id: id as string,
-      data: { ...book, chapters: [...book.chapters, newChapter] },
+      data: { ...book!, chapters: updatedChapters }
     });
-		setMutations(prev => ({
-			...prev,
-			isAddChapter: true,
-		}))
-
-		setSelectedChapterIndex(book.chapters.length);
+    setMutations(prev => ({ ...prev, isAddChapter: true }));
   };
 
   const handleDeleteParagraph = (chapterId: number, paragraphIndex: number) => {
-    if (!book) return;
+    const chapterIndex = localChapters.findIndex(c => c.id === chapterId);
+    if (chapterIndex === -1) return;
 
-    const updatedChapters = book.chapters.map((chapter) => {
-      if (chapter.id === chapterId) {
-        const updatedValues = [...chapter.values];
-        updatedValues.splice(paragraphIndex, 1);
-        return { ...chapter, values: updatedValues };
-      }
-      return chapter;
-    });
+    const updatedChapters = [...localChapters];
+    updatedChapters[chapterIndex] = {
+      ...updatedChapters[chapterIndex],
+      values: updatedChapters[chapterIndex].values.filter((_, i) => i !== paragraphIndex)
+    };
 
+    setLocalChapters(updatedChapters);
     updateBook.mutate({
       id: id as string,
-      data: { ...book, chapters: updatedChapters },
+      data: { ...book!, chapters: updatedChapters }
     });
   };
 
   const handleNextChapter = () => {
-    if (!book || selectedChapterIndex >= book.chapters.length - 1) return;
+    if (!book?.chapters || selectedChapterIndex >= book.chapters.length - 1)
+      return;
     setSelectedChapterIndex((prev) => prev + 1);
   };
 
@@ -167,37 +141,34 @@ const BookPage = () => {
   };
 
   const handleDeleteChapter = (chapterId: number) => {
-    if (!book || book.chapters.length <= 1) return;
+    const updatedChapters = localChapters.filter(c => c.id !== chapterId);
+    const newSelectedIndex = Math.min(selectedChapterIndex, updatedChapters.length - 1);
 
-    const updatedChapters = book.chapters.filter(
-      (chapter) => chapter.id !== chapterId
-    );
-		const newSelectedIndex = Math.min(
-			selectedChapterIndex,
-			updatedChapters.length - 1
-		);
+    setLocalChapters(updatedChapters);
+    setSelectedChapterIndex(newSelectedIndex);
 
     updateBook.mutate({
       id: id as string,
-      data: { ...book, chapters: updatedChapters },
+      data: { ...book!, chapters: updatedChapters }
     });
-		setMutations(prev => ({
-			...prev,
-			isDeleteChapter: true,
-		}))
-
-		setSelectedChapterIndex(newSelectedIndex);
+    setMutations(prev => ({ ...prev, isDeleteChapter: true }));
   };
 
+  useEffect(() => {
+    if (isMutating == false) {
+      setMutations({
+        isAddChapter: false,
+        isAddParagraph: false,
+        isDeleteChapter: false,
+      });
+    }
+  }, [isMutating]);
+
 	useEffect(() => {
-		if (isMutating == false) {
-			setMutations({
-				isAddChapter: false,
-				isAddParagraph: false,
-				isDeleteChapter: false,
-			})
-		}
-	}, [isMutating])
+    if (book?.chapters) {
+      setLocalChapters(book.chapters);
+    }
+  }, [book?.chapters]);
 
   if (isLoading || isRoleLoading) {
     return <SpinerLoading />;
@@ -220,7 +191,35 @@ const BookPage = () => {
     );
   }
 
-  const currentChapter = book.chapters[selectedChapterIndex];
+  const currentChapter = localChapters[selectedChapterIndex] || { values: [] };
+
+	const handleParagraphBlur = (paragraphIndex: number) => {
+    if (!book.chapters || !localChapters[selectedChapterIndex]) return;
+    
+    const originalValue = book.chapters[selectedChapterIndex]?.values[paragraphIndex];
+    const currentValue = localChapters[selectedChapterIndex].values[paragraphIndex];
+    
+    if (currentValue !== originalValue) {
+      updateBook.mutate({
+        id: id as string,
+        data: { ...book, chapters: localChapters }
+      });
+    }
+  };
+
+	const handleChapterNameBlur = () => {
+    if (!book.chapters || !localChapters[selectedChapterIndex]) return;
+    
+    const originalName = book.chapters[selectedChapterIndex]?.name;
+    const currentName = localChapters[selectedChapterIndex].name;
+    
+    if (currentName !== originalName) {
+      updateBook.mutate({
+        id: id as string,
+        data: { ...book, chapters: localChapters }
+      });
+    }
+  };
 
   return (
     <div className="w-full">
@@ -230,12 +229,8 @@ const BookPage = () => {
             <input
               type="text"
               value={currentChapter?.name}
-              onChange={(e) =>
-                handleUpdateChapterName(currentChapter?.id, e.target.value)
-              }
-              onBlur={(e) =>
-                handleUpdateChapterName(currentChapter?.id, e.target.value)
-              }
+              onChange={(e) => handleUpdateChapterName(e.target.value)}
+              onBlur={handleChapterNameBlur}
               className="text-xl font-medium p-0-5 rounded-t-2xl rounded-b-xl border-2 flex-1"
             />
             <button
@@ -243,7 +238,9 @@ const BookPage = () => {
               className="bg-red-500 p-0-5 rounded-xl min-w-40 text-white"
               disabled={book.chapters.length <= 1}
             >
-							{mutations.isDeleteChapter && isMutating ? 'Удаляется ...' : 'Удалить страницу'}
+              {mutations.isDeleteChapter && isMutating
+                ? "Удаляется ..."
+                : "Удалить страницу"}
             </button>
           </div>
         ) : (
@@ -257,12 +254,8 @@ const BookPage = () => {
               <div key={j} className="flex">
                 <textarea
                   value={value}
-                  onChange={(e) =>
-                    handleUpdateParagraph(currentChapter?.id, j, e.target.value)
-                  }
-                  onBlur={(e) =>
-                    handleUpdateParagraph(currentChapter?.id, j, e.target.value)
-                  }
+                  onChange={(e) => handleUpdateParagraph(j, e.target.value)}
+                  onBlur={() => handleParagraphBlur(j)}
                   className="border-2 border-r-0 p-0-5 rounded-l-xl w-full"
                 />
                 <button
@@ -301,7 +294,7 @@ const BookPage = () => {
                 onClick={() => handleAddParagraph(currentChapter?.id)}
                 className="rounded-4xl p-0-5 active-black hover:bg-brown ml-2"
               >
-								{mutations.isAddParagraph && isMutating ? '+ ...' : '+ абзац'}
+                {mutations.isAddParagraph && isMutating ? "+ ..." : "+ абзац"}
               </button>
             )}
           </div>
@@ -321,7 +314,9 @@ const BookPage = () => {
                 onClick={handleAddChapter}
                 className="rounded-4xl p-0-5 active-black hover:bg-brown"
               >
-								{mutations.isAddParagraph && isMutating ? '+ ...' : '+ страницу'}
+                {mutations.isAddParagraph && isMutating
+                  ? "+ ..."
+                  : "+ страницу"}
               </button>
             )}
           </div>

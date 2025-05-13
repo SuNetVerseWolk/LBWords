@@ -36,6 +36,7 @@ export class ProfilesService {
     imageFile?: Express.Multer.File,
   ): Promise<profiles> {
     const existingProfile = await this.getProfileById(id);
+		console.log(typeof updateData, updateData)
 
     let imageUrl = existingProfile.image;
 
@@ -68,9 +69,7 @@ export class ProfilesService {
     userId: string,
     file: Express.Multer.File,
   ): Promise<string> {
-    // Sanitize the original filename
-    const originalName = file.originalname;
-    const sanitizedOriginal = originalName
+    const sanitizedOriginal = file.originalname
       .replace(/[^a-zA-Z0-9-_.]/g, '_') // Replace invalid characters with underscores
       .replace(/_+/g, '_'); // Collapse multiple underscores
 

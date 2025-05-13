@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { books } from 'generated/prisma';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('books')
 export class BooksController {
@@ -16,17 +17,28 @@ export class BooksController {
   }
 
   @Post()
-  create(@Body() book: books) {
-    return this.booksService.create(book);
+  @UseInterceptors(FileInterceptor('image'))
+  create(
+    @Body() data: books,
+    @UploadedFile() image?: Express.Multer.File,
+  ) {
+		console.log(data)
+    return this.booksService.createBook(data, image);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() book: books) {
-    return this.booksService.update(id, book);
+	@UseInterceptors(FileInterceptor('image'))
+  async update(
+    @Param('id') id: string,
+    @Body() data: Partial<books>,
+    @UploadedFile() image?: Express.Multer.File,
+  ) {
+		data = {...data, chapters: JSON.parse(data.chapters as string)}
+    return this.booksService.updateBook(id, data, image);
   }
 
 	@Delete(':id')
   async deleteBook(@Param('id') id: string): Promise<books> {
-    return this.booksService.delete(id);
+    return this.booksService.deleteBook(id);
   }
 }

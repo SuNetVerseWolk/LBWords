@@ -336,6 +336,24 @@ exports.Prisma.ProfilesScalarFieldEnum = {
   role: 'role'
 };
 
+exports.Prisma.UsersbooksScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  user: 'user',
+  book: 'book',
+  is_book_marked: 'is_book_marked',
+  last_page: 'last_page'
+};
+
+exports.Prisma.UsersvocabScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  user: 'user',
+  word: 'word',
+  status: 'status',
+  repeatments: 'repeatments'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -401,6 +419,13 @@ exports.roles = exports.$Enums.roles = {
   admin: 'admin'
 };
 
+exports.word_statuses = exports.$Enums.word_statuses = {
+  unknown: 'unknown',
+  learned: 'learned',
+  learning: 'learning',
+  upto: 'upto'
+};
+
 exports.Prisma.ModelName = {
   audit_log_entries: 'audit_log_entries',
   flow_state: 'flow_state',
@@ -420,7 +445,9 @@ exports.Prisma.ModelName = {
   users: 'users',
   books: 'books',
   dictionary: 'dictionary',
-  profiles: 'profiles'
+  profiles: 'profiles',
+  usersbooks: 'usersbooks',
+  usersvocab: 'usersvocab'
 };
 
 /**

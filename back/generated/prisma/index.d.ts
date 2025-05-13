@@ -132,6 +132,16 @@ export type dictionary = $Result.DefaultSelection<Prisma.$dictionaryPayload>
  * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
  */
 export type profiles = $Result.DefaultSelection<Prisma.$profilesPayload>
+/**
+ * Model usersbooks
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type usersbooks = $Result.DefaultSelection<Prisma.$usersbooksPayload>
+/**
+ * Model usersvocab
+ * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ */
+export type usersvocab = $Result.DefaultSelection<Prisma.$usersvocabPayload>
 
 /**
  * Enums
@@ -190,6 +200,16 @@ export const roles: {
 
 export type roles = (typeof roles)[keyof typeof roles]
 
+
+export const word_statuses: {
+  unknown: 'unknown',
+  learned: 'learned',
+  learning: 'learning',
+  upto: 'upto'
+};
+
+export type word_statuses = (typeof word_statuses)[keyof typeof word_statuses]
+
 }
 
 export type aal_level = $Enums.aal_level
@@ -215,6 +235,10 @@ export const one_time_token_type: typeof $Enums.one_time_token_type
 export type roles = $Enums.roles
 
 export const roles: typeof $Enums.roles
+
+export type word_statuses = $Enums.word_statuses
+
+export const word_statuses: typeof $Enums.word_statuses
 
 /**
  * ##  Prisma Client ʲˢ
@@ -530,6 +554,26 @@ export class PrismaClient<
     * ```
     */
   get profiles(): Prisma.profilesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.usersbooks`: Exposes CRUD operations for the **usersbooks** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Usersbooks
+    * const usersbooks = await prisma.usersbooks.findMany()
+    * ```
+    */
+  get usersbooks(): Prisma.usersbooksDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.usersvocab`: Exposes CRUD operations for the **usersvocab** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Usersvocabs
+    * const usersvocabs = await prisma.usersvocab.findMany()
+    * ```
+    */
+  get usersvocab(): Prisma.usersvocabDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -988,7 +1032,9 @@ export namespace Prisma {
     users: 'users',
     books: 'books',
     dictionary: 'dictionary',
-    profiles: 'profiles'
+    profiles: 'profiles',
+    usersbooks: 'usersbooks',
+    usersvocab: 'usersvocab'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1007,7 +1053,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "audit_log_entries" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "books" | "dictionary" | "profiles"
+      modelProps: "audit_log_entries" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "books" | "dictionary" | "profiles" | "usersbooks" | "usersvocab"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2417,6 +2463,154 @@ export namespace Prisma {
           }
         }
       }
+      usersbooks: {
+        payload: Prisma.$usersbooksPayload<ExtArgs>
+        fields: Prisma.usersbooksFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.usersbooksFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.usersbooksFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>
+          }
+          findFirst: {
+            args: Prisma.usersbooksFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.usersbooksFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>
+          }
+          findMany: {
+            args: Prisma.usersbooksFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>[]
+          }
+          create: {
+            args: Prisma.usersbooksCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>
+          }
+          createMany: {
+            args: Prisma.usersbooksCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.usersbooksCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>[]
+          }
+          delete: {
+            args: Prisma.usersbooksDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>
+          }
+          update: {
+            args: Prisma.usersbooksUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>
+          }
+          deleteMany: {
+            args: Prisma.usersbooksDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.usersbooksUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.usersbooksUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>[]
+          }
+          upsert: {
+            args: Prisma.usersbooksUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersbooksPayload>
+          }
+          aggregate: {
+            args: Prisma.UsersbooksAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsersbooks>
+          }
+          groupBy: {
+            args: Prisma.usersbooksGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsersbooksGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.usersbooksCountArgs<ExtArgs>
+            result: $Utils.Optional<UsersbooksCountAggregateOutputType> | number
+          }
+        }
+      }
+      usersvocab: {
+        payload: Prisma.$usersvocabPayload<ExtArgs>
+        fields: Prisma.usersvocabFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.usersvocabFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.usersvocabFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>
+          }
+          findFirst: {
+            args: Prisma.usersvocabFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.usersvocabFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>
+          }
+          findMany: {
+            args: Prisma.usersvocabFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>[]
+          }
+          create: {
+            args: Prisma.usersvocabCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>
+          }
+          createMany: {
+            args: Prisma.usersvocabCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.usersvocabCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>[]
+          }
+          delete: {
+            args: Prisma.usersvocabDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>
+          }
+          update: {
+            args: Prisma.usersvocabUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>
+          }
+          deleteMany: {
+            args: Prisma.usersvocabDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.usersvocabUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.usersvocabUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>[]
+          }
+          upsert: {
+            args: Prisma.usersvocabUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$usersvocabPayload>
+          }
+          aggregate: {
+            args: Prisma.UsersvocabAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsersvocab>
+          }
+          groupBy: {
+            args: Prisma.usersvocabGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsersvocabGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.usersvocabCountArgs<ExtArgs>
+            result: $Utils.Optional<UsersvocabCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2520,6 +2714,8 @@ export namespace Prisma {
     books?: booksOmit
     dictionary?: dictionaryOmit
     profiles?: profilesOmit
+    usersbooks?: usersbooksOmit
+    usersvocab?: usersvocabOmit
   }
 
   /* Types for Logging */
@@ -2815,6 +3011,108 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: sessionsWhereInput
+  }
+
+
+  /**
+   * Count Type BooksCountOutputType
+   */
+
+  export type BooksCountOutputType = {
+    usersbooks: number
+  }
+
+  export type BooksCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usersbooks?: boolean | BooksCountOutputTypeCountUsersbooksArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BooksCountOutputType without action
+   */
+  export type BooksCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BooksCountOutputType
+     */
+    select?: BooksCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BooksCountOutputType without action
+   */
+  export type BooksCountOutputTypeCountUsersbooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersbooksWhereInput
+  }
+
+
+  /**
+   * Count Type DictionaryCountOutputType
+   */
+
+  export type DictionaryCountOutputType = {
+    usersvocab: number
+  }
+
+  export type DictionaryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usersvocab?: boolean | DictionaryCountOutputTypeCountUsersvocabArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DictionaryCountOutputType without action
+   */
+  export type DictionaryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DictionaryCountOutputType
+     */
+    select?: DictionaryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DictionaryCountOutputType without action
+   */
+  export type DictionaryCountOutputTypeCountUsersvocabArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersvocabWhereInput
+  }
+
+
+  /**
+   * Count Type ProfilesCountOutputType
+   */
+
+  export type ProfilesCountOutputType = {
+    usersbooks: number
+    usersvocab: number
+  }
+
+  export type ProfilesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usersbooks?: boolean | ProfilesCountOutputTypeCountUsersbooksArgs
+    usersvocab?: boolean | ProfilesCountOutputTypeCountUsersvocabArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProfilesCountOutputType without action
+   */
+  export type ProfilesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProfilesCountOutputType
+     */
+    select?: ProfilesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProfilesCountOutputType without action
+   */
+  export type ProfilesCountOutputTypeCountUsersbooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersbooksWhereInput
+  }
+
+  /**
+   * ProfilesCountOutputType without action
+   */
+  export type ProfilesCountOutputTypeCountUsersvocabArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersvocabWhereInput
   }
 
 
@@ -20934,6 +21232,8 @@ export namespace Prisma {
     image?: boolean
     chapters?: boolean
     id?: boolean
+    usersbooks?: boolean | books$usersbooksArgs<ExtArgs>
+    _count?: boolean | BooksCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["books"]>
 
   export type booksSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -20964,10 +21264,18 @@ export namespace Prisma {
   }
 
   export type booksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"created_at" | "title" | "description" | "image" | "chapters" | "id", ExtArgs["result"]["books"]>
+  export type booksInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usersbooks?: boolean | books$usersbooksArgs<ExtArgs>
+    _count?: boolean | BooksCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type booksIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type booksIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $booksPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "books"
-    objects: {}
+    objects: {
+      usersbooks: Prisma.$usersbooksPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       created_at: Date
       title: string
@@ -21369,6 +21677,7 @@ export namespace Prisma {
    */
   export interface Prisma__booksClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    usersbooks<T extends books$usersbooksArgs<ExtArgs> = {}>(args?: Subset<T, books$usersbooksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21421,6 +21730,10 @@ export namespace Prisma {
      */
     omit?: booksOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    /**
      * Filter, which books to fetch.
      */
     where: booksWhereUniqueInput
@@ -21439,6 +21752,10 @@ export namespace Prisma {
      */
     omit?: booksOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    /**
      * Filter, which books to fetch.
      */
     where: booksWhereUniqueInput
@@ -21456,6 +21773,10 @@ export namespace Prisma {
      * Omit specific fields from the books
      */
     omit?: booksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
     /**
      * Filter, which books to fetch.
      */
@@ -21505,6 +21826,10 @@ export namespace Prisma {
      */
     omit?: booksOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    /**
      * Filter, which books to fetch.
      */
     where?: booksWhereInput
@@ -21553,6 +21878,10 @@ export namespace Prisma {
      */
     omit?: booksOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    /**
      * Filter, which books to fetch.
      */
     where?: booksWhereInput
@@ -21595,6 +21924,10 @@ export namespace Prisma {
      * Omit specific fields from the books
      */
     omit?: booksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
     /**
      * The data needed to create a books.
      */
@@ -21643,6 +21976,10 @@ export namespace Prisma {
      * Omit specific fields from the books
      */
     omit?: booksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
     /**
      * The data needed to update a books.
      */
@@ -21710,6 +22047,10 @@ export namespace Prisma {
      */
     omit?: booksOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    /**
      * The filter to search for the books to update in case it exists.
      */
     where: booksWhereUniqueInput
@@ -21736,6 +22077,10 @@ export namespace Prisma {
      */
     omit?: booksOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    /**
      * Filter which books to delete.
      */
     where: booksWhereUniqueInput
@@ -21756,6 +22101,30 @@ export namespace Prisma {
   }
 
   /**
+   * books.usersbooks
+   */
+  export type books$usersbooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    where?: usersbooksWhereInput
+    orderBy?: usersbooksOrderByWithRelationInput | usersbooksOrderByWithRelationInput[]
+    cursor?: usersbooksWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsersbooksScalarFieldEnum | UsersbooksScalarFieldEnum[]
+  }
+
+  /**
    * books without action
    */
   export type booksDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21767,6 +22136,10 @@ export namespace Prisma {
      * Omit specific fields from the books
      */
     omit?: booksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
   }
 
 
@@ -21926,6 +22299,8 @@ export namespace Prisma {
     level?: boolean
     created_at?: boolean
     id?: boolean
+    usersvocab?: boolean | dictionary$usersvocabArgs<ExtArgs>
+    _count?: boolean | DictionaryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dictionary"]>
 
   export type dictionarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -21950,10 +22325,18 @@ export namespace Prisma {
   }
 
   export type dictionaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"word" | "level" | "created_at" | "id", ExtArgs["result"]["dictionary"]>
+  export type dictionaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usersvocab?: boolean | dictionary$usersvocabArgs<ExtArgs>
+    _count?: boolean | DictionaryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type dictionaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type dictionaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $dictionaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "dictionary"
-    objects: {}
+    objects: {
+      usersvocab: Prisma.$usersvocabPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       word: string
       level: string
@@ -22353,6 +22736,7 @@ export namespace Prisma {
    */
   export interface Prisma__dictionaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    usersvocab<T extends dictionary$usersvocabArgs<ExtArgs> = {}>(args?: Subset<T, dictionary$usersvocabArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22403,6 +22787,10 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
+    /**
      * Filter, which dictionary to fetch.
      */
     where: dictionaryWhereUniqueInput
@@ -22421,6 +22809,10 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
+    /**
      * Filter, which dictionary to fetch.
      */
     where: dictionaryWhereUniqueInput
@@ -22438,6 +22830,10 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
     /**
      * Filter, which dictionary to fetch.
      */
@@ -22487,6 +22883,10 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
+    /**
      * Filter, which dictionary to fetch.
      */
     where?: dictionaryWhereInput
@@ -22535,6 +22935,10 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
+    /**
      * Filter, which dictionaries to fetch.
      */
     where?: dictionaryWhereInput
@@ -22577,6 +22981,10 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
     /**
      * The data needed to create a dictionary.
      */
@@ -22625,6 +23033,10 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
     /**
      * The data needed to update a dictionary.
      */
@@ -22692,6 +23104,10 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
+    /**
      * The filter to search for the dictionary to update in case it exists.
      */
     where: dictionaryWhereUniqueInput
@@ -22718,6 +23134,10 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
+    /**
      * Filter which dictionary to delete.
      */
     where: dictionaryWhereUniqueInput
@@ -22738,6 +23158,30 @@ export namespace Prisma {
   }
 
   /**
+   * dictionary.usersvocab
+   */
+  export type dictionary$usersvocabArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    where?: usersvocabWhereInput
+    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
+    cursor?: usersvocabWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsersvocabScalarFieldEnum | UsersvocabScalarFieldEnum[]
+  }
+
+  /**
    * dictionary without action
    */
   export type dictionaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22749,6 +23193,10 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: dictionaryInclude<ExtArgs> | null
   }
 
 
@@ -22917,6 +23365,9 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     users?: boolean | usersDefaultArgs<ExtArgs>
+    usersbooks?: boolean | profiles$usersbooksArgs<ExtArgs>
+    usersvocab?: boolean | profiles$usersvocabArgs<ExtArgs>
+    _count?: boolean | ProfilesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["profiles"]>
 
   export type profilesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22948,6 +23399,9 @@ export namespace Prisma {
   export type profilesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "updated_at" | "nickname" | "image" | "role", ExtArgs["result"]["profiles"]>
   export type profilesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
+    usersbooks?: boolean | profiles$usersbooksArgs<ExtArgs>
+    usersvocab?: boolean | profiles$usersvocabArgs<ExtArgs>
+    _count?: boolean | ProfilesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type profilesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | usersDefaultArgs<ExtArgs>
@@ -22960,6 +23414,8 @@ export namespace Prisma {
     name: "profiles"
     objects: {
       users: Prisma.$usersPayload<ExtArgs>
+      usersbooks: Prisma.$usersbooksPayload<ExtArgs>[]
+      usersvocab: Prisma.$usersvocabPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -23362,6 +23818,8 @@ export namespace Prisma {
   export interface Prisma__profilesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    usersbooks<T extends profiles$usersbooksArgs<ExtArgs> = {}>(args?: Subset<T, profiles$usersbooksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    usersvocab<T extends profiles$usersvocabArgs<ExtArgs> = {}>(args?: Subset<T, profiles$usersvocabArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23792,6 +24250,54 @@ export namespace Prisma {
   }
 
   /**
+   * profiles.usersbooks
+   */
+  export type profiles$usersbooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    where?: usersbooksWhereInput
+    orderBy?: usersbooksOrderByWithRelationInput | usersbooksOrderByWithRelationInput[]
+    cursor?: usersbooksWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsersbooksScalarFieldEnum | UsersbooksScalarFieldEnum[]
+  }
+
+  /**
+   * profiles.usersvocab
+   */
+  export type profiles$usersvocabArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    where?: usersvocabWhereInput
+    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
+    cursor?: usersvocabWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsersvocabScalarFieldEnum | UsersvocabScalarFieldEnum[]
+  }
+
+  /**
    * profiles without action
    */
   export type profilesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23807,6 +24313,2270 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: profilesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model usersbooks
+   */
+
+  export type AggregateUsersbooks = {
+    _count: UsersbooksCountAggregateOutputType | null
+    _avg: UsersbooksAvgAggregateOutputType | null
+    _sum: UsersbooksSumAggregateOutputType | null
+    _min: UsersbooksMinAggregateOutputType | null
+    _max: UsersbooksMaxAggregateOutputType | null
+  }
+
+  export type UsersbooksAvgAggregateOutputType = {
+    last_page: number | null
+  }
+
+  export type UsersbooksSumAggregateOutputType = {
+    last_page: number | null
+  }
+
+  export type UsersbooksMinAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    user: string | null
+    book: string | null
+    is_book_marked: boolean | null
+    last_page: number | null
+  }
+
+  export type UsersbooksMaxAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    user: string | null
+    book: string | null
+    is_book_marked: boolean | null
+    last_page: number | null
+  }
+
+  export type UsersbooksCountAggregateOutputType = {
+    id: number
+    created_at: number
+    user: number
+    book: number
+    is_book_marked: number
+    last_page: number
+    _all: number
+  }
+
+
+  export type UsersbooksAvgAggregateInputType = {
+    last_page?: true
+  }
+
+  export type UsersbooksSumAggregateInputType = {
+    last_page?: true
+  }
+
+  export type UsersbooksMinAggregateInputType = {
+    id?: true
+    created_at?: true
+    user?: true
+    book?: true
+    is_book_marked?: true
+    last_page?: true
+  }
+
+  export type UsersbooksMaxAggregateInputType = {
+    id?: true
+    created_at?: true
+    user?: true
+    book?: true
+    is_book_marked?: true
+    last_page?: true
+  }
+
+  export type UsersbooksCountAggregateInputType = {
+    id?: true
+    created_at?: true
+    user?: true
+    book?: true
+    is_book_marked?: true
+    last_page?: true
+    _all?: true
+  }
+
+  export type UsersbooksAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which usersbooks to aggregate.
+     */
+    where?: usersbooksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersbooks to fetch.
+     */
+    orderBy?: usersbooksOrderByWithRelationInput | usersbooksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: usersbooksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersbooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersbooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned usersbooks
+    **/
+    _count?: true | UsersbooksCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UsersbooksAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsersbooksSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsersbooksMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsersbooksMaxAggregateInputType
+  }
+
+  export type GetUsersbooksAggregateType<T extends UsersbooksAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsersbooks]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsersbooks[P]>
+      : GetScalarType<T[P], AggregateUsersbooks[P]>
+  }
+
+
+
+
+  export type usersbooksGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersbooksWhereInput
+    orderBy?: usersbooksOrderByWithAggregationInput | usersbooksOrderByWithAggregationInput[]
+    by: UsersbooksScalarFieldEnum[] | UsersbooksScalarFieldEnum
+    having?: usersbooksScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsersbooksCountAggregateInputType | true
+    _avg?: UsersbooksAvgAggregateInputType
+    _sum?: UsersbooksSumAggregateInputType
+    _min?: UsersbooksMinAggregateInputType
+    _max?: UsersbooksMaxAggregateInputType
+  }
+
+  export type UsersbooksGroupByOutputType = {
+    id: string
+    created_at: Date
+    user: string | null
+    book: string | null
+    is_book_marked: boolean
+    last_page: number
+    _count: UsersbooksCountAggregateOutputType | null
+    _avg: UsersbooksAvgAggregateOutputType | null
+    _sum: UsersbooksSumAggregateOutputType | null
+    _min: UsersbooksMinAggregateOutputType | null
+    _max: UsersbooksMaxAggregateOutputType | null
+  }
+
+  type GetUsersbooksGroupByPayload<T extends usersbooksGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsersbooksGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsersbooksGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsersbooksGroupByOutputType[P]>
+            : GetScalarType<T[P], UsersbooksGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type usersbooksSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    book?: boolean
+    is_book_marked?: boolean
+    last_page?: boolean
+    books?: boolean | usersbooks$booksArgs<ExtArgs>
+    profiles?: boolean | usersbooks$profilesArgs<ExtArgs>
+  }, ExtArgs["result"]["usersbooks"]>
+
+  export type usersbooksSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    book?: boolean
+    is_book_marked?: boolean
+    last_page?: boolean
+    books?: boolean | usersbooks$booksArgs<ExtArgs>
+    profiles?: boolean | usersbooks$profilesArgs<ExtArgs>
+  }, ExtArgs["result"]["usersbooks"]>
+
+  export type usersbooksSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    book?: boolean
+    is_book_marked?: boolean
+    last_page?: boolean
+    books?: boolean | usersbooks$booksArgs<ExtArgs>
+    profiles?: boolean | usersbooks$profilesArgs<ExtArgs>
+  }, ExtArgs["result"]["usersbooks"]>
+
+  export type usersbooksSelectScalar = {
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    book?: boolean
+    is_book_marked?: boolean
+    last_page?: boolean
+  }
+
+  export type usersbooksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "user" | "book" | "is_book_marked" | "last_page", ExtArgs["result"]["usersbooks"]>
+  export type usersbooksInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    books?: boolean | usersbooks$booksArgs<ExtArgs>
+    profiles?: boolean | usersbooks$profilesArgs<ExtArgs>
+  }
+  export type usersbooksIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    books?: boolean | usersbooks$booksArgs<ExtArgs>
+    profiles?: boolean | usersbooks$profilesArgs<ExtArgs>
+  }
+  export type usersbooksIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    books?: boolean | usersbooks$booksArgs<ExtArgs>
+    profiles?: boolean | usersbooks$profilesArgs<ExtArgs>
+  }
+
+  export type $usersbooksPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "usersbooks"
+    objects: {
+      books: Prisma.$booksPayload<ExtArgs> | null
+      profiles: Prisma.$profilesPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      created_at: Date
+      user: string | null
+      book: string | null
+      is_book_marked: boolean
+      last_page: number
+    }, ExtArgs["result"]["usersbooks"]>
+    composites: {}
+  }
+
+  type usersbooksGetPayload<S extends boolean | null | undefined | usersbooksDefaultArgs> = $Result.GetResult<Prisma.$usersbooksPayload, S>
+
+  type usersbooksCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<usersbooksFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsersbooksCountAggregateInputType | true
+    }
+
+  export interface usersbooksDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['usersbooks'], meta: { name: 'usersbooks' } }
+    /**
+     * Find zero or one Usersbooks that matches the filter.
+     * @param {usersbooksFindUniqueArgs} args - Arguments to find a Usersbooks
+     * @example
+     * // Get one Usersbooks
+     * const usersbooks = await prisma.usersbooks.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends usersbooksFindUniqueArgs>(args: SelectSubset<T, usersbooksFindUniqueArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Usersbooks that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {usersbooksFindUniqueOrThrowArgs} args - Arguments to find a Usersbooks
+     * @example
+     * // Get one Usersbooks
+     * const usersbooks = await prisma.usersbooks.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends usersbooksFindUniqueOrThrowArgs>(args: SelectSubset<T, usersbooksFindUniqueOrThrowArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Usersbooks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersbooksFindFirstArgs} args - Arguments to find a Usersbooks
+     * @example
+     * // Get one Usersbooks
+     * const usersbooks = await prisma.usersbooks.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends usersbooksFindFirstArgs>(args?: SelectSubset<T, usersbooksFindFirstArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Usersbooks that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersbooksFindFirstOrThrowArgs} args - Arguments to find a Usersbooks
+     * @example
+     * // Get one Usersbooks
+     * const usersbooks = await prisma.usersbooks.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends usersbooksFindFirstOrThrowArgs>(args?: SelectSubset<T, usersbooksFindFirstOrThrowArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Usersbooks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersbooksFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Usersbooks
+     * const usersbooks = await prisma.usersbooks.findMany()
+     * 
+     * // Get first 10 Usersbooks
+     * const usersbooks = await prisma.usersbooks.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usersbooksWithIdOnly = await prisma.usersbooks.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends usersbooksFindManyArgs>(args?: SelectSubset<T, usersbooksFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Usersbooks.
+     * @param {usersbooksCreateArgs} args - Arguments to create a Usersbooks.
+     * @example
+     * // Create one Usersbooks
+     * const Usersbooks = await prisma.usersbooks.create({
+     *   data: {
+     *     // ... data to create a Usersbooks
+     *   }
+     * })
+     * 
+     */
+    create<T extends usersbooksCreateArgs>(args: SelectSubset<T, usersbooksCreateArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Usersbooks.
+     * @param {usersbooksCreateManyArgs} args - Arguments to create many Usersbooks.
+     * @example
+     * // Create many Usersbooks
+     * const usersbooks = await prisma.usersbooks.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends usersbooksCreateManyArgs>(args?: SelectSubset<T, usersbooksCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Usersbooks and returns the data saved in the database.
+     * @param {usersbooksCreateManyAndReturnArgs} args - Arguments to create many Usersbooks.
+     * @example
+     * // Create many Usersbooks
+     * const usersbooks = await prisma.usersbooks.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Usersbooks and only return the `id`
+     * const usersbooksWithIdOnly = await prisma.usersbooks.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends usersbooksCreateManyAndReturnArgs>(args?: SelectSubset<T, usersbooksCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Usersbooks.
+     * @param {usersbooksDeleteArgs} args - Arguments to delete one Usersbooks.
+     * @example
+     * // Delete one Usersbooks
+     * const Usersbooks = await prisma.usersbooks.delete({
+     *   where: {
+     *     // ... filter to delete one Usersbooks
+     *   }
+     * })
+     * 
+     */
+    delete<T extends usersbooksDeleteArgs>(args: SelectSubset<T, usersbooksDeleteArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Usersbooks.
+     * @param {usersbooksUpdateArgs} args - Arguments to update one Usersbooks.
+     * @example
+     * // Update one Usersbooks
+     * const usersbooks = await prisma.usersbooks.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends usersbooksUpdateArgs>(args: SelectSubset<T, usersbooksUpdateArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Usersbooks.
+     * @param {usersbooksDeleteManyArgs} args - Arguments to filter Usersbooks to delete.
+     * @example
+     * // Delete a few Usersbooks
+     * const { count } = await prisma.usersbooks.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends usersbooksDeleteManyArgs>(args?: SelectSubset<T, usersbooksDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Usersbooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersbooksUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Usersbooks
+     * const usersbooks = await prisma.usersbooks.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends usersbooksUpdateManyArgs>(args: SelectSubset<T, usersbooksUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Usersbooks and returns the data updated in the database.
+     * @param {usersbooksUpdateManyAndReturnArgs} args - Arguments to update many Usersbooks.
+     * @example
+     * // Update many Usersbooks
+     * const usersbooks = await prisma.usersbooks.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Usersbooks and only return the `id`
+     * const usersbooksWithIdOnly = await prisma.usersbooks.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends usersbooksUpdateManyAndReturnArgs>(args: SelectSubset<T, usersbooksUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Usersbooks.
+     * @param {usersbooksUpsertArgs} args - Arguments to update or create a Usersbooks.
+     * @example
+     * // Update or create a Usersbooks
+     * const usersbooks = await prisma.usersbooks.upsert({
+     *   create: {
+     *     // ... data to create a Usersbooks
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Usersbooks we want to update
+     *   }
+     * })
+     */
+    upsert<T extends usersbooksUpsertArgs>(args: SelectSubset<T, usersbooksUpsertArgs<ExtArgs>>): Prisma__usersbooksClient<$Result.GetResult<Prisma.$usersbooksPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Usersbooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersbooksCountArgs} args - Arguments to filter Usersbooks to count.
+     * @example
+     * // Count the number of Usersbooks
+     * const count = await prisma.usersbooks.count({
+     *   where: {
+     *     // ... the filter for the Usersbooks we want to count
+     *   }
+     * })
+    **/
+    count<T extends usersbooksCountArgs>(
+      args?: Subset<T, usersbooksCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsersbooksCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Usersbooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsersbooksAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsersbooksAggregateArgs>(args: Subset<T, UsersbooksAggregateArgs>): Prisma.PrismaPromise<GetUsersbooksAggregateType<T>>
+
+    /**
+     * Group by Usersbooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersbooksGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends usersbooksGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: usersbooksGroupByArgs['orderBy'] }
+        : { orderBy?: usersbooksGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, usersbooksGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsersbooksGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the usersbooks model
+   */
+  readonly fields: usersbooksFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for usersbooks.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__usersbooksClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    books<T extends usersbooks$booksArgs<ExtArgs> = {}>(args?: Subset<T, usersbooks$booksArgs<ExtArgs>>): Prisma__booksClient<$Result.GetResult<Prisma.$booksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    profiles<T extends usersbooks$profilesArgs<ExtArgs> = {}>(args?: Subset<T, usersbooks$profilesArgs<ExtArgs>>): Prisma__profilesClient<$Result.GetResult<Prisma.$profilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the usersbooks model
+   */
+  interface usersbooksFieldRefs {
+    readonly id: FieldRef<"usersbooks", 'String'>
+    readonly created_at: FieldRef<"usersbooks", 'DateTime'>
+    readonly user: FieldRef<"usersbooks", 'String'>
+    readonly book: FieldRef<"usersbooks", 'String'>
+    readonly is_book_marked: FieldRef<"usersbooks", 'Boolean'>
+    readonly last_page: FieldRef<"usersbooks", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * usersbooks findUnique
+   */
+  export type usersbooksFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * Filter, which usersbooks to fetch.
+     */
+    where: usersbooksWhereUniqueInput
+  }
+
+  /**
+   * usersbooks findUniqueOrThrow
+   */
+  export type usersbooksFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * Filter, which usersbooks to fetch.
+     */
+    where: usersbooksWhereUniqueInput
+  }
+
+  /**
+   * usersbooks findFirst
+   */
+  export type usersbooksFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * Filter, which usersbooks to fetch.
+     */
+    where?: usersbooksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersbooks to fetch.
+     */
+    orderBy?: usersbooksOrderByWithRelationInput | usersbooksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for usersbooks.
+     */
+    cursor?: usersbooksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersbooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersbooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of usersbooks.
+     */
+    distinct?: UsersbooksScalarFieldEnum | UsersbooksScalarFieldEnum[]
+  }
+
+  /**
+   * usersbooks findFirstOrThrow
+   */
+  export type usersbooksFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * Filter, which usersbooks to fetch.
+     */
+    where?: usersbooksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersbooks to fetch.
+     */
+    orderBy?: usersbooksOrderByWithRelationInput | usersbooksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for usersbooks.
+     */
+    cursor?: usersbooksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersbooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersbooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of usersbooks.
+     */
+    distinct?: UsersbooksScalarFieldEnum | UsersbooksScalarFieldEnum[]
+  }
+
+  /**
+   * usersbooks findMany
+   */
+  export type usersbooksFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * Filter, which usersbooks to fetch.
+     */
+    where?: usersbooksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersbooks to fetch.
+     */
+    orderBy?: usersbooksOrderByWithRelationInput | usersbooksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing usersbooks.
+     */
+    cursor?: usersbooksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersbooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersbooks.
+     */
+    skip?: number
+    distinct?: UsersbooksScalarFieldEnum | UsersbooksScalarFieldEnum[]
+  }
+
+  /**
+   * usersbooks create
+   */
+  export type usersbooksCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * The data needed to create a usersbooks.
+     */
+    data: XOR<usersbooksCreateInput, usersbooksUncheckedCreateInput>
+  }
+
+  /**
+   * usersbooks createMany
+   */
+  export type usersbooksCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many usersbooks.
+     */
+    data: usersbooksCreateManyInput | usersbooksCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * usersbooks createManyAndReturn
+   */
+  export type usersbooksCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * The data used to create many usersbooks.
+     */
+    data: usersbooksCreateManyInput | usersbooksCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * usersbooks update
+   */
+  export type usersbooksUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * The data needed to update a usersbooks.
+     */
+    data: XOR<usersbooksUpdateInput, usersbooksUncheckedUpdateInput>
+    /**
+     * Choose, which usersbooks to update.
+     */
+    where: usersbooksWhereUniqueInput
+  }
+
+  /**
+   * usersbooks updateMany
+   */
+  export type usersbooksUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update usersbooks.
+     */
+    data: XOR<usersbooksUpdateManyMutationInput, usersbooksUncheckedUpdateManyInput>
+    /**
+     * Filter which usersbooks to update
+     */
+    where?: usersbooksWhereInput
+    /**
+     * Limit how many usersbooks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * usersbooks updateManyAndReturn
+   */
+  export type usersbooksUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * The data used to update usersbooks.
+     */
+    data: XOR<usersbooksUpdateManyMutationInput, usersbooksUncheckedUpdateManyInput>
+    /**
+     * Filter which usersbooks to update
+     */
+    where?: usersbooksWhereInput
+    /**
+     * Limit how many usersbooks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * usersbooks upsert
+   */
+  export type usersbooksUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * The filter to search for the usersbooks to update in case it exists.
+     */
+    where: usersbooksWhereUniqueInput
+    /**
+     * In case the usersbooks found by the `where` argument doesn't exist, create a new usersbooks with this data.
+     */
+    create: XOR<usersbooksCreateInput, usersbooksUncheckedCreateInput>
+    /**
+     * In case the usersbooks was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<usersbooksUpdateInput, usersbooksUncheckedUpdateInput>
+  }
+
+  /**
+   * usersbooks delete
+   */
+  export type usersbooksDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+    /**
+     * Filter which usersbooks to delete.
+     */
+    where: usersbooksWhereUniqueInput
+  }
+
+  /**
+   * usersbooks deleteMany
+   */
+  export type usersbooksDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which usersbooks to delete
+     */
+    where?: usersbooksWhereInput
+    /**
+     * Limit how many usersbooks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * usersbooks.books
+   */
+  export type usersbooks$booksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the books
+     */
+    select?: booksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the books
+     */
+    omit?: booksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: booksInclude<ExtArgs> | null
+    where?: booksWhereInput
+  }
+
+  /**
+   * usersbooks.profiles
+   */
+  export type usersbooks$profilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the profiles
+     */
+    select?: profilesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the profiles
+     */
+    omit?: profilesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: profilesInclude<ExtArgs> | null
+    where?: profilesWhereInput
+  }
+
+  /**
+   * usersbooks without action
+   */
+  export type usersbooksDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersbooks
+     */
+    select?: usersbooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersbooks
+     */
+    omit?: usersbooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersbooksInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model usersvocab
+   */
+
+  export type AggregateUsersvocab = {
+    _count: UsersvocabCountAggregateOutputType | null
+    _avg: UsersvocabAvgAggregateOutputType | null
+    _sum: UsersvocabSumAggregateOutputType | null
+    _min: UsersvocabMinAggregateOutputType | null
+    _max: UsersvocabMaxAggregateOutputType | null
+  }
+
+  export type UsersvocabAvgAggregateOutputType = {
+    repeatments: Decimal | null
+  }
+
+  export type UsersvocabSumAggregateOutputType = {
+    repeatments: Decimal | null
+  }
+
+  export type UsersvocabMinAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    user: string | null
+    word: string | null
+    status: $Enums.word_statuses | null
+    repeatments: Decimal | null
+  }
+
+  export type UsersvocabMaxAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    user: string | null
+    word: string | null
+    status: $Enums.word_statuses | null
+    repeatments: Decimal | null
+  }
+
+  export type UsersvocabCountAggregateOutputType = {
+    id: number
+    created_at: number
+    user: number
+    word: number
+    status: number
+    repeatments: number
+    _all: number
+  }
+
+
+  export type UsersvocabAvgAggregateInputType = {
+    repeatments?: true
+  }
+
+  export type UsersvocabSumAggregateInputType = {
+    repeatments?: true
+  }
+
+  export type UsersvocabMinAggregateInputType = {
+    id?: true
+    created_at?: true
+    user?: true
+    word?: true
+    status?: true
+    repeatments?: true
+  }
+
+  export type UsersvocabMaxAggregateInputType = {
+    id?: true
+    created_at?: true
+    user?: true
+    word?: true
+    status?: true
+    repeatments?: true
+  }
+
+  export type UsersvocabCountAggregateInputType = {
+    id?: true
+    created_at?: true
+    user?: true
+    word?: true
+    status?: true
+    repeatments?: true
+    _all?: true
+  }
+
+  export type UsersvocabAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which usersvocab to aggregate.
+     */
+    where?: usersvocabWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersvocabs to fetch.
+     */
+    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: usersvocabWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersvocabs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersvocabs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned usersvocabs
+    **/
+    _count?: true | UsersvocabCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UsersvocabAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsersvocabSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsersvocabMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsersvocabMaxAggregateInputType
+  }
+
+  export type GetUsersvocabAggregateType<T extends UsersvocabAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsersvocab]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsersvocab[P]>
+      : GetScalarType<T[P], AggregateUsersvocab[P]>
+  }
+
+
+
+
+  export type usersvocabGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usersvocabWhereInput
+    orderBy?: usersvocabOrderByWithAggregationInput | usersvocabOrderByWithAggregationInput[]
+    by: UsersvocabScalarFieldEnum[] | UsersvocabScalarFieldEnum
+    having?: usersvocabScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsersvocabCountAggregateInputType | true
+    _avg?: UsersvocabAvgAggregateInputType
+    _sum?: UsersvocabSumAggregateInputType
+    _min?: UsersvocabMinAggregateInputType
+    _max?: UsersvocabMaxAggregateInputType
+  }
+
+  export type UsersvocabGroupByOutputType = {
+    id: string
+    created_at: Date
+    user: string
+    word: string
+    status: $Enums.word_statuses
+    repeatments: Decimal
+    _count: UsersvocabCountAggregateOutputType | null
+    _avg: UsersvocabAvgAggregateOutputType | null
+    _sum: UsersvocabSumAggregateOutputType | null
+    _min: UsersvocabMinAggregateOutputType | null
+    _max: UsersvocabMaxAggregateOutputType | null
+  }
+
+  type GetUsersvocabGroupByPayload<T extends usersvocabGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsersvocabGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsersvocabGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsersvocabGroupByOutputType[P]>
+            : GetScalarType<T[P], UsersvocabGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type usersvocabSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    word?: boolean
+    status?: boolean
+    repeatments?: boolean
+    profiles?: boolean | profilesDefaultArgs<ExtArgs>
+    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usersvocab"]>
+
+  export type usersvocabSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    word?: boolean
+    status?: boolean
+    repeatments?: boolean
+    profiles?: boolean | profilesDefaultArgs<ExtArgs>
+    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usersvocab"]>
+
+  export type usersvocabSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    word?: boolean
+    status?: boolean
+    repeatments?: boolean
+    profiles?: boolean | profilesDefaultArgs<ExtArgs>
+    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usersvocab"]>
+
+  export type usersvocabSelectScalar = {
+    id?: boolean
+    created_at?: boolean
+    user?: boolean
+    word?: boolean
+    status?: boolean
+    repeatments?: boolean
+  }
+
+  export type usersvocabOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "user" | "word" | "status" | "repeatments", ExtArgs["result"]["usersvocab"]>
+  export type usersvocabInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profiles?: boolean | profilesDefaultArgs<ExtArgs>
+    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
+  }
+  export type usersvocabIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profiles?: boolean | profilesDefaultArgs<ExtArgs>
+    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
+  }
+  export type usersvocabIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    profiles?: boolean | profilesDefaultArgs<ExtArgs>
+    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
+  }
+
+  export type $usersvocabPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "usersvocab"
+    objects: {
+      profiles: Prisma.$profilesPayload<ExtArgs>
+      dictionary: Prisma.$dictionaryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      created_at: Date
+      user: string
+      word: string
+      status: $Enums.word_statuses
+      repeatments: Prisma.Decimal
+    }, ExtArgs["result"]["usersvocab"]>
+    composites: {}
+  }
+
+  type usersvocabGetPayload<S extends boolean | null | undefined | usersvocabDefaultArgs> = $Result.GetResult<Prisma.$usersvocabPayload, S>
+
+  type usersvocabCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<usersvocabFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsersvocabCountAggregateInputType | true
+    }
+
+  export interface usersvocabDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['usersvocab'], meta: { name: 'usersvocab' } }
+    /**
+     * Find zero or one Usersvocab that matches the filter.
+     * @param {usersvocabFindUniqueArgs} args - Arguments to find a Usersvocab
+     * @example
+     * // Get one Usersvocab
+     * const usersvocab = await prisma.usersvocab.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends usersvocabFindUniqueArgs>(args: SelectSubset<T, usersvocabFindUniqueArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Usersvocab that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {usersvocabFindUniqueOrThrowArgs} args - Arguments to find a Usersvocab
+     * @example
+     * // Get one Usersvocab
+     * const usersvocab = await prisma.usersvocab.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends usersvocabFindUniqueOrThrowArgs>(args: SelectSubset<T, usersvocabFindUniqueOrThrowArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Usersvocab that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersvocabFindFirstArgs} args - Arguments to find a Usersvocab
+     * @example
+     * // Get one Usersvocab
+     * const usersvocab = await prisma.usersvocab.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends usersvocabFindFirstArgs>(args?: SelectSubset<T, usersvocabFindFirstArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Usersvocab that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersvocabFindFirstOrThrowArgs} args - Arguments to find a Usersvocab
+     * @example
+     * // Get one Usersvocab
+     * const usersvocab = await prisma.usersvocab.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends usersvocabFindFirstOrThrowArgs>(args?: SelectSubset<T, usersvocabFindFirstOrThrowArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Usersvocabs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersvocabFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Usersvocabs
+     * const usersvocabs = await prisma.usersvocab.findMany()
+     * 
+     * // Get first 10 Usersvocabs
+     * const usersvocabs = await prisma.usersvocab.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usersvocabWithIdOnly = await prisma.usersvocab.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends usersvocabFindManyArgs>(args?: SelectSubset<T, usersvocabFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Usersvocab.
+     * @param {usersvocabCreateArgs} args - Arguments to create a Usersvocab.
+     * @example
+     * // Create one Usersvocab
+     * const Usersvocab = await prisma.usersvocab.create({
+     *   data: {
+     *     // ... data to create a Usersvocab
+     *   }
+     * })
+     * 
+     */
+    create<T extends usersvocabCreateArgs>(args: SelectSubset<T, usersvocabCreateArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Usersvocabs.
+     * @param {usersvocabCreateManyArgs} args - Arguments to create many Usersvocabs.
+     * @example
+     * // Create many Usersvocabs
+     * const usersvocab = await prisma.usersvocab.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends usersvocabCreateManyArgs>(args?: SelectSubset<T, usersvocabCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Usersvocabs and returns the data saved in the database.
+     * @param {usersvocabCreateManyAndReturnArgs} args - Arguments to create many Usersvocabs.
+     * @example
+     * // Create many Usersvocabs
+     * const usersvocab = await prisma.usersvocab.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Usersvocabs and only return the `id`
+     * const usersvocabWithIdOnly = await prisma.usersvocab.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends usersvocabCreateManyAndReturnArgs>(args?: SelectSubset<T, usersvocabCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Usersvocab.
+     * @param {usersvocabDeleteArgs} args - Arguments to delete one Usersvocab.
+     * @example
+     * // Delete one Usersvocab
+     * const Usersvocab = await prisma.usersvocab.delete({
+     *   where: {
+     *     // ... filter to delete one Usersvocab
+     *   }
+     * })
+     * 
+     */
+    delete<T extends usersvocabDeleteArgs>(args: SelectSubset<T, usersvocabDeleteArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Usersvocab.
+     * @param {usersvocabUpdateArgs} args - Arguments to update one Usersvocab.
+     * @example
+     * // Update one Usersvocab
+     * const usersvocab = await prisma.usersvocab.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends usersvocabUpdateArgs>(args: SelectSubset<T, usersvocabUpdateArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Usersvocabs.
+     * @param {usersvocabDeleteManyArgs} args - Arguments to filter Usersvocabs to delete.
+     * @example
+     * // Delete a few Usersvocabs
+     * const { count } = await prisma.usersvocab.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends usersvocabDeleteManyArgs>(args?: SelectSubset<T, usersvocabDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Usersvocabs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersvocabUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Usersvocabs
+     * const usersvocab = await prisma.usersvocab.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends usersvocabUpdateManyArgs>(args: SelectSubset<T, usersvocabUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Usersvocabs and returns the data updated in the database.
+     * @param {usersvocabUpdateManyAndReturnArgs} args - Arguments to update many Usersvocabs.
+     * @example
+     * // Update many Usersvocabs
+     * const usersvocab = await prisma.usersvocab.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Usersvocabs and only return the `id`
+     * const usersvocabWithIdOnly = await prisma.usersvocab.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends usersvocabUpdateManyAndReturnArgs>(args: SelectSubset<T, usersvocabUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Usersvocab.
+     * @param {usersvocabUpsertArgs} args - Arguments to update or create a Usersvocab.
+     * @example
+     * // Update or create a Usersvocab
+     * const usersvocab = await prisma.usersvocab.upsert({
+     *   create: {
+     *     // ... data to create a Usersvocab
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Usersvocab we want to update
+     *   }
+     * })
+     */
+    upsert<T extends usersvocabUpsertArgs>(args: SelectSubset<T, usersvocabUpsertArgs<ExtArgs>>): Prisma__usersvocabClient<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Usersvocabs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersvocabCountArgs} args - Arguments to filter Usersvocabs to count.
+     * @example
+     * // Count the number of Usersvocabs
+     * const count = await prisma.usersvocab.count({
+     *   where: {
+     *     // ... the filter for the Usersvocabs we want to count
+     *   }
+     * })
+    **/
+    count<T extends usersvocabCountArgs>(
+      args?: Subset<T, usersvocabCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsersvocabCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Usersvocab.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsersvocabAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsersvocabAggregateArgs>(args: Subset<T, UsersvocabAggregateArgs>): Prisma.PrismaPromise<GetUsersvocabAggregateType<T>>
+
+    /**
+     * Group by Usersvocab.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {usersvocabGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends usersvocabGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: usersvocabGroupByArgs['orderBy'] }
+        : { orderBy?: usersvocabGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, usersvocabGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsersvocabGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the usersvocab model
+   */
+  readonly fields: usersvocabFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for usersvocab.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__usersvocabClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    profiles<T extends profilesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, profilesDefaultArgs<ExtArgs>>): Prisma__profilesClient<$Result.GetResult<Prisma.$profilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    dictionary<T extends dictionaryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, dictionaryDefaultArgs<ExtArgs>>): Prisma__dictionaryClient<$Result.GetResult<Prisma.$dictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the usersvocab model
+   */
+  interface usersvocabFieldRefs {
+    readonly id: FieldRef<"usersvocab", 'String'>
+    readonly created_at: FieldRef<"usersvocab", 'DateTime'>
+    readonly user: FieldRef<"usersvocab", 'String'>
+    readonly word: FieldRef<"usersvocab", 'String'>
+    readonly status: FieldRef<"usersvocab", 'word_statuses'>
+    readonly repeatments: FieldRef<"usersvocab", 'Decimal'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * usersvocab findUnique
+   */
+  export type usersvocabFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * Filter, which usersvocab to fetch.
+     */
+    where: usersvocabWhereUniqueInput
+  }
+
+  /**
+   * usersvocab findUniqueOrThrow
+   */
+  export type usersvocabFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * Filter, which usersvocab to fetch.
+     */
+    where: usersvocabWhereUniqueInput
+  }
+
+  /**
+   * usersvocab findFirst
+   */
+  export type usersvocabFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * Filter, which usersvocab to fetch.
+     */
+    where?: usersvocabWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersvocabs to fetch.
+     */
+    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for usersvocabs.
+     */
+    cursor?: usersvocabWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersvocabs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersvocabs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of usersvocabs.
+     */
+    distinct?: UsersvocabScalarFieldEnum | UsersvocabScalarFieldEnum[]
+  }
+
+  /**
+   * usersvocab findFirstOrThrow
+   */
+  export type usersvocabFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * Filter, which usersvocab to fetch.
+     */
+    where?: usersvocabWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersvocabs to fetch.
+     */
+    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for usersvocabs.
+     */
+    cursor?: usersvocabWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersvocabs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersvocabs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of usersvocabs.
+     */
+    distinct?: UsersvocabScalarFieldEnum | UsersvocabScalarFieldEnum[]
+  }
+
+  /**
+   * usersvocab findMany
+   */
+  export type usersvocabFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * Filter, which usersvocabs to fetch.
+     */
+    where?: usersvocabWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of usersvocabs to fetch.
+     */
+    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing usersvocabs.
+     */
+    cursor?: usersvocabWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` usersvocabs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` usersvocabs.
+     */
+    skip?: number
+    distinct?: UsersvocabScalarFieldEnum | UsersvocabScalarFieldEnum[]
+  }
+
+  /**
+   * usersvocab create
+   */
+  export type usersvocabCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * The data needed to create a usersvocab.
+     */
+    data: XOR<usersvocabCreateInput, usersvocabUncheckedCreateInput>
+  }
+
+  /**
+   * usersvocab createMany
+   */
+  export type usersvocabCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many usersvocabs.
+     */
+    data: usersvocabCreateManyInput | usersvocabCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * usersvocab createManyAndReturn
+   */
+  export type usersvocabCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * The data used to create many usersvocabs.
+     */
+    data: usersvocabCreateManyInput | usersvocabCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * usersvocab update
+   */
+  export type usersvocabUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * The data needed to update a usersvocab.
+     */
+    data: XOR<usersvocabUpdateInput, usersvocabUncheckedUpdateInput>
+    /**
+     * Choose, which usersvocab to update.
+     */
+    where: usersvocabWhereUniqueInput
+  }
+
+  /**
+   * usersvocab updateMany
+   */
+  export type usersvocabUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update usersvocabs.
+     */
+    data: XOR<usersvocabUpdateManyMutationInput, usersvocabUncheckedUpdateManyInput>
+    /**
+     * Filter which usersvocabs to update
+     */
+    where?: usersvocabWhereInput
+    /**
+     * Limit how many usersvocabs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * usersvocab updateManyAndReturn
+   */
+  export type usersvocabUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * The data used to update usersvocabs.
+     */
+    data: XOR<usersvocabUpdateManyMutationInput, usersvocabUncheckedUpdateManyInput>
+    /**
+     * Filter which usersvocabs to update
+     */
+    where?: usersvocabWhereInput
+    /**
+     * Limit how many usersvocabs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * usersvocab upsert
+   */
+  export type usersvocabUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * The filter to search for the usersvocab to update in case it exists.
+     */
+    where: usersvocabWhereUniqueInput
+    /**
+     * In case the usersvocab found by the `where` argument doesn't exist, create a new usersvocab with this data.
+     */
+    create: XOR<usersvocabCreateInput, usersvocabUncheckedCreateInput>
+    /**
+     * In case the usersvocab was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<usersvocabUpdateInput, usersvocabUncheckedUpdateInput>
+  }
+
+  /**
+   * usersvocab delete
+   */
+  export type usersvocabDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
+    /**
+     * Filter which usersvocab to delete.
+     */
+    where: usersvocabWhereUniqueInput
+  }
+
+  /**
+   * usersvocab deleteMany
+   */
+  export type usersvocabDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which usersvocabs to delete
+     */
+    where?: usersvocabWhereInput
+    /**
+     * Limit how many usersvocabs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * usersvocab without action
+   */
+  export type usersvocabDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usersvocab
+     */
+    select?: usersvocabSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usersvocab
+     */
+    omit?: usersvocabOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usersvocabInclude<ExtArgs> | null
   }
 
 
@@ -24097,6 +26867,30 @@ export namespace Prisma {
   export type ProfilesScalarFieldEnum = (typeof ProfilesScalarFieldEnum)[keyof typeof ProfilesScalarFieldEnum]
 
 
+  export const UsersbooksScalarFieldEnum: {
+    id: 'id',
+    created_at: 'created_at',
+    user: 'user',
+    book: 'book',
+    is_book_marked: 'is_book_marked',
+    last_page: 'last_page'
+  };
+
+  export type UsersbooksScalarFieldEnum = (typeof UsersbooksScalarFieldEnum)[keyof typeof UsersbooksScalarFieldEnum]
+
+
+  export const UsersvocabScalarFieldEnum: {
+    id: 'id',
+    created_at: 'created_at',
+    user: 'user',
+    word: 'word',
+    status: 'status',
+    repeatments: 'repeatments'
+  };
+
+  export type UsersvocabScalarFieldEnum = (typeof UsersvocabScalarFieldEnum)[keyof typeof UsersvocabScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -24308,6 +27102,34 @@ export namespace Prisma {
    * Reference to a field of type 'roles[]'
    */
   export type ListEnumrolesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'roles[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'word_statuses'
+   */
+  export type Enumword_statusesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'word_statuses'>
+    
+
+
+  /**
+   * Reference to a field of type 'word_statuses[]'
+   */
+  export type ListEnumword_statusesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'word_statuses[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal[]'
+   */
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -25567,6 +28389,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"books"> | string | null
     chapters?: JsonNullableFilter<"books">
     id?: UuidFilter<"books"> | string
+    usersbooks?: UsersbooksListRelationFilter
   }
 
   export type booksOrderByWithRelationInput = {
@@ -25576,6 +28399,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     chapters?: SortOrderInput | SortOrder
     id?: SortOrder
+    usersbooks?: usersbooksOrderByRelationAggregateInput
   }
 
   export type booksWhereUniqueInput = Prisma.AtLeast<{
@@ -25588,6 +28412,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"books"> | string | null
     image?: StringNullableFilter<"books"> | string | null
     chapters?: JsonNullableFilter<"books">
+    usersbooks?: UsersbooksListRelationFilter
   }, "id">
 
   export type booksOrderByWithAggregationInput = {
@@ -25622,6 +28447,7 @@ export namespace Prisma {
     level?: StringFilter<"dictionary"> | string
     created_at?: DateTimeFilter<"dictionary"> | Date | string
     id?: UuidFilter<"dictionary"> | string
+    usersvocab?: UsersvocabListRelationFilter
   }
 
   export type dictionaryOrderByWithRelationInput = {
@@ -25629,6 +28455,7 @@ export namespace Prisma {
     level?: SortOrder
     created_at?: SortOrder
     id?: SortOrder
+    usersvocab?: usersvocabOrderByRelationAggregateInput
   }
 
   export type dictionaryWhereUniqueInput = Prisma.AtLeast<{
@@ -25639,6 +28466,7 @@ export namespace Prisma {
     word?: StringFilter<"dictionary"> | string
     level?: StringFilter<"dictionary"> | string
     created_at?: DateTimeFilter<"dictionary"> | Date | string
+    usersvocab?: UsersvocabListRelationFilter
   }, "id">
 
   export type dictionaryOrderByWithAggregationInput = {
@@ -25671,6 +28499,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"profiles"> | string | null
     role?: EnumrolesFilter<"profiles"> | $Enums.roles
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    usersbooks?: UsersbooksListRelationFilter
+    usersvocab?: UsersvocabListRelationFilter
   }
 
   export type profilesOrderByWithRelationInput = {
@@ -25680,6 +28510,8 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     users?: usersOrderByWithRelationInput
+    usersbooks?: usersbooksOrderByRelationAggregateInput
+    usersvocab?: usersvocabOrderByRelationAggregateInput
   }
 
   export type profilesWhereUniqueInput = Prisma.AtLeast<{
@@ -25692,6 +28524,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"profiles"> | string | null
     role?: EnumrolesFilter<"profiles"> | $Enums.roles
     users?: XOR<UsersScalarRelationFilter, usersWhereInput>
+    usersbooks?: UsersbooksListRelationFilter
+    usersvocab?: UsersvocabListRelationFilter
   }, "id">
 
   export type profilesOrderByWithAggregationInput = {
@@ -25714,6 +28548,136 @@ export namespace Prisma {
     nickname?: StringNullableWithAggregatesFilter<"profiles"> | string | null
     image?: StringNullableWithAggregatesFilter<"profiles"> | string | null
     role?: EnumrolesWithAggregatesFilter<"profiles"> | $Enums.roles
+  }
+
+  export type usersbooksWhereInput = {
+    AND?: usersbooksWhereInput | usersbooksWhereInput[]
+    OR?: usersbooksWhereInput[]
+    NOT?: usersbooksWhereInput | usersbooksWhereInput[]
+    id?: UuidFilter<"usersbooks"> | string
+    created_at?: DateTimeFilter<"usersbooks"> | Date | string
+    user?: UuidNullableFilter<"usersbooks"> | string | null
+    book?: UuidNullableFilter<"usersbooks"> | string | null
+    is_book_marked?: BoolFilter<"usersbooks"> | boolean
+    last_page?: IntFilter<"usersbooks"> | number
+    books?: XOR<BooksNullableScalarRelationFilter, booksWhereInput> | null
+    profiles?: XOR<ProfilesNullableScalarRelationFilter, profilesWhereInput> | null
+  }
+
+  export type usersbooksOrderByWithRelationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrderInput | SortOrder
+    book?: SortOrderInput | SortOrder
+    is_book_marked?: SortOrder
+    last_page?: SortOrder
+    books?: booksOrderByWithRelationInput
+    profiles?: profilesOrderByWithRelationInput
+  }
+
+  export type usersbooksWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: usersbooksWhereInput | usersbooksWhereInput[]
+    OR?: usersbooksWhereInput[]
+    NOT?: usersbooksWhereInput | usersbooksWhereInput[]
+    created_at?: DateTimeFilter<"usersbooks"> | Date | string
+    user?: UuidNullableFilter<"usersbooks"> | string | null
+    book?: UuidNullableFilter<"usersbooks"> | string | null
+    is_book_marked?: BoolFilter<"usersbooks"> | boolean
+    last_page?: IntFilter<"usersbooks"> | number
+    books?: XOR<BooksNullableScalarRelationFilter, booksWhereInput> | null
+    profiles?: XOR<ProfilesNullableScalarRelationFilter, profilesWhereInput> | null
+  }, "id">
+
+  export type usersbooksOrderByWithAggregationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrderInput | SortOrder
+    book?: SortOrderInput | SortOrder
+    is_book_marked?: SortOrder
+    last_page?: SortOrder
+    _count?: usersbooksCountOrderByAggregateInput
+    _avg?: usersbooksAvgOrderByAggregateInput
+    _max?: usersbooksMaxOrderByAggregateInput
+    _min?: usersbooksMinOrderByAggregateInput
+    _sum?: usersbooksSumOrderByAggregateInput
+  }
+
+  export type usersbooksScalarWhereWithAggregatesInput = {
+    AND?: usersbooksScalarWhereWithAggregatesInput | usersbooksScalarWhereWithAggregatesInput[]
+    OR?: usersbooksScalarWhereWithAggregatesInput[]
+    NOT?: usersbooksScalarWhereWithAggregatesInput | usersbooksScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"usersbooks"> | string
+    created_at?: DateTimeWithAggregatesFilter<"usersbooks"> | Date | string
+    user?: UuidNullableWithAggregatesFilter<"usersbooks"> | string | null
+    book?: UuidNullableWithAggregatesFilter<"usersbooks"> | string | null
+    is_book_marked?: BoolWithAggregatesFilter<"usersbooks"> | boolean
+    last_page?: IntWithAggregatesFilter<"usersbooks"> | number
+  }
+
+  export type usersvocabWhereInput = {
+    AND?: usersvocabWhereInput | usersvocabWhereInput[]
+    OR?: usersvocabWhereInput[]
+    NOT?: usersvocabWhereInput | usersvocabWhereInput[]
+    id?: UuidFilter<"usersvocab"> | string
+    created_at?: DateTimeFilter<"usersvocab"> | Date | string
+    user?: UuidFilter<"usersvocab"> | string
+    word?: UuidFilter<"usersvocab"> | string
+    status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
+    repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
+    profiles?: XOR<ProfilesScalarRelationFilter, profilesWhereInput>
+    dictionary?: XOR<DictionaryScalarRelationFilter, dictionaryWhereInput>
+  }
+
+  export type usersvocabOrderByWithRelationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    word?: SortOrder
+    status?: SortOrder
+    repeatments?: SortOrder
+    profiles?: profilesOrderByWithRelationInput
+    dictionary?: dictionaryOrderByWithRelationInput
+  }
+
+  export type usersvocabWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: usersvocabWhereInput | usersvocabWhereInput[]
+    OR?: usersvocabWhereInput[]
+    NOT?: usersvocabWhereInput | usersvocabWhereInput[]
+    created_at?: DateTimeFilter<"usersvocab"> | Date | string
+    user?: UuidFilter<"usersvocab"> | string
+    word?: UuidFilter<"usersvocab"> | string
+    status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
+    repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
+    profiles?: XOR<ProfilesScalarRelationFilter, profilesWhereInput>
+    dictionary?: XOR<DictionaryScalarRelationFilter, dictionaryWhereInput>
+  }, "id">
+
+  export type usersvocabOrderByWithAggregationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    word?: SortOrder
+    status?: SortOrder
+    repeatments?: SortOrder
+    _count?: usersvocabCountOrderByAggregateInput
+    _avg?: usersvocabAvgOrderByAggregateInput
+    _max?: usersvocabMaxOrderByAggregateInput
+    _min?: usersvocabMinOrderByAggregateInput
+    _sum?: usersvocabSumOrderByAggregateInput
+  }
+
+  export type usersvocabScalarWhereWithAggregatesInput = {
+    AND?: usersvocabScalarWhereWithAggregatesInput | usersvocabScalarWhereWithAggregatesInput[]
+    OR?: usersvocabScalarWhereWithAggregatesInput[]
+    NOT?: usersvocabScalarWhereWithAggregatesInput | usersvocabScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"usersvocab"> | string
+    created_at?: DateTimeWithAggregatesFilter<"usersvocab"> | Date | string
+    user?: UuidWithAggregatesFilter<"usersvocab"> | string
+    word?: UuidWithAggregatesFilter<"usersvocab"> | string
+    status?: Enumword_statusesWithAggregatesFilter<"usersvocab"> | $Enums.word_statuses
+    repeatments?: DecimalWithAggregatesFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
   }
 
   export type audit_log_entriesCreateInput = {
@@ -27104,6 +30068,7 @@ export namespace Prisma {
     image?: string | null
     chapters?: NullableJsonNullValueInput | InputJsonValue
     id?: string
+    usersbooks?: usersbooksCreateNestedManyWithoutBooksInput
   }
 
   export type booksUncheckedCreateInput = {
@@ -27113,6 +30078,7 @@ export namespace Prisma {
     image?: string | null
     chapters?: NullableJsonNullValueInput | InputJsonValue
     id?: string
+    usersbooks?: usersbooksUncheckedCreateNestedManyWithoutBooksInput
   }
 
   export type booksUpdateInput = {
@@ -27122,6 +30088,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     chapters?: NullableJsonNullValueInput | InputJsonValue
     id?: StringFieldUpdateOperationsInput | string
+    usersbooks?: usersbooksUpdateManyWithoutBooksNestedInput
   }
 
   export type booksUncheckedUpdateInput = {
@@ -27131,6 +30098,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     chapters?: NullableJsonNullValueInput | InputJsonValue
     id?: StringFieldUpdateOperationsInput | string
+    usersbooks?: usersbooksUncheckedUpdateManyWithoutBooksNestedInput
   }
 
   export type booksCreateManyInput = {
@@ -27165,6 +30133,7 @@ export namespace Prisma {
     level: string
     created_at: Date | string
     id?: string
+    usersvocab?: usersvocabCreateNestedManyWithoutDictionaryInput
   }
 
   export type dictionaryUncheckedCreateInput = {
@@ -27172,6 +30141,7 @@ export namespace Prisma {
     level: string
     created_at: Date | string
     id?: string
+    usersvocab?: usersvocabUncheckedCreateNestedManyWithoutDictionaryInput
   }
 
   export type dictionaryUpdateInput = {
@@ -27179,6 +30149,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: StringFieldUpdateOperationsInput | string
+    usersvocab?: usersvocabUpdateManyWithoutDictionaryNestedInput
   }
 
   export type dictionaryUncheckedUpdateInput = {
@@ -27186,6 +30157,7 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: StringFieldUpdateOperationsInput | string
+    usersvocab?: usersvocabUncheckedUpdateManyWithoutDictionaryNestedInput
   }
 
   export type dictionaryCreateManyInput = {
@@ -27215,6 +30187,8 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.roles
     users: usersCreateNestedOneWithoutProfilesInput
+    usersbooks?: usersbooksCreateNestedManyWithoutProfilesInput
+    usersvocab?: usersvocabCreateNestedManyWithoutProfilesInput
   }
 
   export type profilesUncheckedCreateInput = {
@@ -27223,6 +30197,8 @@ export namespace Prisma {
     nickname?: string | null
     image?: string | null
     role?: $Enums.roles
+    usersbooks?: usersbooksUncheckedCreateNestedManyWithoutProfilesInput
+    usersvocab?: usersvocabUncheckedCreateNestedManyWithoutProfilesInput
   }
 
   export type profilesUpdateInput = {
@@ -27231,6 +30207,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
     users?: usersUpdateOneRequiredWithoutProfilesNestedInput
+    usersbooks?: usersbooksUpdateManyWithoutProfilesNestedInput
+    usersvocab?: usersvocabUpdateManyWithoutProfilesNestedInput
   }
 
   export type profilesUncheckedUpdateInput = {
@@ -27239,6 +30217,8 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    usersbooks?: usersbooksUncheckedUpdateManyWithoutProfilesNestedInput
+    usersvocab?: usersvocabUncheckedUpdateManyWithoutProfilesNestedInput
   }
 
   export type profilesCreateManyInput = {
@@ -27262,6 +30242,128 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+  }
+
+  export type usersbooksCreateInput = {
+    id?: string
+    created_at?: Date | string
+    is_book_marked?: boolean
+    last_page: number
+    books?: booksCreateNestedOneWithoutUsersbooksInput
+    profiles?: profilesCreateNestedOneWithoutUsersbooksInput
+  }
+
+  export type usersbooksUncheckedCreateInput = {
+    id?: string
+    created_at?: Date | string
+    user?: string | null
+    book?: string | null
+    is_book_marked?: boolean
+    last_page: number
+  }
+
+  export type usersbooksUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+    books?: booksUpdateOneWithoutUsersbooksNestedInput
+    profiles?: profilesUpdateOneWithoutUsersbooksNestedInput
+  }
+
+  export type usersbooksUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: NullableStringFieldUpdateOperationsInput | string | null
+    book?: NullableStringFieldUpdateOperationsInput | string | null
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersbooksCreateManyInput = {
+    id?: string
+    created_at?: Date | string
+    user?: string | null
+    book?: string | null
+    is_book_marked?: boolean
+    last_page: number
+  }
+
+  export type usersbooksUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersbooksUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: NullableStringFieldUpdateOperationsInput | string | null
+    book?: NullableStringFieldUpdateOperationsInput | string | null
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersvocabCreateInput = {
+    id?: string
+    created_at?: Date | string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+    profiles: profilesCreateNestedOneWithoutUsersvocabInput
+    dictionary: dictionaryCreateNestedOneWithoutUsersvocabInput
+  }
+
+  export type usersvocabUncheckedCreateInput = {
+    id?: string
+    created_at?: Date | string
+    user: string
+    word: string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    profiles?: profilesUpdateOneRequiredWithoutUsersvocabNestedInput
+    dictionary?: dictionaryUpdateOneRequiredWithoutUsersvocabNestedInput
+  }
+
+  export type usersvocabUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: StringFieldUpdateOperationsInput | string
+    word?: StringFieldUpdateOperationsInput | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabCreateManyInput = {
+    id?: string
+    created_at?: Date | string
+    user: string
+    word: string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: StringFieldUpdateOperationsInput | string
+    word?: StringFieldUpdateOperationsInput | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -28435,6 +31537,16 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type UsersbooksListRelationFilter = {
+    every?: usersbooksWhereInput
+    some?: usersbooksWhereInput
+    none?: usersbooksWhereInput
+  }
+
+  export type usersbooksOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type booksCountOrderByAggregateInput = {
     created_at?: SortOrder
     title?: SortOrder
@@ -28458,6 +31570,16 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     id?: SortOrder
+  }
+
+  export type UsersvocabListRelationFilter = {
+    every?: usersvocabWhereInput
+    some?: usersvocabWhereInput
+    none?: usersvocabWhereInput
+  }
+
+  export type usersvocabOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type dictionaryCountOrderByAggregateInput = {
@@ -28520,6 +31642,162 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumrolesFilter<$PrismaModel>
     _max?: NestedEnumrolesFilter<$PrismaModel>
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type BooksNullableScalarRelationFilter = {
+    is?: booksWhereInput | null
+    isNot?: booksWhereInput | null
+  }
+
+  export type usersbooksCountOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    book?: SortOrder
+    is_book_marked?: SortOrder
+    last_page?: SortOrder
+  }
+
+  export type usersbooksAvgOrderByAggregateInput = {
+    last_page?: SortOrder
+  }
+
+  export type usersbooksMaxOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    book?: SortOrder
+    is_book_marked?: SortOrder
+    last_page?: SortOrder
+  }
+
+  export type usersbooksMinOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    book?: SortOrder
+    is_book_marked?: SortOrder
+    last_page?: SortOrder
+  }
+
+  export type usersbooksSumOrderByAggregateInput = {
+    last_page?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type Enumword_statusesFilter<$PrismaModel = never> = {
+    equals?: $Enums.word_statuses | Enumword_statusesFieldRefInput<$PrismaModel>
+    in?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    notIn?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    not?: NestedEnumword_statusesFilter<$PrismaModel> | $Enums.word_statuses
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type ProfilesScalarRelationFilter = {
+    is?: profilesWhereInput
+    isNot?: profilesWhereInput
+  }
+
+  export type DictionaryScalarRelationFilter = {
+    is?: dictionaryWhereInput
+    isNot?: dictionaryWhereInput
+  }
+
+  export type usersvocabCountOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    word?: SortOrder
+    status?: SortOrder
+    repeatments?: SortOrder
+  }
+
+  export type usersvocabAvgOrderByAggregateInput = {
+    repeatments?: SortOrder
+  }
+
+  export type usersvocabMaxOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    word?: SortOrder
+    status?: SortOrder
+    repeatments?: SortOrder
+  }
+
+  export type usersvocabMinOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    user?: SortOrder
+    word?: SortOrder
+    status?: SortOrder
+    repeatments?: SortOrder
+  }
+
+  export type usersvocabSumOrderByAggregateInput = {
+    repeatments?: SortOrder
+  }
+
+  export type Enumword_statusesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.word_statuses | Enumword_statusesFieldRefInput<$PrismaModel>
+    in?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    notIn?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    not?: NestedEnumword_statusesWithAggregatesFilter<$PrismaModel> | $Enums.word_statuses
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumword_statusesFilter<$PrismaModel>
+    _max?: NestedEnumword_statusesFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -29234,10 +32512,122 @@ export namespace Prisma {
     update?: XOR<XOR<profilesUpdateToOneWithWhereWithoutUsersInput, profilesUpdateWithoutUsersInput>, profilesUncheckedUpdateWithoutUsersInput>
   }
 
+  export type usersbooksCreateNestedManyWithoutBooksInput = {
+    create?: XOR<usersbooksCreateWithoutBooksInput, usersbooksUncheckedCreateWithoutBooksInput> | usersbooksCreateWithoutBooksInput[] | usersbooksUncheckedCreateWithoutBooksInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutBooksInput | usersbooksCreateOrConnectWithoutBooksInput[]
+    createMany?: usersbooksCreateManyBooksInputEnvelope
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+  }
+
+  export type usersbooksUncheckedCreateNestedManyWithoutBooksInput = {
+    create?: XOR<usersbooksCreateWithoutBooksInput, usersbooksUncheckedCreateWithoutBooksInput> | usersbooksCreateWithoutBooksInput[] | usersbooksUncheckedCreateWithoutBooksInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutBooksInput | usersbooksCreateOrConnectWithoutBooksInput[]
+    createMany?: usersbooksCreateManyBooksInputEnvelope
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+  }
+
+  export type usersbooksUpdateManyWithoutBooksNestedInput = {
+    create?: XOR<usersbooksCreateWithoutBooksInput, usersbooksUncheckedCreateWithoutBooksInput> | usersbooksCreateWithoutBooksInput[] | usersbooksUncheckedCreateWithoutBooksInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutBooksInput | usersbooksCreateOrConnectWithoutBooksInput[]
+    upsert?: usersbooksUpsertWithWhereUniqueWithoutBooksInput | usersbooksUpsertWithWhereUniqueWithoutBooksInput[]
+    createMany?: usersbooksCreateManyBooksInputEnvelope
+    set?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    disconnect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    delete?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    update?: usersbooksUpdateWithWhereUniqueWithoutBooksInput | usersbooksUpdateWithWhereUniqueWithoutBooksInput[]
+    updateMany?: usersbooksUpdateManyWithWhereWithoutBooksInput | usersbooksUpdateManyWithWhereWithoutBooksInput[]
+    deleteMany?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
+  }
+
+  export type usersbooksUncheckedUpdateManyWithoutBooksNestedInput = {
+    create?: XOR<usersbooksCreateWithoutBooksInput, usersbooksUncheckedCreateWithoutBooksInput> | usersbooksCreateWithoutBooksInput[] | usersbooksUncheckedCreateWithoutBooksInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutBooksInput | usersbooksCreateOrConnectWithoutBooksInput[]
+    upsert?: usersbooksUpsertWithWhereUniqueWithoutBooksInput | usersbooksUpsertWithWhereUniqueWithoutBooksInput[]
+    createMany?: usersbooksCreateManyBooksInputEnvelope
+    set?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    disconnect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    delete?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    update?: usersbooksUpdateWithWhereUniqueWithoutBooksInput | usersbooksUpdateWithWhereUniqueWithoutBooksInput[]
+    updateMany?: usersbooksUpdateManyWithWhereWithoutBooksInput | usersbooksUpdateManyWithWhereWithoutBooksInput[]
+    deleteMany?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
+  }
+
+  export type usersvocabCreateNestedManyWithoutDictionaryInput = {
+    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
+    createMany?: usersvocabCreateManyDictionaryInputEnvelope
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+  }
+
+  export type usersvocabUncheckedCreateNestedManyWithoutDictionaryInput = {
+    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
+    createMany?: usersvocabCreateManyDictionaryInputEnvelope
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+  }
+
+  export type usersvocabUpdateManyWithoutDictionaryNestedInput = {
+    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
+    upsert?: usersvocabUpsertWithWhereUniqueWithoutDictionaryInput | usersvocabUpsertWithWhereUniqueWithoutDictionaryInput[]
+    createMany?: usersvocabCreateManyDictionaryInputEnvelope
+    set?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    disconnect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    delete?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    update?: usersvocabUpdateWithWhereUniqueWithoutDictionaryInput | usersvocabUpdateWithWhereUniqueWithoutDictionaryInput[]
+    updateMany?: usersvocabUpdateManyWithWhereWithoutDictionaryInput | usersvocabUpdateManyWithWhereWithoutDictionaryInput[]
+    deleteMany?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+  }
+
+  export type usersvocabUncheckedUpdateManyWithoutDictionaryNestedInput = {
+    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
+    upsert?: usersvocabUpsertWithWhereUniqueWithoutDictionaryInput | usersvocabUpsertWithWhereUniqueWithoutDictionaryInput[]
+    createMany?: usersvocabCreateManyDictionaryInputEnvelope
+    set?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    disconnect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    delete?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    update?: usersvocabUpdateWithWhereUniqueWithoutDictionaryInput | usersvocabUpdateWithWhereUniqueWithoutDictionaryInput[]
+    updateMany?: usersvocabUpdateManyWithWhereWithoutDictionaryInput | usersvocabUpdateManyWithWhereWithoutDictionaryInput[]
+    deleteMany?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+  }
+
   export type usersCreateNestedOneWithoutProfilesInput = {
     create?: XOR<usersCreateWithoutProfilesInput, usersUncheckedCreateWithoutProfilesInput>
     connectOrCreate?: usersCreateOrConnectWithoutProfilesInput
     connect?: usersWhereUniqueInput
+  }
+
+  export type usersbooksCreateNestedManyWithoutProfilesInput = {
+    create?: XOR<usersbooksCreateWithoutProfilesInput, usersbooksUncheckedCreateWithoutProfilesInput> | usersbooksCreateWithoutProfilesInput[] | usersbooksUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutProfilesInput | usersbooksCreateOrConnectWithoutProfilesInput[]
+    createMany?: usersbooksCreateManyProfilesInputEnvelope
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+  }
+
+  export type usersvocabCreateNestedManyWithoutProfilesInput = {
+    create?: XOR<usersvocabCreateWithoutProfilesInput, usersvocabUncheckedCreateWithoutProfilesInput> | usersvocabCreateWithoutProfilesInput[] | usersvocabUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutProfilesInput | usersvocabCreateOrConnectWithoutProfilesInput[]
+    createMany?: usersvocabCreateManyProfilesInputEnvelope
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+  }
+
+  export type usersbooksUncheckedCreateNestedManyWithoutProfilesInput = {
+    create?: XOR<usersbooksCreateWithoutProfilesInput, usersbooksUncheckedCreateWithoutProfilesInput> | usersbooksCreateWithoutProfilesInput[] | usersbooksUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutProfilesInput | usersbooksCreateOrConnectWithoutProfilesInput[]
+    createMany?: usersbooksCreateManyProfilesInputEnvelope
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+  }
+
+  export type usersvocabUncheckedCreateNestedManyWithoutProfilesInput = {
+    create?: XOR<usersvocabCreateWithoutProfilesInput, usersvocabUncheckedCreateWithoutProfilesInput> | usersvocabCreateWithoutProfilesInput[] | usersvocabUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutProfilesInput | usersvocabCreateOrConnectWithoutProfilesInput[]
+    createMany?: usersvocabCreateManyProfilesInputEnvelope
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
   }
 
   export type EnumrolesFieldUpdateOperationsInput = {
@@ -29250,6 +32640,142 @@ export namespace Prisma {
     upsert?: usersUpsertWithoutProfilesInput
     connect?: usersWhereUniqueInput
     update?: XOR<XOR<usersUpdateToOneWithWhereWithoutProfilesInput, usersUpdateWithoutProfilesInput>, usersUncheckedUpdateWithoutProfilesInput>
+  }
+
+  export type usersbooksUpdateManyWithoutProfilesNestedInput = {
+    create?: XOR<usersbooksCreateWithoutProfilesInput, usersbooksUncheckedCreateWithoutProfilesInput> | usersbooksCreateWithoutProfilesInput[] | usersbooksUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutProfilesInput | usersbooksCreateOrConnectWithoutProfilesInput[]
+    upsert?: usersbooksUpsertWithWhereUniqueWithoutProfilesInput | usersbooksUpsertWithWhereUniqueWithoutProfilesInput[]
+    createMany?: usersbooksCreateManyProfilesInputEnvelope
+    set?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    disconnect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    delete?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    update?: usersbooksUpdateWithWhereUniqueWithoutProfilesInput | usersbooksUpdateWithWhereUniqueWithoutProfilesInput[]
+    updateMany?: usersbooksUpdateManyWithWhereWithoutProfilesInput | usersbooksUpdateManyWithWhereWithoutProfilesInput[]
+    deleteMany?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
+  }
+
+  export type usersvocabUpdateManyWithoutProfilesNestedInput = {
+    create?: XOR<usersvocabCreateWithoutProfilesInput, usersvocabUncheckedCreateWithoutProfilesInput> | usersvocabCreateWithoutProfilesInput[] | usersvocabUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutProfilesInput | usersvocabCreateOrConnectWithoutProfilesInput[]
+    upsert?: usersvocabUpsertWithWhereUniqueWithoutProfilesInput | usersvocabUpsertWithWhereUniqueWithoutProfilesInput[]
+    createMany?: usersvocabCreateManyProfilesInputEnvelope
+    set?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    disconnect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    delete?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    update?: usersvocabUpdateWithWhereUniqueWithoutProfilesInput | usersvocabUpdateWithWhereUniqueWithoutProfilesInput[]
+    updateMany?: usersvocabUpdateManyWithWhereWithoutProfilesInput | usersvocabUpdateManyWithWhereWithoutProfilesInput[]
+    deleteMany?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+  }
+
+  export type usersbooksUncheckedUpdateManyWithoutProfilesNestedInput = {
+    create?: XOR<usersbooksCreateWithoutProfilesInput, usersbooksUncheckedCreateWithoutProfilesInput> | usersbooksCreateWithoutProfilesInput[] | usersbooksUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersbooksCreateOrConnectWithoutProfilesInput | usersbooksCreateOrConnectWithoutProfilesInput[]
+    upsert?: usersbooksUpsertWithWhereUniqueWithoutProfilesInput | usersbooksUpsertWithWhereUniqueWithoutProfilesInput[]
+    createMany?: usersbooksCreateManyProfilesInputEnvelope
+    set?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    disconnect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    delete?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    connect?: usersbooksWhereUniqueInput | usersbooksWhereUniqueInput[]
+    update?: usersbooksUpdateWithWhereUniqueWithoutProfilesInput | usersbooksUpdateWithWhereUniqueWithoutProfilesInput[]
+    updateMany?: usersbooksUpdateManyWithWhereWithoutProfilesInput | usersbooksUpdateManyWithWhereWithoutProfilesInput[]
+    deleteMany?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
+  }
+
+  export type usersvocabUncheckedUpdateManyWithoutProfilesNestedInput = {
+    create?: XOR<usersvocabCreateWithoutProfilesInput, usersvocabUncheckedCreateWithoutProfilesInput> | usersvocabCreateWithoutProfilesInput[] | usersvocabUncheckedCreateWithoutProfilesInput[]
+    connectOrCreate?: usersvocabCreateOrConnectWithoutProfilesInput | usersvocabCreateOrConnectWithoutProfilesInput[]
+    upsert?: usersvocabUpsertWithWhereUniqueWithoutProfilesInput | usersvocabUpsertWithWhereUniqueWithoutProfilesInput[]
+    createMany?: usersvocabCreateManyProfilesInputEnvelope
+    set?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    disconnect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    delete?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
+    update?: usersvocabUpdateWithWhereUniqueWithoutProfilesInput | usersvocabUpdateWithWhereUniqueWithoutProfilesInput[]
+    updateMany?: usersvocabUpdateManyWithWhereWithoutProfilesInput | usersvocabUpdateManyWithWhereWithoutProfilesInput[]
+    deleteMany?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+  }
+
+  export type booksCreateNestedOneWithoutUsersbooksInput = {
+    create?: XOR<booksCreateWithoutUsersbooksInput, booksUncheckedCreateWithoutUsersbooksInput>
+    connectOrCreate?: booksCreateOrConnectWithoutUsersbooksInput
+    connect?: booksWhereUniqueInput
+  }
+
+  export type profilesCreateNestedOneWithoutUsersbooksInput = {
+    create?: XOR<profilesCreateWithoutUsersbooksInput, profilesUncheckedCreateWithoutUsersbooksInput>
+    connectOrCreate?: profilesCreateOrConnectWithoutUsersbooksInput
+    connect?: profilesWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type booksUpdateOneWithoutUsersbooksNestedInput = {
+    create?: XOR<booksCreateWithoutUsersbooksInput, booksUncheckedCreateWithoutUsersbooksInput>
+    connectOrCreate?: booksCreateOrConnectWithoutUsersbooksInput
+    upsert?: booksUpsertWithoutUsersbooksInput
+    disconnect?: booksWhereInput | boolean
+    delete?: booksWhereInput | boolean
+    connect?: booksWhereUniqueInput
+    update?: XOR<XOR<booksUpdateToOneWithWhereWithoutUsersbooksInput, booksUpdateWithoutUsersbooksInput>, booksUncheckedUpdateWithoutUsersbooksInput>
+  }
+
+  export type profilesUpdateOneWithoutUsersbooksNestedInput = {
+    create?: XOR<profilesCreateWithoutUsersbooksInput, profilesUncheckedCreateWithoutUsersbooksInput>
+    connectOrCreate?: profilesCreateOrConnectWithoutUsersbooksInput
+    upsert?: profilesUpsertWithoutUsersbooksInput
+    disconnect?: profilesWhereInput | boolean
+    delete?: profilesWhereInput | boolean
+    connect?: profilesWhereUniqueInput
+    update?: XOR<XOR<profilesUpdateToOneWithWhereWithoutUsersbooksInput, profilesUpdateWithoutUsersbooksInput>, profilesUncheckedUpdateWithoutUsersbooksInput>
+  }
+
+  export type profilesCreateNestedOneWithoutUsersvocabInput = {
+    create?: XOR<profilesCreateWithoutUsersvocabInput, profilesUncheckedCreateWithoutUsersvocabInput>
+    connectOrCreate?: profilesCreateOrConnectWithoutUsersvocabInput
+    connect?: profilesWhereUniqueInput
+  }
+
+  export type dictionaryCreateNestedOneWithoutUsersvocabInput = {
+    create?: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
+    connectOrCreate?: dictionaryCreateOrConnectWithoutUsersvocabInput
+    connect?: dictionaryWhereUniqueInput
+  }
+
+  export type Enumword_statusesFieldUpdateOperationsInput = {
+    set?: $Enums.word_statuses
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type profilesUpdateOneRequiredWithoutUsersvocabNestedInput = {
+    create?: XOR<profilesCreateWithoutUsersvocabInput, profilesUncheckedCreateWithoutUsersvocabInput>
+    connectOrCreate?: profilesCreateOrConnectWithoutUsersvocabInput
+    upsert?: profilesUpsertWithoutUsersvocabInput
+    connect?: profilesWhereUniqueInput
+    update?: XOR<XOR<profilesUpdateToOneWithWhereWithoutUsersvocabInput, profilesUpdateWithoutUsersvocabInput>, profilesUncheckedUpdateWithoutUsersvocabInput>
+  }
+
+  export type dictionaryUpdateOneRequiredWithoutUsersvocabNestedInput = {
+    create?: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
+    connectOrCreate?: dictionaryCreateOrConnectWithoutUsersvocabInput
+    upsert?: dictionaryUpsertWithoutUsersvocabInput
+    connect?: dictionaryWhereUniqueInput
+    update?: XOR<XOR<dictionaryUpdateToOneWithWhereWithoutUsersvocabInput, dictionaryUpdateWithoutUsersvocabInput>, dictionaryUncheckedUpdateWithoutUsersvocabInput>
   }
 
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
@@ -29673,6 +33199,66 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumrolesFilter<$PrismaModel>
     _max?: NestedEnumrolesFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedEnumword_statusesFilter<$PrismaModel = never> = {
+    equals?: $Enums.word_statuses | Enumword_statusesFieldRefInput<$PrismaModel>
+    in?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    notIn?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    not?: NestedEnumword_statusesFilter<$PrismaModel> | $Enums.word_statuses
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedEnumword_statusesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.word_statuses | Enumword_statusesFieldRefInput<$PrismaModel>
+    in?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    notIn?: $Enums.word_statuses[] | ListEnumword_statusesFieldRefInput<$PrismaModel>
+    not?: NestedEnumword_statusesWithAggregatesFilter<$PrismaModel> | $Enums.word_statuses
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumword_statusesFilter<$PrismaModel>
+    _max?: NestedEnumword_statusesFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type saml_relay_statesCreateWithoutFlow_stateInput = {
@@ -31407,6 +34993,8 @@ export namespace Prisma {
     nickname?: string | null
     image?: string | null
     role?: $Enums.roles
+    usersbooks?: usersbooksCreateNestedManyWithoutProfilesInput
+    usersvocab?: usersvocabCreateNestedManyWithoutProfilesInput
   }
 
   export type profilesUncheckedCreateWithoutUsersInput = {
@@ -31414,6 +35002,8 @@ export namespace Prisma {
     nickname?: string | null
     image?: string | null
     role?: $Enums.roles
+    usersbooks?: usersbooksUncheckedCreateNestedManyWithoutProfilesInput
+    usersvocab?: usersvocabUncheckedCreateNestedManyWithoutProfilesInput
   }
 
   export type profilesCreateOrConnectWithoutUsersInput = {
@@ -31564,6 +35154,8 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    usersbooks?: usersbooksUpdateManyWithoutProfilesNestedInput
+    usersvocab?: usersvocabUpdateManyWithoutProfilesNestedInput
   }
 
   export type profilesUncheckedUpdateWithoutUsersInput = {
@@ -31571,6 +35163,116 @@ export namespace Prisma {
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    usersbooks?: usersbooksUncheckedUpdateManyWithoutProfilesNestedInput
+    usersvocab?: usersvocabUncheckedUpdateManyWithoutProfilesNestedInput
+  }
+
+  export type usersbooksCreateWithoutBooksInput = {
+    id?: string
+    created_at?: Date | string
+    is_book_marked?: boolean
+    last_page: number
+    profiles?: profilesCreateNestedOneWithoutUsersbooksInput
+  }
+
+  export type usersbooksUncheckedCreateWithoutBooksInput = {
+    id?: string
+    created_at?: Date | string
+    user?: string | null
+    is_book_marked?: boolean
+    last_page: number
+  }
+
+  export type usersbooksCreateOrConnectWithoutBooksInput = {
+    where: usersbooksWhereUniqueInput
+    create: XOR<usersbooksCreateWithoutBooksInput, usersbooksUncheckedCreateWithoutBooksInput>
+  }
+
+  export type usersbooksCreateManyBooksInputEnvelope = {
+    data: usersbooksCreateManyBooksInput | usersbooksCreateManyBooksInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usersbooksUpsertWithWhereUniqueWithoutBooksInput = {
+    where: usersbooksWhereUniqueInput
+    update: XOR<usersbooksUpdateWithoutBooksInput, usersbooksUncheckedUpdateWithoutBooksInput>
+    create: XOR<usersbooksCreateWithoutBooksInput, usersbooksUncheckedCreateWithoutBooksInput>
+  }
+
+  export type usersbooksUpdateWithWhereUniqueWithoutBooksInput = {
+    where: usersbooksWhereUniqueInput
+    data: XOR<usersbooksUpdateWithoutBooksInput, usersbooksUncheckedUpdateWithoutBooksInput>
+  }
+
+  export type usersbooksUpdateManyWithWhereWithoutBooksInput = {
+    where: usersbooksScalarWhereInput
+    data: XOR<usersbooksUpdateManyMutationInput, usersbooksUncheckedUpdateManyWithoutBooksInput>
+  }
+
+  export type usersbooksScalarWhereInput = {
+    AND?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
+    OR?: usersbooksScalarWhereInput[]
+    NOT?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
+    id?: UuidFilter<"usersbooks"> | string
+    created_at?: DateTimeFilter<"usersbooks"> | Date | string
+    user?: UuidNullableFilter<"usersbooks"> | string | null
+    book?: UuidNullableFilter<"usersbooks"> | string | null
+    is_book_marked?: BoolFilter<"usersbooks"> | boolean
+    last_page?: IntFilter<"usersbooks"> | number
+  }
+
+  export type usersvocabCreateWithoutDictionaryInput = {
+    id?: string
+    created_at?: Date | string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+    profiles: profilesCreateNestedOneWithoutUsersvocabInput
+  }
+
+  export type usersvocabUncheckedCreateWithoutDictionaryInput = {
+    id?: string
+    created_at?: Date | string
+    user: string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabCreateOrConnectWithoutDictionaryInput = {
+    where: usersvocabWhereUniqueInput
+    create: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput>
+  }
+
+  export type usersvocabCreateManyDictionaryInputEnvelope = {
+    data: usersvocabCreateManyDictionaryInput | usersvocabCreateManyDictionaryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usersvocabUpsertWithWhereUniqueWithoutDictionaryInput = {
+    where: usersvocabWhereUniqueInput
+    update: XOR<usersvocabUpdateWithoutDictionaryInput, usersvocabUncheckedUpdateWithoutDictionaryInput>
+    create: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput>
+  }
+
+  export type usersvocabUpdateWithWhereUniqueWithoutDictionaryInput = {
+    where: usersvocabWhereUniqueInput
+    data: XOR<usersvocabUpdateWithoutDictionaryInput, usersvocabUncheckedUpdateWithoutDictionaryInput>
+  }
+
+  export type usersvocabUpdateManyWithWhereWithoutDictionaryInput = {
+    where: usersvocabScalarWhereInput
+    data: XOR<usersvocabUpdateManyMutationInput, usersvocabUncheckedUpdateManyWithoutDictionaryInput>
+  }
+
+  export type usersvocabScalarWhereInput = {
+    AND?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+    OR?: usersvocabScalarWhereInput[]
+    NOT?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+    id?: UuidFilter<"usersvocab"> | string
+    created_at?: DateTimeFilter<"usersvocab"> | Date | string
+    user?: UuidFilter<"usersvocab"> | string
+    word?: UuidFilter<"usersvocab"> | string
+    status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
+    repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
   }
 
   export type usersCreateWithoutProfilesInput = {
@@ -31660,6 +35362,58 @@ export namespace Prisma {
   export type usersCreateOrConnectWithoutProfilesInput = {
     where: usersWhereUniqueInput
     create: XOR<usersCreateWithoutProfilesInput, usersUncheckedCreateWithoutProfilesInput>
+  }
+
+  export type usersbooksCreateWithoutProfilesInput = {
+    id?: string
+    created_at?: Date | string
+    is_book_marked?: boolean
+    last_page: number
+    books?: booksCreateNestedOneWithoutUsersbooksInput
+  }
+
+  export type usersbooksUncheckedCreateWithoutProfilesInput = {
+    id?: string
+    created_at?: Date | string
+    book?: string | null
+    is_book_marked?: boolean
+    last_page: number
+  }
+
+  export type usersbooksCreateOrConnectWithoutProfilesInput = {
+    where: usersbooksWhereUniqueInput
+    create: XOR<usersbooksCreateWithoutProfilesInput, usersbooksUncheckedCreateWithoutProfilesInput>
+  }
+
+  export type usersbooksCreateManyProfilesInputEnvelope = {
+    data: usersbooksCreateManyProfilesInput | usersbooksCreateManyProfilesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usersvocabCreateWithoutProfilesInput = {
+    id?: string
+    created_at?: Date | string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+    dictionary: dictionaryCreateNestedOneWithoutUsersvocabInput
+  }
+
+  export type usersvocabUncheckedCreateWithoutProfilesInput = {
+    id?: string
+    created_at?: Date | string
+    word: string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabCreateOrConnectWithoutProfilesInput = {
+    where: usersvocabWhereUniqueInput
+    create: XOR<usersvocabCreateWithoutProfilesInput, usersvocabUncheckedCreateWithoutProfilesInput>
+  }
+
+  export type usersvocabCreateManyProfilesInputEnvelope = {
+    data: usersvocabCreateManyProfilesInput | usersvocabCreateManyProfilesInput[]
+    skipDuplicates?: boolean
   }
 
   export type usersUpsertWithoutProfilesInput = {
@@ -31755,6 +35509,238 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedUpdateManyWithoutUsersNestedInput
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
+  }
+
+  export type usersbooksUpsertWithWhereUniqueWithoutProfilesInput = {
+    where: usersbooksWhereUniqueInput
+    update: XOR<usersbooksUpdateWithoutProfilesInput, usersbooksUncheckedUpdateWithoutProfilesInput>
+    create: XOR<usersbooksCreateWithoutProfilesInput, usersbooksUncheckedCreateWithoutProfilesInput>
+  }
+
+  export type usersbooksUpdateWithWhereUniqueWithoutProfilesInput = {
+    where: usersbooksWhereUniqueInput
+    data: XOR<usersbooksUpdateWithoutProfilesInput, usersbooksUncheckedUpdateWithoutProfilesInput>
+  }
+
+  export type usersbooksUpdateManyWithWhereWithoutProfilesInput = {
+    where: usersbooksScalarWhereInput
+    data: XOR<usersbooksUpdateManyMutationInput, usersbooksUncheckedUpdateManyWithoutProfilesInput>
+  }
+
+  export type usersvocabUpsertWithWhereUniqueWithoutProfilesInput = {
+    where: usersvocabWhereUniqueInput
+    update: XOR<usersvocabUpdateWithoutProfilesInput, usersvocabUncheckedUpdateWithoutProfilesInput>
+    create: XOR<usersvocabCreateWithoutProfilesInput, usersvocabUncheckedCreateWithoutProfilesInput>
+  }
+
+  export type usersvocabUpdateWithWhereUniqueWithoutProfilesInput = {
+    where: usersvocabWhereUniqueInput
+    data: XOR<usersvocabUpdateWithoutProfilesInput, usersvocabUncheckedUpdateWithoutProfilesInput>
+  }
+
+  export type usersvocabUpdateManyWithWhereWithoutProfilesInput = {
+    where: usersvocabScalarWhereInput
+    data: XOR<usersvocabUpdateManyMutationInput, usersvocabUncheckedUpdateManyWithoutProfilesInput>
+  }
+
+  export type booksCreateWithoutUsersbooksInput = {
+    created_at?: Date | string
+    title: string
+    description?: string | null
+    image?: string | null
+    chapters?: NullableJsonNullValueInput | InputJsonValue
+    id?: string
+  }
+
+  export type booksUncheckedCreateWithoutUsersbooksInput = {
+    created_at?: Date | string
+    title: string
+    description?: string | null
+    image?: string | null
+    chapters?: NullableJsonNullValueInput | InputJsonValue
+    id?: string
+  }
+
+  export type booksCreateOrConnectWithoutUsersbooksInput = {
+    where: booksWhereUniqueInput
+    create: XOR<booksCreateWithoutUsersbooksInput, booksUncheckedCreateWithoutUsersbooksInput>
+  }
+
+  export type profilesCreateWithoutUsersbooksInput = {
+    updated_at?: Date | string | null
+    nickname?: string | null
+    image?: string | null
+    role?: $Enums.roles
+    users: usersCreateNestedOneWithoutProfilesInput
+    usersvocab?: usersvocabCreateNestedManyWithoutProfilesInput
+  }
+
+  export type profilesUncheckedCreateWithoutUsersbooksInput = {
+    id: string
+    updated_at?: Date | string | null
+    nickname?: string | null
+    image?: string | null
+    role?: $Enums.roles
+    usersvocab?: usersvocabUncheckedCreateNestedManyWithoutProfilesInput
+  }
+
+  export type profilesCreateOrConnectWithoutUsersbooksInput = {
+    where: profilesWhereUniqueInput
+    create: XOR<profilesCreateWithoutUsersbooksInput, profilesUncheckedCreateWithoutUsersbooksInput>
+  }
+
+  export type booksUpsertWithoutUsersbooksInput = {
+    update: XOR<booksUpdateWithoutUsersbooksInput, booksUncheckedUpdateWithoutUsersbooksInput>
+    create: XOR<booksCreateWithoutUsersbooksInput, booksUncheckedCreateWithoutUsersbooksInput>
+    where?: booksWhereInput
+  }
+
+  export type booksUpdateToOneWithWhereWithoutUsersbooksInput = {
+    where?: booksWhereInput
+    data: XOR<booksUpdateWithoutUsersbooksInput, booksUncheckedUpdateWithoutUsersbooksInput>
+  }
+
+  export type booksUpdateWithoutUsersbooksInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    chapters?: NullableJsonNullValueInput | InputJsonValue
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type booksUncheckedUpdateWithoutUsersbooksInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    chapters?: NullableJsonNullValueInput | InputJsonValue
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type profilesUpsertWithoutUsersbooksInput = {
+    update: XOR<profilesUpdateWithoutUsersbooksInput, profilesUncheckedUpdateWithoutUsersbooksInput>
+    create: XOR<profilesCreateWithoutUsersbooksInput, profilesUncheckedCreateWithoutUsersbooksInput>
+    where?: profilesWhereInput
+  }
+
+  export type profilesUpdateToOneWithWhereWithoutUsersbooksInput = {
+    where?: profilesWhereInput
+    data: XOR<profilesUpdateWithoutUsersbooksInput, profilesUncheckedUpdateWithoutUsersbooksInput>
+  }
+
+  export type profilesUpdateWithoutUsersbooksInput = {
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    users?: usersUpdateOneRequiredWithoutProfilesNestedInput
+    usersvocab?: usersvocabUpdateManyWithoutProfilesNestedInput
+  }
+
+  export type profilesUncheckedUpdateWithoutUsersbooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    usersvocab?: usersvocabUncheckedUpdateManyWithoutProfilesNestedInput
+  }
+
+  export type profilesCreateWithoutUsersvocabInput = {
+    updated_at?: Date | string | null
+    nickname?: string | null
+    image?: string | null
+    role?: $Enums.roles
+    users: usersCreateNestedOneWithoutProfilesInput
+    usersbooks?: usersbooksCreateNestedManyWithoutProfilesInput
+  }
+
+  export type profilesUncheckedCreateWithoutUsersvocabInput = {
+    id: string
+    updated_at?: Date | string | null
+    nickname?: string | null
+    image?: string | null
+    role?: $Enums.roles
+    usersbooks?: usersbooksUncheckedCreateNestedManyWithoutProfilesInput
+  }
+
+  export type profilesCreateOrConnectWithoutUsersvocabInput = {
+    where: profilesWhereUniqueInput
+    create: XOR<profilesCreateWithoutUsersvocabInput, profilesUncheckedCreateWithoutUsersvocabInput>
+  }
+
+  export type dictionaryCreateWithoutUsersvocabInput = {
+    word: string
+    level: string
+    created_at: Date | string
+    id?: string
+  }
+
+  export type dictionaryUncheckedCreateWithoutUsersvocabInput = {
+    word: string
+    level: string
+    created_at: Date | string
+    id?: string
+  }
+
+  export type dictionaryCreateOrConnectWithoutUsersvocabInput = {
+    where: dictionaryWhereUniqueInput
+    create: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
+  }
+
+  export type profilesUpsertWithoutUsersvocabInput = {
+    update: XOR<profilesUpdateWithoutUsersvocabInput, profilesUncheckedUpdateWithoutUsersvocabInput>
+    create: XOR<profilesCreateWithoutUsersvocabInput, profilesUncheckedCreateWithoutUsersvocabInput>
+    where?: profilesWhereInput
+  }
+
+  export type profilesUpdateToOneWithWhereWithoutUsersvocabInput = {
+    where?: profilesWhereInput
+    data: XOR<profilesUpdateWithoutUsersvocabInput, profilesUncheckedUpdateWithoutUsersvocabInput>
+  }
+
+  export type profilesUpdateWithoutUsersvocabInput = {
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    users?: usersUpdateOneRequiredWithoutProfilesNestedInput
+    usersbooks?: usersbooksUpdateManyWithoutProfilesNestedInput
+  }
+
+  export type profilesUncheckedUpdateWithoutUsersvocabInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
+    usersbooks?: usersbooksUncheckedUpdateManyWithoutProfilesNestedInput
+  }
+
+  export type dictionaryUpsertWithoutUsersvocabInput = {
+    update: XOR<dictionaryUpdateWithoutUsersvocabInput, dictionaryUncheckedUpdateWithoutUsersvocabInput>
+    create: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
+    where?: dictionaryWhereInput
+  }
+
+  export type dictionaryUpdateToOneWithWhereWithoutUsersvocabInput = {
+    where?: dictionaryWhereInput
+    data: XOR<dictionaryUpdateWithoutUsersvocabInput, dictionaryUncheckedUpdateWithoutUsersvocabInput>
+  }
+
+  export type dictionaryUpdateWithoutUsersvocabInput = {
+    word?: StringFieldUpdateOperationsInput | string
+    level?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type dictionaryUncheckedUpdateWithoutUsersvocabInput = {
+    word?: StringFieldUpdateOperationsInput | string
+    level?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    id?: StringFieldUpdateOperationsInput | string
   }
 
   export type saml_relay_statesCreateManyFlow_stateInput = {
@@ -32209,6 +36195,134 @@ export namespace Prisma {
     user_agent?: NullableStringFieldUpdateOperationsInput | string | null
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     tag?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type usersbooksCreateManyBooksInput = {
+    id?: string
+    created_at?: Date | string
+    user?: string | null
+    is_book_marked?: boolean
+    last_page: number
+  }
+
+  export type usersbooksUpdateWithoutBooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+    profiles?: profilesUpdateOneWithoutUsersbooksNestedInput
+  }
+
+  export type usersbooksUncheckedUpdateWithoutBooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: NullableStringFieldUpdateOperationsInput | string | null
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersbooksUncheckedUpdateManyWithoutBooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: NullableStringFieldUpdateOperationsInput | string | null
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersvocabCreateManyDictionaryInput = {
+    id?: string
+    created_at?: Date | string
+    user: string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabUpdateWithoutDictionaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    profiles?: profilesUpdateOneRequiredWithoutUsersvocabNestedInput
+  }
+
+  export type usersvocabUncheckedUpdateWithoutDictionaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: StringFieldUpdateOperationsInput | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabUncheckedUpdateManyWithoutDictionaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: StringFieldUpdateOperationsInput | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersbooksCreateManyProfilesInput = {
+    id?: string
+    created_at?: Date | string
+    book?: string | null
+    is_book_marked?: boolean
+    last_page: number
+  }
+
+  export type usersvocabCreateManyProfilesInput = {
+    id?: string
+    created_at?: Date | string
+    word: string
+    status?: $Enums.word_statuses
+    repeatments?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersbooksUpdateWithoutProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+    books?: booksUpdateOneWithoutUsersbooksNestedInput
+  }
+
+  export type usersbooksUncheckedUpdateWithoutProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    book?: NullableStringFieldUpdateOperationsInput | string | null
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersbooksUncheckedUpdateManyWithoutProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    book?: NullableStringFieldUpdateOperationsInput | string | null
+    is_book_marked?: BoolFieldUpdateOperationsInput | boolean
+    last_page?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type usersvocabUpdateWithoutProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    dictionary?: dictionaryUpdateOneRequiredWithoutUsersvocabNestedInput
+  }
+
+  export type usersvocabUncheckedUpdateWithoutProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    word?: StringFieldUpdateOperationsInput | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type usersvocabUncheckedUpdateManyWithoutProfilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    word?: StringFieldUpdateOperationsInput | string
+    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
+    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
 

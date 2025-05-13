@@ -21,9 +21,9 @@ export class ProfilesController {
   @UseInterceptors(FileInterceptor('avatar'))
   async updateProfile(
     @Param('id') id: string,
-    @Body() updateData: profiles,
+    @Body() body: profiles,
     @UploadedFile() avatar?: Express.Multer.File
   ) {
-    return this.profilesService.updateProfile(id, updateData, avatar);
+    return this.profilesService.updateProfile(id, body, avatar);
   }
 }

@@ -25,7 +25,7 @@ export interface Book {
   id: UID;
   title: string;
   description: string;
-  image: string | null;
-	chapters: Chapter[];
+  image?: string;
+	chapters?: Chapter[];
   createdAt: string;
 }
