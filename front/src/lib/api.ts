@@ -1,4 +1,4 @@
-import { Book, Profile, Word } from "@/types/dbTypes";
+import { Book, Profile, UsersBooks, UsersVocab, Word, word_statuses } from "@/types/dbTypes";
 import { supabase } from "./supabaseClient";
 import axios, { AxiosError } from "axios";
 
@@ -52,6 +52,72 @@ const handleApiError = (error: unknown, defaultMessage: string) => {
     throw new Error(error.response?.data?.message || defaultMessage);
   }
   throw new Error(defaultMessage);
+};
+
+// UsersBooks API
+export const fetchUserBooks = async (userId: string): Promise<UsersBooks[]> => {
+  try {
+    const response = await apiClient.get<UsersBooks[]>(`/users-books/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, "Failed to fetch user books");
+  }
+};
+
+export const fetchUserBook = async (userId: string, bookId: string): Promise<UsersBooks | null> => {
+  try {
+    const response = await apiClient.get<UsersBooks>(`/users-books/user-book/${bookId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw handleApiError(error, "Failed to fetch user book");
+  }
+};
+
+export const createUserBook = async (data: UsersBooks): Promise<UsersBooks> => {
+  try {
+    const response = await apiClient.post<UsersBooks>('/users-books', data);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, "Failed to create user book");
+  }
+};
+
+export const updateUserBook = async (id: string, data: UsersBooks): Promise<UsersBooks> => {
+  try {
+    const response = await apiClient.patch<UsersBooks>(`/users-books/${id}`, data);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to update user book with ID ${id}`);
+  }
+};
+
+export const updateLastPage = async (id: string, page: number): Promise<UsersBooks> => {
+  try {
+    const response = await apiClient.patch<UsersBooks>(`/users-books/${id}/last-page/${page}`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to update last page for user book with ID ${id}`);
+  }
+};
+
+export const toggleBookmark = async (id: string): Promise<UsersBooks> => {
+  try {
+    const response = await apiClient.patch<UsersBooks>(`/users-books/${id}/toggle-bookmark`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to toggle bookmark for user book with ID ${id}`);
+  }
+};
+
+export const deleteUserBook = async (id: string): Promise<void> => {
+  try {
+    await apiClient.delete(`/users-books/${id}`);
+  } catch (error) {
+    throw handleApiError(error, `Failed to delete user book with ID ${id}`);
+  }
 };
 
 // Books API
@@ -267,5 +333,82 @@ export const syncUser = async (): Promise<void> => {
     await apiClient.post('/auth/sync-user', { userId, email, name });
   } catch (error) {
     throw handleApiError(error, "Failed to sync user");
+  }
+};
+
+export const fetchUserVocab = async (userId: string): Promise<UsersVocab[]> => {
+  try {
+    const response = await apiClient.get<UsersVocab[]>(`/users-vocab/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, "Failed to fetch user vocabulary");
+  }
+};
+
+export const fetchVocabItem = async (id: string): Promise<UsersVocab> => {
+  try {
+    const response = await apiClient.get<UsersVocab>(`/users-vocab/${id}`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to fetch vocabulary item with ID ${id}`);
+  }
+};
+
+export const fetchVocabItemByTerm = async (term: string, userId: string): Promise<UsersVocab> => {
+  try {
+    const response = await apiClient.get<UsersVocab>(`/users-vocab/term/${term}/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to fetch vocabulary item with value ${term}`);
+  }
+};
+
+export const createVocabItem = async (data: Partial<UsersVocab>): Promise<UsersVocab> => {
+  try {
+    const response = await apiClient.post<UsersVocab>('/users-vocab', data);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, "Failed to create vocabulary item");
+  }
+};
+
+export const updateVocabItem = async (
+  id: string, 
+  vocabData: Partial<UsersVocab>
+): Promise<UsersVocab> => {
+  try {
+    const response = await apiClient.patch<UsersVocab>(`/users-vocab/${id}`, vocabData);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to update vocabulary item with ID ${id}`);
+  }
+};
+
+export const updateVocabStatus = async (
+  id: string,
+  status: word_statuses
+): Promise<UsersVocab> => {
+  try {
+    const response = await apiClient.patch<UsersVocab>(`/users-vocab/${id}/status/${status}`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to update status for vocabulary item with ID ${id}`);
+  }
+};
+
+export const incrementVocabRepeats = async (id: string): Promise<UsersVocab> => {
+  try {
+    const response = await apiClient.patch<UsersVocab>(`/users-vocab/${id}/increment-repeats`);
+    return response.data;
+  } catch (error) {
+    throw handleApiError(error, `Failed to increment repeats for vocabulary item with ID ${id}`);
+  }
+};
+
+export const deleteVocabItem = async (id: string): Promise<void> => {
+  try {
+    await apiClient.delete(`/users-vocab/${id}`);
+  } catch (error) {
+    throw handleApiError(error, `Failed to delete vocabulary item with ID ${id}`);
   }
 };

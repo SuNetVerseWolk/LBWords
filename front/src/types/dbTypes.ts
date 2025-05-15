@@ -7,6 +7,25 @@ export interface Profile {
 	role: 'user' | 'admin';
 }
 
+export type word_statuses = 'unknown' | 'learning' | 'learned' | 'upto';
+
+export interface UsersVocab {
+  id?: UID;
+  created_at?: string;
+  user: string;
+  status: word_statuses;
+  repeatments: number;
+  term: string;
+}
+
+export interface UsersBooks {
+	id?: UID;
+  user: string;
+  book: string;
+  is_book_marked?: boolean;
+  last_page?: number;
+}
+
 export interface Word {
 	id: UID;
 	word: string;

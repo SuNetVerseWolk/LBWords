@@ -3046,37 +3046,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type DictionaryCountOutputType
-   */
-
-  export type DictionaryCountOutputType = {
-    usersvocab: number
-  }
-
-  export type DictionaryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    usersvocab?: boolean | DictionaryCountOutputTypeCountUsersvocabArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * DictionaryCountOutputType without action
-   */
-  export type DictionaryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DictionaryCountOutputType
-     */
-    select?: DictionaryCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * DictionaryCountOutputType without action
-   */
-  export type DictionaryCountOutputTypeCountUsersvocabArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: usersvocabWhereInput
-  }
-
-
-  /**
    * Count Type ProfilesCountOutputType
    */
 
@@ -22299,8 +22268,6 @@ export namespace Prisma {
     level?: boolean
     created_at?: boolean
     id?: boolean
-    usersvocab?: boolean | dictionary$usersvocabArgs<ExtArgs>
-    _count?: boolean | DictionaryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dictionary"]>
 
   export type dictionarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22325,18 +22292,10 @@ export namespace Prisma {
   }
 
   export type dictionaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"word" | "level" | "created_at" | "id", ExtArgs["result"]["dictionary"]>
-  export type dictionaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    usersvocab?: boolean | dictionary$usersvocabArgs<ExtArgs>
-    _count?: boolean | DictionaryCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type dictionaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type dictionaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $dictionaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "dictionary"
-    objects: {
-      usersvocab: Prisma.$usersvocabPayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       word: string
       level: string
@@ -22736,7 +22695,6 @@ export namespace Prisma {
    */
   export interface Prisma__dictionaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    usersvocab<T extends dictionary$usersvocabArgs<ExtArgs> = {}>(args?: Subset<T, dictionary$usersvocabArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usersvocabPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22787,10 +22745,6 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
-    /**
      * Filter, which dictionary to fetch.
      */
     where: dictionaryWhereUniqueInput
@@ -22809,10 +22763,6 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
-    /**
      * Filter, which dictionary to fetch.
      */
     where: dictionaryWhereUniqueInput
@@ -22830,10 +22780,6 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
     /**
      * Filter, which dictionary to fetch.
      */
@@ -22883,10 +22829,6 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
-    /**
      * Filter, which dictionary to fetch.
      */
     where?: dictionaryWhereInput
@@ -22935,10 +22877,6 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
-    /**
      * Filter, which dictionaries to fetch.
      */
     where?: dictionaryWhereInput
@@ -22981,10 +22919,6 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
     /**
      * The data needed to create a dictionary.
      */
@@ -23033,10 +22967,6 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
     /**
      * The data needed to update a dictionary.
      */
@@ -23104,10 +23034,6 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
-    /**
      * The filter to search for the dictionary to update in case it exists.
      */
     where: dictionaryWhereUniqueInput
@@ -23134,10 +23060,6 @@ export namespace Prisma {
      */
     omit?: dictionaryOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
-    /**
      * Filter which dictionary to delete.
      */
     where: dictionaryWhereUniqueInput
@@ -23158,30 +23080,6 @@ export namespace Prisma {
   }
 
   /**
-   * dictionary.usersvocab
-   */
-  export type dictionary$usersvocabArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the usersvocab
-     */
-    select?: usersvocabSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the usersvocab
-     */
-    omit?: usersvocabOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: usersvocabInclude<ExtArgs> | null
-    where?: usersvocabWhereInput
-    orderBy?: usersvocabOrderByWithRelationInput | usersvocabOrderByWithRelationInput[]
-    cursor?: usersvocabWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UsersvocabScalarFieldEnum | UsersvocabScalarFieldEnum[]
-  }
-
-  /**
    * dictionary without action
    */
   export type dictionaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23193,10 +23091,6 @@ export namespace Prisma {
      * Omit specific fields from the dictionary
      */
     omit?: dictionaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: dictionaryInclude<ExtArgs> | null
   }
 
 
@@ -25233,7 +25127,7 @@ export namespace Prisma {
     /**
      * The data needed to create a usersbooks.
      */
-    data: XOR<usersbooksCreateInput, usersbooksUncheckedCreateInput>
+    data?: XOR<usersbooksCreateInput, usersbooksUncheckedCreateInput>
   }
 
   /**
@@ -25491,27 +25385,27 @@ export namespace Prisma {
     id: string | null
     created_at: Date | null
     user: string | null
-    word: string | null
     status: $Enums.word_statuses | null
     repeatments: Decimal | null
+    term: string | null
   }
 
   export type UsersvocabMaxAggregateOutputType = {
     id: string | null
     created_at: Date | null
     user: string | null
-    word: string | null
     status: $Enums.word_statuses | null
     repeatments: Decimal | null
+    term: string | null
   }
 
   export type UsersvocabCountAggregateOutputType = {
     id: number
     created_at: number
     user: number
-    word: number
     status: number
     repeatments: number
+    term: number
     _all: number
   }
 
@@ -25528,27 +25422,27 @@ export namespace Prisma {
     id?: true
     created_at?: true
     user?: true
-    word?: true
     status?: true
     repeatments?: true
+    term?: true
   }
 
   export type UsersvocabMaxAggregateInputType = {
     id?: true
     created_at?: true
     user?: true
-    word?: true
     status?: true
     repeatments?: true
+    term?: true
   }
 
   export type UsersvocabCountAggregateInputType = {
     id?: true
     created_at?: true
     user?: true
-    word?: true
     status?: true
     repeatments?: true
+    term?: true
     _all?: true
   }
 
@@ -25642,9 +25536,9 @@ export namespace Prisma {
     id: string
     created_at: Date
     user: string
-    word: string
     status: $Enums.word_statuses
     repeatments: Decimal
+    term: string
     _count: UsersvocabCountAggregateOutputType | null
     _avg: UsersvocabAvgAggregateOutputType | null
     _sum: UsersvocabSumAggregateOutputType | null
@@ -25670,71 +25564,64 @@ export namespace Prisma {
     id?: boolean
     created_at?: boolean
     user?: boolean
-    word?: boolean
     status?: boolean
     repeatments?: boolean
+    term?: boolean
     profiles?: boolean | profilesDefaultArgs<ExtArgs>
-    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usersvocab"]>
 
   export type usersvocabSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     created_at?: boolean
     user?: boolean
-    word?: boolean
     status?: boolean
     repeatments?: boolean
+    term?: boolean
     profiles?: boolean | profilesDefaultArgs<ExtArgs>
-    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usersvocab"]>
 
   export type usersvocabSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     created_at?: boolean
     user?: boolean
-    word?: boolean
     status?: boolean
     repeatments?: boolean
+    term?: boolean
     profiles?: boolean | profilesDefaultArgs<ExtArgs>
-    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usersvocab"]>
 
   export type usersvocabSelectScalar = {
     id?: boolean
     created_at?: boolean
     user?: boolean
-    word?: boolean
     status?: boolean
     repeatments?: boolean
+    term?: boolean
   }
 
-  export type usersvocabOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "user" | "word" | "status" | "repeatments", ExtArgs["result"]["usersvocab"]>
+  export type usersvocabOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "user" | "status" | "repeatments" | "term", ExtArgs["result"]["usersvocab"]>
   export type usersvocabInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profiles?: boolean | profilesDefaultArgs<ExtArgs>
-    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
   }
   export type usersvocabIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profiles?: boolean | profilesDefaultArgs<ExtArgs>
-    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
   }
   export type usersvocabIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profiles?: boolean | profilesDefaultArgs<ExtArgs>
-    dictionary?: boolean | dictionaryDefaultArgs<ExtArgs>
   }
 
   export type $usersvocabPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "usersvocab"
     objects: {
       profiles: Prisma.$profilesPayload<ExtArgs>
-      dictionary: Prisma.$dictionaryPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       created_at: Date
       user: string
-      word: string
       status: $Enums.word_statuses
       repeatments: Prisma.Decimal
+      term: string
     }, ExtArgs["result"]["usersvocab"]>
     composites: {}
   }
@@ -26130,7 +26017,6 @@ export namespace Prisma {
   export interface Prisma__usersvocabClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     profiles<T extends profilesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, profilesDefaultArgs<ExtArgs>>): Prisma__profilesClient<$Result.GetResult<Prisma.$profilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    dictionary<T extends dictionaryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, dictionaryDefaultArgs<ExtArgs>>): Prisma__dictionaryClient<$Result.GetResult<Prisma.$dictionaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26163,9 +26049,9 @@ export namespace Prisma {
     readonly id: FieldRef<"usersvocab", 'String'>
     readonly created_at: FieldRef<"usersvocab", 'DateTime'>
     readonly user: FieldRef<"usersvocab", 'String'>
-    readonly word: FieldRef<"usersvocab", 'String'>
     readonly status: FieldRef<"usersvocab", 'word_statuses'>
     readonly repeatments: FieldRef<"usersvocab", 'Decimal'>
+    readonly term: FieldRef<"usersvocab", 'String'>
   }
     
 
@@ -26883,9 +26769,9 @@ export namespace Prisma {
     id: 'id',
     created_at: 'created_at',
     user: 'user',
-    word: 'word',
     status: 'status',
-    repeatments: 'repeatments'
+    repeatments: 'repeatments',
+    term: 'term'
   };
 
   export type UsersvocabScalarFieldEnum = (typeof UsersvocabScalarFieldEnum)[keyof typeof UsersvocabScalarFieldEnum]
@@ -28447,7 +28333,6 @@ export namespace Prisma {
     level?: StringFilter<"dictionary"> | string
     created_at?: DateTimeFilter<"dictionary"> | Date | string
     id?: UuidFilter<"dictionary"> | string
-    usersvocab?: UsersvocabListRelationFilter
   }
 
   export type dictionaryOrderByWithRelationInput = {
@@ -28455,7 +28340,6 @@ export namespace Prisma {
     level?: SortOrder
     created_at?: SortOrder
     id?: SortOrder
-    usersvocab?: usersvocabOrderByRelationAggregateInput
   }
 
   export type dictionaryWhereUniqueInput = Prisma.AtLeast<{
@@ -28466,7 +28350,6 @@ export namespace Prisma {
     word?: StringFilter<"dictionary"> | string
     level?: StringFilter<"dictionary"> | string
     created_at?: DateTimeFilter<"dictionary"> | Date | string
-    usersvocab?: UsersvocabListRelationFilter
   }, "id">
 
   export type dictionaryOrderByWithAggregationInput = {
@@ -28622,45 +28505,42 @@ export namespace Prisma {
     id?: UuidFilter<"usersvocab"> | string
     created_at?: DateTimeFilter<"usersvocab"> | Date | string
     user?: UuidFilter<"usersvocab"> | string
-    word?: UuidFilter<"usersvocab"> | string
     status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
     repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
+    term?: StringFilter<"usersvocab"> | string
     profiles?: XOR<ProfilesScalarRelationFilter, profilesWhereInput>
-    dictionary?: XOR<DictionaryScalarRelationFilter, dictionaryWhereInput>
   }
 
   export type usersvocabOrderByWithRelationInput = {
     id?: SortOrder
     created_at?: SortOrder
     user?: SortOrder
-    word?: SortOrder
     status?: SortOrder
     repeatments?: SortOrder
+    term?: SortOrder
     profiles?: profilesOrderByWithRelationInput
-    dictionary?: dictionaryOrderByWithRelationInput
   }
 
   export type usersvocabWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    term?: string
     AND?: usersvocabWhereInput | usersvocabWhereInput[]
     OR?: usersvocabWhereInput[]
     NOT?: usersvocabWhereInput | usersvocabWhereInput[]
     created_at?: DateTimeFilter<"usersvocab"> | Date | string
     user?: UuidFilter<"usersvocab"> | string
-    word?: UuidFilter<"usersvocab"> | string
     status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
     repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
     profiles?: XOR<ProfilesScalarRelationFilter, profilesWhereInput>
-    dictionary?: XOR<DictionaryScalarRelationFilter, dictionaryWhereInput>
-  }, "id">
+  }, "id" | "term">
 
   export type usersvocabOrderByWithAggregationInput = {
     id?: SortOrder
     created_at?: SortOrder
     user?: SortOrder
-    word?: SortOrder
     status?: SortOrder
     repeatments?: SortOrder
+    term?: SortOrder
     _count?: usersvocabCountOrderByAggregateInput
     _avg?: usersvocabAvgOrderByAggregateInput
     _max?: usersvocabMaxOrderByAggregateInput
@@ -28675,9 +28555,9 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"usersvocab"> | string
     created_at?: DateTimeWithAggregatesFilter<"usersvocab"> | Date | string
     user?: UuidWithAggregatesFilter<"usersvocab"> | string
-    word?: UuidWithAggregatesFilter<"usersvocab"> | string
     status?: Enumword_statusesWithAggregatesFilter<"usersvocab"> | $Enums.word_statuses
     repeatments?: DecimalWithAggregatesFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
+    term?: StringWithAggregatesFilter<"usersvocab"> | string
   }
 
   export type audit_log_entriesCreateInput = {
@@ -30133,7 +30013,6 @@ export namespace Prisma {
     level: string
     created_at: Date | string
     id?: string
-    usersvocab?: usersvocabCreateNestedManyWithoutDictionaryInput
   }
 
   export type dictionaryUncheckedCreateInput = {
@@ -30141,7 +30020,6 @@ export namespace Prisma {
     level: string
     created_at: Date | string
     id?: string
-    usersvocab?: usersvocabUncheckedCreateNestedManyWithoutDictionaryInput
   }
 
   export type dictionaryUpdateInput = {
@@ -30149,7 +30027,6 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: StringFieldUpdateOperationsInput | string
-    usersvocab?: usersvocabUpdateManyWithoutDictionaryNestedInput
   }
 
   export type dictionaryUncheckedUpdateInput = {
@@ -30157,7 +30034,6 @@ export namespace Prisma {
     level?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     id?: StringFieldUpdateOperationsInput | string
-    usersvocab?: usersvocabUncheckedUpdateManyWithoutDictionaryNestedInput
   }
 
   export type dictionaryCreateManyInput = {
@@ -30248,7 +30124,7 @@ export namespace Prisma {
     id?: string
     created_at?: Date | string
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
     books?: booksCreateNestedOneWithoutUsersbooksInput
     profiles?: profilesCreateNestedOneWithoutUsersbooksInput
   }
@@ -30259,7 +30135,7 @@ export namespace Prisma {
     user?: string | null
     book?: string | null
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
   }
 
   export type usersbooksUpdateInput = {
@@ -30286,7 +30162,7 @@ export namespace Prisma {
     user?: string | null
     book?: string | null
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
   }
 
   export type usersbooksUpdateManyMutationInput = {
@@ -30310,17 +30186,17 @@ export namespace Prisma {
     created_at?: Date | string
     status?: $Enums.word_statuses
     repeatments?: Decimal | DecimalJsLike | number | string
+    term?: string
     profiles: profilesCreateNestedOneWithoutUsersvocabInput
-    dictionary: dictionaryCreateNestedOneWithoutUsersvocabInput
   }
 
   export type usersvocabUncheckedCreateInput = {
     id?: string
     created_at?: Date | string
     user: string
-    word: string
     status?: $Enums.word_statuses
     repeatments?: Decimal | DecimalJsLike | number | string
+    term?: string
   }
 
   export type usersvocabUpdateInput = {
@@ -30328,26 +30204,26 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    term?: StringFieldUpdateOperationsInput | string
     profiles?: profilesUpdateOneRequiredWithoutUsersvocabNestedInput
-    dictionary?: dictionaryUpdateOneRequiredWithoutUsersvocabNestedInput
   }
 
   export type usersvocabUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: StringFieldUpdateOperationsInput | string
-    word?: StringFieldUpdateOperationsInput | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    term?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersvocabCreateManyInput = {
     id?: string
     created_at?: Date | string
     user: string
-    word: string
     status?: $Enums.word_statuses
     repeatments?: Decimal | DecimalJsLike | number | string
+    term?: string
   }
 
   export type usersvocabUpdateManyMutationInput = {
@@ -30355,15 +30231,16 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    term?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersvocabUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: StringFieldUpdateOperationsInput | string
-    word?: StringFieldUpdateOperationsInput | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    term?: StringFieldUpdateOperationsInput | string
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -31572,16 +31449,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type UsersvocabListRelationFilter = {
-    every?: usersvocabWhereInput
-    some?: usersvocabWhereInput
-    none?: usersvocabWhereInput
-  }
-
-  export type usersvocabOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type dictionaryCountOrderByAggregateInput = {
     word?: SortOrder
     level?: SortOrder
@@ -31608,6 +31475,16 @@ export namespace Prisma {
     in?: $Enums.roles[] | ListEnumrolesFieldRefInput<$PrismaModel>
     notIn?: $Enums.roles[] | ListEnumrolesFieldRefInput<$PrismaModel>
     not?: NestedEnumrolesFilter<$PrismaModel> | $Enums.roles
+  }
+
+  export type UsersvocabListRelationFilter = {
+    every?: usersvocabWhereInput
+    some?: usersvocabWhereInput
+    none?: usersvocabWhereInput
+  }
+
+  export type usersvocabOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type profilesCountOrderByAggregateInput = {
@@ -31734,18 +31611,13 @@ export namespace Prisma {
     isNot?: profilesWhereInput
   }
 
-  export type DictionaryScalarRelationFilter = {
-    is?: dictionaryWhereInput
-    isNot?: dictionaryWhereInput
-  }
-
   export type usersvocabCountOrderByAggregateInput = {
     id?: SortOrder
     created_at?: SortOrder
     user?: SortOrder
-    word?: SortOrder
     status?: SortOrder
     repeatments?: SortOrder
+    term?: SortOrder
   }
 
   export type usersvocabAvgOrderByAggregateInput = {
@@ -31756,18 +31628,18 @@ export namespace Prisma {
     id?: SortOrder
     created_at?: SortOrder
     user?: SortOrder
-    word?: SortOrder
     status?: SortOrder
     repeatments?: SortOrder
+    term?: SortOrder
   }
 
   export type usersvocabMinOrderByAggregateInput = {
     id?: SortOrder
     created_at?: SortOrder
     user?: SortOrder
-    word?: SortOrder
     status?: SortOrder
     repeatments?: SortOrder
+    term?: SortOrder
   }
 
   export type usersvocabSumOrderByAggregateInput = {
@@ -32554,48 +32426,6 @@ export namespace Prisma {
     deleteMany?: usersbooksScalarWhereInput | usersbooksScalarWhereInput[]
   }
 
-  export type usersvocabCreateNestedManyWithoutDictionaryInput = {
-    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
-    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
-    createMany?: usersvocabCreateManyDictionaryInputEnvelope
-    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-  }
-
-  export type usersvocabUncheckedCreateNestedManyWithoutDictionaryInput = {
-    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
-    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
-    createMany?: usersvocabCreateManyDictionaryInputEnvelope
-    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-  }
-
-  export type usersvocabUpdateManyWithoutDictionaryNestedInput = {
-    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
-    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
-    upsert?: usersvocabUpsertWithWhereUniqueWithoutDictionaryInput | usersvocabUpsertWithWhereUniqueWithoutDictionaryInput[]
-    createMany?: usersvocabCreateManyDictionaryInputEnvelope
-    set?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    disconnect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    delete?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    update?: usersvocabUpdateWithWhereUniqueWithoutDictionaryInput | usersvocabUpdateWithWhereUniqueWithoutDictionaryInput[]
-    updateMany?: usersvocabUpdateManyWithWhereWithoutDictionaryInput | usersvocabUpdateManyWithWhereWithoutDictionaryInput[]
-    deleteMany?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
-  }
-
-  export type usersvocabUncheckedUpdateManyWithoutDictionaryNestedInput = {
-    create?: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput> | usersvocabCreateWithoutDictionaryInput[] | usersvocabUncheckedCreateWithoutDictionaryInput[]
-    connectOrCreate?: usersvocabCreateOrConnectWithoutDictionaryInput | usersvocabCreateOrConnectWithoutDictionaryInput[]
-    upsert?: usersvocabUpsertWithWhereUniqueWithoutDictionaryInput | usersvocabUpsertWithWhereUniqueWithoutDictionaryInput[]
-    createMany?: usersvocabCreateManyDictionaryInputEnvelope
-    set?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    disconnect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    delete?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    connect?: usersvocabWhereUniqueInput | usersvocabWhereUniqueInput[]
-    update?: usersvocabUpdateWithWhereUniqueWithoutDictionaryInput | usersvocabUpdateWithWhereUniqueWithoutDictionaryInput[]
-    updateMany?: usersvocabUpdateManyWithWhereWithoutDictionaryInput | usersvocabUpdateManyWithWhereWithoutDictionaryInput[]
-    deleteMany?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
-  }
-
   export type usersCreateNestedOneWithoutProfilesInput = {
     create?: XOR<usersCreateWithoutProfilesInput, usersUncheckedCreateWithoutProfilesInput>
     connectOrCreate?: usersCreateOrConnectWithoutProfilesInput
@@ -32744,12 +32574,6 @@ export namespace Prisma {
     connect?: profilesWhereUniqueInput
   }
 
-  export type dictionaryCreateNestedOneWithoutUsersvocabInput = {
-    create?: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
-    connectOrCreate?: dictionaryCreateOrConnectWithoutUsersvocabInput
-    connect?: dictionaryWhereUniqueInput
-  }
-
   export type Enumword_statusesFieldUpdateOperationsInput = {
     set?: $Enums.word_statuses
   }
@@ -32768,14 +32592,6 @@ export namespace Prisma {
     upsert?: profilesUpsertWithoutUsersvocabInput
     connect?: profilesWhereUniqueInput
     update?: XOR<XOR<profilesUpdateToOneWithWhereWithoutUsersvocabInput, profilesUpdateWithoutUsersvocabInput>, profilesUncheckedUpdateWithoutUsersvocabInput>
-  }
-
-  export type dictionaryUpdateOneRequiredWithoutUsersvocabNestedInput = {
-    create?: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
-    connectOrCreate?: dictionaryCreateOrConnectWithoutUsersvocabInput
-    upsert?: dictionaryUpsertWithoutUsersvocabInput
-    connect?: dictionaryWhereUniqueInput
-    update?: XOR<XOR<dictionaryUpdateToOneWithWhereWithoutUsersvocabInput, dictionaryUpdateWithoutUsersvocabInput>, dictionaryUncheckedUpdateWithoutUsersvocabInput>
   }
 
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
@@ -35171,7 +34987,7 @@ export namespace Prisma {
     id?: string
     created_at?: Date | string
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
     profiles?: profilesCreateNestedOneWithoutUsersbooksInput
   }
 
@@ -35180,7 +34996,7 @@ export namespace Prisma {
     created_at?: Date | string
     user?: string | null
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
   }
 
   export type usersbooksCreateOrConnectWithoutBooksInput = {
@@ -35219,60 +35035,6 @@ export namespace Prisma {
     book?: UuidNullableFilter<"usersbooks"> | string | null
     is_book_marked?: BoolFilter<"usersbooks"> | boolean
     last_page?: IntFilter<"usersbooks"> | number
-  }
-
-  export type usersvocabCreateWithoutDictionaryInput = {
-    id?: string
-    created_at?: Date | string
-    status?: $Enums.word_statuses
-    repeatments?: Decimal | DecimalJsLike | number | string
-    profiles: profilesCreateNestedOneWithoutUsersvocabInput
-  }
-
-  export type usersvocabUncheckedCreateWithoutDictionaryInput = {
-    id?: string
-    created_at?: Date | string
-    user: string
-    status?: $Enums.word_statuses
-    repeatments?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type usersvocabCreateOrConnectWithoutDictionaryInput = {
-    where: usersvocabWhereUniqueInput
-    create: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput>
-  }
-
-  export type usersvocabCreateManyDictionaryInputEnvelope = {
-    data: usersvocabCreateManyDictionaryInput | usersvocabCreateManyDictionaryInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type usersvocabUpsertWithWhereUniqueWithoutDictionaryInput = {
-    where: usersvocabWhereUniqueInput
-    update: XOR<usersvocabUpdateWithoutDictionaryInput, usersvocabUncheckedUpdateWithoutDictionaryInput>
-    create: XOR<usersvocabCreateWithoutDictionaryInput, usersvocabUncheckedCreateWithoutDictionaryInput>
-  }
-
-  export type usersvocabUpdateWithWhereUniqueWithoutDictionaryInput = {
-    where: usersvocabWhereUniqueInput
-    data: XOR<usersvocabUpdateWithoutDictionaryInput, usersvocabUncheckedUpdateWithoutDictionaryInput>
-  }
-
-  export type usersvocabUpdateManyWithWhereWithoutDictionaryInput = {
-    where: usersvocabScalarWhereInput
-    data: XOR<usersvocabUpdateManyMutationInput, usersvocabUncheckedUpdateManyWithoutDictionaryInput>
-  }
-
-  export type usersvocabScalarWhereInput = {
-    AND?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
-    OR?: usersvocabScalarWhereInput[]
-    NOT?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
-    id?: UuidFilter<"usersvocab"> | string
-    created_at?: DateTimeFilter<"usersvocab"> | Date | string
-    user?: UuidFilter<"usersvocab"> | string
-    word?: UuidFilter<"usersvocab"> | string
-    status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
-    repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
   }
 
   export type usersCreateWithoutProfilesInput = {
@@ -35368,7 +35130,7 @@ export namespace Prisma {
     id?: string
     created_at?: Date | string
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
     books?: booksCreateNestedOneWithoutUsersbooksInput
   }
 
@@ -35377,7 +35139,7 @@ export namespace Prisma {
     created_at?: Date | string
     book?: string | null
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
   }
 
   export type usersbooksCreateOrConnectWithoutProfilesInput = {
@@ -35395,15 +35157,15 @@ export namespace Prisma {
     created_at?: Date | string
     status?: $Enums.word_statuses
     repeatments?: Decimal | DecimalJsLike | number | string
-    dictionary: dictionaryCreateNestedOneWithoutUsersvocabInput
+    term?: string
   }
 
   export type usersvocabUncheckedCreateWithoutProfilesInput = {
     id?: string
     created_at?: Date | string
-    word: string
     status?: $Enums.word_statuses
     repeatments?: Decimal | DecimalJsLike | number | string
+    term?: string
   }
 
   export type usersvocabCreateOrConnectWithoutProfilesInput = {
@@ -35543,6 +35305,18 @@ export namespace Prisma {
     data: XOR<usersvocabUpdateManyMutationInput, usersvocabUncheckedUpdateManyWithoutProfilesInput>
   }
 
+  export type usersvocabScalarWhereInput = {
+    AND?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+    OR?: usersvocabScalarWhereInput[]
+    NOT?: usersvocabScalarWhereInput | usersvocabScalarWhereInput[]
+    id?: UuidFilter<"usersvocab"> | string
+    created_at?: DateTimeFilter<"usersvocab"> | Date | string
+    user?: UuidFilter<"usersvocab"> | string
+    status?: Enumword_statusesFilter<"usersvocab"> | $Enums.word_statuses
+    repeatments?: DecimalFilter<"usersvocab"> | Decimal | DecimalJsLike | number | string
+    term?: StringFilter<"usersvocab"> | string
+  }
+
   export type booksCreateWithoutUsersbooksInput = {
     created_at?: Date | string
     title: string
@@ -35670,25 +35444,6 @@ export namespace Prisma {
     create: XOR<profilesCreateWithoutUsersvocabInput, profilesUncheckedCreateWithoutUsersvocabInput>
   }
 
-  export type dictionaryCreateWithoutUsersvocabInput = {
-    word: string
-    level: string
-    created_at: Date | string
-    id?: string
-  }
-
-  export type dictionaryUncheckedCreateWithoutUsersvocabInput = {
-    word: string
-    level: string
-    created_at: Date | string
-    id?: string
-  }
-
-  export type dictionaryCreateOrConnectWithoutUsersvocabInput = {
-    where: dictionaryWhereUniqueInput
-    create: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
-  }
-
   export type profilesUpsertWithoutUsersvocabInput = {
     update: XOR<profilesUpdateWithoutUsersvocabInput, profilesUncheckedUpdateWithoutUsersvocabInput>
     create: XOR<profilesCreateWithoutUsersvocabInput, profilesUncheckedCreateWithoutUsersvocabInput>
@@ -35716,31 +35471,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumrolesFieldUpdateOperationsInput | $Enums.roles
     usersbooks?: usersbooksUncheckedUpdateManyWithoutProfilesNestedInput
-  }
-
-  export type dictionaryUpsertWithoutUsersvocabInput = {
-    update: XOR<dictionaryUpdateWithoutUsersvocabInput, dictionaryUncheckedUpdateWithoutUsersvocabInput>
-    create: XOR<dictionaryCreateWithoutUsersvocabInput, dictionaryUncheckedCreateWithoutUsersvocabInput>
-    where?: dictionaryWhereInput
-  }
-
-  export type dictionaryUpdateToOneWithWhereWithoutUsersvocabInput = {
-    where?: dictionaryWhereInput
-    data: XOR<dictionaryUpdateWithoutUsersvocabInput, dictionaryUncheckedUpdateWithoutUsersvocabInput>
-  }
-
-  export type dictionaryUpdateWithoutUsersvocabInput = {
-    word?: StringFieldUpdateOperationsInput | string
-    level?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type dictionaryUncheckedUpdateWithoutUsersvocabInput = {
-    word?: StringFieldUpdateOperationsInput | string
-    level?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    id?: StringFieldUpdateOperationsInput | string
   }
 
   export type saml_relay_statesCreateManyFlow_stateInput = {
@@ -36202,7 +35932,7 @@ export namespace Prisma {
     created_at?: Date | string
     user?: string | null
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
   }
 
   export type usersbooksUpdateWithoutBooksInput = {
@@ -36229,52 +35959,20 @@ export namespace Prisma {
     last_page?: IntFieldUpdateOperationsInput | number
   }
 
-  export type usersvocabCreateManyDictionaryInput = {
-    id?: string
-    created_at?: Date | string
-    user: string
-    status?: $Enums.word_statuses
-    repeatments?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type usersvocabUpdateWithoutDictionaryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
-    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    profiles?: profilesUpdateOneRequiredWithoutUsersvocabNestedInput
-  }
-
-  export type usersvocabUncheckedUpdateWithoutDictionaryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: StringFieldUpdateOperationsInput | string
-    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
-    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
-  export type usersvocabUncheckedUpdateManyWithoutDictionaryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: StringFieldUpdateOperationsInput | string
-    status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
-    repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-  }
-
   export type usersbooksCreateManyProfilesInput = {
     id?: string
     created_at?: Date | string
     book?: string | null
     is_book_marked?: boolean
-    last_page: number
+    last_page?: number
   }
 
   export type usersvocabCreateManyProfilesInput = {
     id?: string
     created_at?: Date | string
-    word: string
     status?: $Enums.word_statuses
     repeatments?: Decimal | DecimalJsLike | number | string
+    term?: string
   }
 
   export type usersbooksUpdateWithoutProfilesInput = {
@@ -36306,23 +36004,23 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    dictionary?: dictionaryUpdateOneRequiredWithoutUsersvocabNestedInput
+    term?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersvocabUncheckedUpdateWithoutProfilesInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    word?: StringFieldUpdateOperationsInput | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    term?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersvocabUncheckedUpdateManyWithoutProfilesInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    word?: StringFieldUpdateOperationsInput | string
     status?: Enumword_statusesFieldUpdateOperationsInput | $Enums.word_statuses
     repeatments?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    term?: StringFieldUpdateOperationsInput | string
   }
 
 

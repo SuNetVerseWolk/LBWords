@@ -345,9 +345,8 @@ model books {
 model dictionary {
   word       String
   level      String
-  created_at DateTime     @db.Timestamptz(6)
-  id         String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  usersvocab usersvocab[]
+  created_at DateTime @db.Timestamptz(6)
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 
   @@schema("public")
 }
@@ -373,7 +372,7 @@ model usersbooks {
   user           String?   @db.Uuid
   book           String?   @db.Uuid
   is_book_marked Boolean   @default(true)
-  last_page      Int
+  last_page      Int       @default(1)
   books          books?    @relation(fields: [book], references: [id], onDelete: Cascade, onUpdate: NoAction)
   profiles       profiles? @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
@@ -385,11 +384,10 @@ model usersvocab {
   id          String        @id(map: "usersdictionary_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   created_at  DateTime      @default(now()) @db.Timestamptz(6)
   user        String        @db.Uuid
-  word        String        @db.Uuid
   status      word_statuses @default(unknown)
   repeatments Decimal       @default(0) @db.Decimal
+  term        String        @unique @default("")
   profiles    profiles      @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "usersdictionary_user_fkey")
-  dictionary  dictionary    @relation(fields: [word], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "usersdictionary_word_fkey")
 
   @@schema("public")
 }

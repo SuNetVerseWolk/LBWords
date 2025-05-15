@@ -1,10 +1,16 @@
 "use client";
 import SpinerLoading from "@/components/layouts/SpinerLoading";
+import { MarkedBook } from "@/components/svgs/MarkedBook";
 import DefinitionPopup from "@/components/ui/DefinitionPopup";
 import RefetchButton from "@/components/ui/RefetchButton";
 import Roles from "@/enums/roles";
-import { useRole } from "@/hooks/useAuth";
+import { useAuth, useRole } from "@/hooks/useAuth";
 import { useBooks } from "@/hooks/useBooks";
+import {
+  useUserBook,
+  useCreateUserBook,
+  useToggleBookmark,
+} from "@/hooks/useUserBooks";
 import { Chapter } from "@/types/dbTypes";
 import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
@@ -32,6 +38,11 @@ const BookPage = () => {
     isAddParagraph: false,
   });
 
+  const { user } = useAuth();
+  const { data } = useUserBook(user!?.id, id as string);
+  const { mutate: CreateBookMark } = useCreateUserBook();
+  const { mutate: toggleBookmark } = useToggleBookmark();
+
   const handleTextSelection = useCallback(() => {
     setPopupPosition(null);
     const selection = window.getSelection();
@@ -52,45 +63,45 @@ const BookPage = () => {
   const generateChapterId = () => Date.now();
 
   const handleUpdateChapterName = (newName: string) => {
-    setLocalChapters(prev => {
+    setLocalChapters((prev) => {
       const updated = [...prev];
       updated[selectedChapterIndex] = {
         ...updated[selectedChapterIndex],
-        name: newName
+        name: newName,
       };
       return updated;
     });
   };
 
   const handleUpdateParagraph = (paragraphIndex: number, newValue: string) => {
-    setLocalChapters(prev => {
+    setLocalChapters((prev) => {
       const updated = [...prev];
       updated[selectedChapterIndex] = {
         ...updated[selectedChapterIndex],
-        values: updated[selectedChapterIndex].values.map((v, i) => 
+        values: updated[selectedChapterIndex].values.map((v, i) =>
           i === paragraphIndex ? newValue : v
-        )
+        ),
       };
       return updated;
     });
   };
 
   const handleAddParagraph = (chapterId: number) => {
-    const chapterIndex = localChapters.findIndex(c => c.id === chapterId);
+    const chapterIndex = localChapters.findIndex((c) => c.id === chapterId);
     if (chapterIndex === -1) return;
 
     const updatedChapters = [...localChapters];
     updatedChapters[chapterIndex] = {
       ...updatedChapters[chapterIndex],
-      values: [...updatedChapters[chapterIndex].values, ""]
+      values: [...updatedChapters[chapterIndex].values, ""],
     };
 
     setLocalChapters(updatedChapters);
     updateBook.mutate({
       id: id as string,
-      data: { ...book!, chapters: updatedChapters }
+      data: { ...book!, chapters: updatedChapters },
     });
-    setMutations(prev => ({ ...prev, isAddParagraph: true }));
+    setMutations((prev) => ({ ...prev, isAddParagraph: true }));
   };
 
   const handleAddChapter = () => {
@@ -107,25 +118,27 @@ const BookPage = () => {
 
     updateBook.mutate({
       id: id as string,
-      data: { ...book!, chapters: updatedChapters }
+      data: { ...book!, chapters: updatedChapters },
     });
-    setMutations(prev => ({ ...prev, isAddChapter: true }));
+    setMutations((prev) => ({ ...prev, isAddChapter: true }));
   };
 
   const handleDeleteParagraph = (chapterId: number, paragraphIndex: number) => {
-    const chapterIndex = localChapters.findIndex(c => c.id === chapterId);
+    const chapterIndex = localChapters.findIndex((c) => c.id === chapterId);
     if (chapterIndex === -1) return;
 
     const updatedChapters = [...localChapters];
     updatedChapters[chapterIndex] = {
       ...updatedChapters[chapterIndex],
-      values: updatedChapters[chapterIndex].values.filter((_, i) => i !== paragraphIndex)
+      values: updatedChapters[chapterIndex].values.filter(
+        (_, i) => i !== paragraphIndex
+      ),
     };
 
     setLocalChapters(updatedChapters);
     updateBook.mutate({
       id: id as string,
-      data: { ...book!, chapters: updatedChapters }
+      data: { ...book!, chapters: updatedChapters },
     });
   };
 
@@ -141,17 +154,20 @@ const BookPage = () => {
   };
 
   const handleDeleteChapter = (chapterId: number) => {
-    const updatedChapters = localChapters.filter(c => c.id !== chapterId);
-    const newSelectedIndex = Math.min(selectedChapterIndex, updatedChapters.length - 1);
+    const updatedChapters = localChapters.filter((c) => c.id !== chapterId);
+    const newSelectedIndex = Math.min(
+      selectedChapterIndex,
+      updatedChapters.length - 1
+    );
 
     setLocalChapters(updatedChapters);
     setSelectedChapterIndex(newSelectedIndex);
 
     updateBook.mutate({
       id: id as string,
-      data: { ...book!, chapters: updatedChapters }
+      data: { ...book!, chapters: updatedChapters },
     });
-    setMutations(prev => ({ ...prev, isDeleteChapter: true }));
+    setMutations((prev) => ({ ...prev, isDeleteChapter: true }));
   };
 
   useEffect(() => {
@@ -164,7 +180,7 @@ const BookPage = () => {
     }
   }, [isMutating]);
 
-	useEffect(() => {
+  useEffect(() => {
     if (book?.chapters) {
       setLocalChapters(book.chapters);
     }
@@ -193,30 +209,32 @@ const BookPage = () => {
 
   const currentChapter = localChapters[selectedChapterIndex] || { values: [] };
 
-	const handleParagraphBlur = (paragraphIndex: number) => {
+  const handleParagraphBlur = (paragraphIndex: number) => {
     if (!book.chapters || !localChapters[selectedChapterIndex]) return;
-    
-    const originalValue = book.chapters[selectedChapterIndex]?.values[paragraphIndex];
-    const currentValue = localChapters[selectedChapterIndex].values[paragraphIndex];
-    
+
+    const originalValue =
+      book.chapters[selectedChapterIndex]?.values[paragraphIndex];
+    const currentValue =
+      localChapters[selectedChapterIndex].values[paragraphIndex];
+
     if (currentValue !== originalValue) {
       updateBook.mutate({
         id: id as string,
-        data: { ...book, chapters: localChapters }
+        data: { ...book, chapters: localChapters },
       });
     }
   };
 
-	const handleChapterNameBlur = () => {
+  const handleChapterNameBlur = () => {
     if (!book.chapters || !localChapters[selectedChapterIndex]) return;
-    
+
     const originalName = book.chapters[selectedChapterIndex]?.name;
     const currentName = localChapters[selectedChapterIndex].name;
-    
+
     if (currentName !== originalName) {
       updateBook.mutate({
         id: id as string,
-        data: { ...book, chapters: localChapters }
+        data: { ...book, chapters: localChapters },
       });
     }
   };
@@ -244,9 +262,32 @@ const BookPage = () => {
             </button>
           </div>
         ) : (
-          <h1 className="text-center text-xl font-medium">
-            {currentChapter?.name}
-          </h1>
+          <div className="c px-3">
+            <h1 className="text-center text-xl font-medium w-full">
+              {currentChapter?.name}
+            </h1>
+            <div
+              className={`p-0-5 rounded cp ${
+                data?.is_book_marked ? "bg-gray-600" : ""
+              }`}
+              onClick={() =>
+                data
+                  ? toggleBookmark(data?.id!)
+                  : CreateBookMark({
+                      book: book.id,
+                      user: user?.id!,
+                    })
+              }
+            >
+              <MarkedBook
+                className={`w-2 ${
+                  data?.is_book_marked
+                    ? "fill-gold"
+                    : "fill-black hover:fill-dark-gold"
+                }`}
+              />
+            </div>
+          </div>
         )}
         <div className="flex flex-col gap-1 pr-0-5 overflow-y-scroll thin-scrollbar h-full">
           {currentChapter?.values?.map((value, j) =>

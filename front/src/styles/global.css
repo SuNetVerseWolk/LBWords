@@ -26,6 +26,13 @@
 	--color-cat-brown-medium: #b38e65;
 	--color-cat-dark: #8d755c;
 	--color-cat-coral-light: #ff7777;
+	--color-dark-gold: #b59410;
+	--color-gold: #ffd700;
+
+	--color-unknown: gray;
+	--color-learned: #129f4b;
+	--color-learning: #8e51ff;
+	--color-upto: white;
 
 	--text-parent: inherit;
 	--font-pangolin: 'Pangolin';
@@ -88,6 +95,19 @@
   }
 	.thin-scrollbar:hover {
     scrollbar-color: #fff var(--color-main-2);
+	}
+
+	.text-unknown {
+		color: var(--color-unknown);
+	}
+	.text-learned {
+		color: var(--color-learned);
+	}
+	.text-learning {
+		color: var(--color-learning);
+	}
+	.text-upto {
+		color: var(--color-upto);
 	}
 
 	.prose {

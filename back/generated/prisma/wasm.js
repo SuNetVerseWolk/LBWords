@@ -349,9 +349,9 @@ exports.Prisma.UsersvocabScalarFieldEnum = {
   id: 'id',
   created_at: 'created_at',
   user: 'user',
-  word: 'word',
   status: 'status',
-  repeatments: 'repeatments'
+  repeatments: 'repeatments',
+  term: 'term'
 };
 
 exports.Prisma.SortOrder = {

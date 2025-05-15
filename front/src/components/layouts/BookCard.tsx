@@ -2,16 +2,18 @@
 import { useState, useRef, ChangeEvent } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Book } from "@/types/dbTypes";
+import { Book, UsersBooks } from "@/types/dbTypes";
 import Roles from "@/enums/roles";
 import { UseMutationResult } from "@tanstack/react-query";
 import EmptyCover from "../../../public/placeholder.jpg";
-
-type BookUpdateData = {
-  id: string;
-  data: Partial<Book>;
-  coverImage?: File;
-};
+import { MarkedBook } from "../svgs/MarkedBook";
+import {
+  useCreateUserBook,
+  useToggleBookmark,
+  useUpdateUserBook,
+  useUserBook,
+} from "@/hooks/useUserBooks";
+import { useAuth } from "@/hooks/useAuth";
 
 const BookCard = ({
   book,
@@ -41,6 +43,10 @@ const BookCard = ({
   });
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { user } = useAuth();
+  const { data } = useUserBook(user!.id, book.id);
+  const { mutate: CreateBookMark } = useCreateUserBook();
+  const { mutate: toggleBookmark } = useToggleBookmark();
 
   const handleChange = (field: keyof Book, value: string) => {
     setEditableBook((prev) => ({ ...prev, [field]: value }));
@@ -68,7 +74,7 @@ const BookCard = ({
 
   return (
     <motion.div className="grid grid-cols-3 place-items-stretch bg-amber-50 p-1 rounded-3xl">
-      <div className="flex flex-col gap-0-5">
+      <div className="c flex-col justify-end gap-0-5">
         <label className="cursor-pointer">
           <Image
             src={imageSrc}
@@ -115,8 +121,29 @@ const BookCard = ({
           </>
         ) : (
           <>
-            <h3 className="text-lg font-medium">{book.title}</h3>
-            <p className="text-gray-700">{book.description}</p>
+            <div className="c justify-between pr-1">
+              <h3 className="text-lg font-medium">{book.title}</h3>
+              <div
+                className={`p-0-5 rounded cp ${data?.is_book_marked ? "bg-gray-600" : ""}`}
+                onClick={() =>
+                  data
+                    ? toggleBookmark(data?.id!)
+                    : CreateBookMark({
+                        book: book.id,
+                        user: user?.id!
+                      })
+                }
+              >
+                <MarkedBook
+                  className={`w-2 ${
+                    data?.is_book_marked ? "fill-gold" : "fill-black hover:fill-dark-gold"
+                  }`}
+                />
+              </div>
+            </div>
+            <p className="text-gray-700 text-justify border-r-2 pr-0-5 rounded-br-sm">
+              {book.description}
+            </p>
           </>
         )}
       </div>
