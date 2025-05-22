@@ -4,6 +4,7 @@ import OpenAI from "openai";
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   baseURL: "https://openrouter.ai/api/v1",
+	maxRetries: 10
 });
 
 export async function POST(req: Request) {
