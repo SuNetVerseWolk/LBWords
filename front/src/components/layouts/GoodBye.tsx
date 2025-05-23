@@ -8,6 +8,7 @@ const GoodBye = () => {
       animate={{
         scale: 1,
       }}
+			className="w-full c"
     >
       <h1 className="text-7xl">Take care</h1>
     </motion.div>

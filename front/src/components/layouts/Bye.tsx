@@ -9,6 +9,7 @@ const Bye = () => {
       animate={{
         scale: 1,
       }}
+			className="w-full c"
     >
       <h1 className="text-7xl">See Ya</h1>
     </motion.div>
