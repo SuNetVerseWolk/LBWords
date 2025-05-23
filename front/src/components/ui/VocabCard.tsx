@@ -25,7 +25,7 @@ const VocabCard = ({ item }: { item: UsersVocab }) => {
     >
       <div className="c gap-1 items-stretch relative">
         <h3
-          className={`c px-1 font-semibold text-xl uppercase bg-white rounded text-${item.status == "upto" ? "black" : item.status}`}
+          className={`c px-1 font-semibold text-xl uppercase bg-white rounded text-${item.status}`}
         >
           {item.term}
         </h3>
@@ -42,16 +42,16 @@ const VocabCard = ({ item }: { item: UsersVocab }) => {
           }
           onClick={handleInnerClick}
         >
-          <option value="unknown" className="bg-unknown">
+          <option value="unknown" className="bg-unknown text-white">
             Не знаю
           </option>
-          <option value="learned" className="bg-learned">
+          <option value="learned" className="bg-learned text-white">
             Знаю
           </option>
-          <option value="learning" className="bg-learning">
+          <option value="learning" className="bg-learning text-white">
             Учу
           </option>
-          <option value="upto" className="bg-upto">
+          <option value="upto" className="bg-upto text-white">
             В планах
           </option>
         </select>

@@ -11,11 +11,13 @@ import {
   useCreateUserBook,
   useToggleBookmark,
 } from "@/hooks/useUserBooks";
-import { Chapter } from "@/types/dbTypes";
+import { useUserVocab } from "@/hooks/useUsersVocab";
+import { Chapter, word_statuses } from "@/types/dbTypes";
 import { useParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 const BookPage = () => {
+	const { user } = useAuth();
   const [localChapters, setLocalChapters] = useState<Chapter[]>([]);
   const { id } = useParams();
   const {
@@ -23,7 +25,42 @@ const BookPage = () => {
     updateBook,
     isMutating,
   } = useBooks(id as string);
+	const { data: vocab, isLoading: isVocabLoading } = useUserVocab(user?.id!)
   const { data: role, isLoading: isRoleLoading } = useRole();
+
+	const vocabMap = useMemo(() => {
+    const map: { [key: string]: word_statuses } = {};
+    if (vocab) {
+      vocab.forEach((item) => {
+        map[item.term.toLowerCase()] = item.status;
+      });
+    }
+    return map;
+  }, [vocab]);
+
+  const processText = useCallback(
+    (text: string, paragraphIndex: number) => {
+      const tokens = text
+        .split(/([a-zA-Z']+)|([^a-zA-Z']+)/g)
+        .filter((t) => t !== undefined && t !== "");
+      return tokens.map((token, i) => {
+        const key = `${paragraphIndex}-${i}`;
+        if (/^[a-zA-Z']+$/.test(token)) {
+          const normalized = token.toLowerCase();
+          const status = vocabMap[normalized];
+          if (status) {
+            return (
+              <span key={key} className={`text-${status}`}>
+                {token}
+              </span>
+            );
+          }
+        }
+        return <span key={key}>{token}</span>;
+      });
+    },
+    [vocabMap]
+  );
 
   const [selectedChapterIndex, setSelectedChapterIndex] = useState(0);
   const [selectedText, setSelectedText] = useState<string>("");
@@ -38,7 +75,6 @@ const BookPage = () => {
     isAddParagraph: false,
   });
 
-  const { user } = useAuth();
   const { data } = useUserBook(user!?.id, id as string);
   const { mutate: CreateBookMark } = useCreateUserBook();
   const { mutate: toggleBookmark } = useToggleBookmark();
@@ -312,7 +348,7 @@ const BookPage = () => {
                 key={j}
                 className="text-gray-800 hover:text-black selection:text-white selection:bg-amber-800 text-justify"
               >
-                {value}
+                {processText(value, j)}
               </p>
             )
           )}

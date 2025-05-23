@@ -30,9 +30,9 @@
 	--color-gold: #ffd700;
 
 	--color-unknown: gray;
-	--color-learned: #129f4b;
-	--color-learning: #8e51ff;
-	--color-upto: white;
+	--color-learned: rgb(0, 125, 50);
+	--color-learning: rgb(75, 0, 150);
+	--color-upto: rgb(150, 0, 150);
 
 	--text-parent: inherit;
 	--font-pangolin: 'Pangolin';
