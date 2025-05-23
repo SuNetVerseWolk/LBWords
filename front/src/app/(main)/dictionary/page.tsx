@@ -10,57 +10,52 @@ const page = () => {
   const {
     useDictionary: { data: words, isLoading },
   } = UseDictionary();
-  
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
 
   const toggleLevel = (level: string) => {
-    setSelectedLevels(prev =>
-      prev.includes(level)
-        ? prev.filter(l => l !== level)
-        : [...prev, level]
+    setSelectedLevels((prev) =>
+      prev.includes(level) ? prev.filter((l) => l !== level) : [...prev, level]
     );
   };
 
-  const filteredWords = words?.filter(word => {
-    const matchesSearch = word.word.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(word.level);
+  const filteredWords = words?.filter((word) => {
+    const matchesSearch = word.word
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesLevel =
+      selectedLevels.length === 0 || selectedLevels.includes(word.level);
     return matchesSearch && matchesLevel;
   });
 
   return (
-    <div className="flex flex-col w-full rounded-3xl h-full overflow-hidden">
+    <div className="flex flex-col w-full rounded-3xl h-full overflow-hidden space-y-1">
       <h1 className="text-center text-xl font-bold">
         The Oxford 3000™ by CEFR level
       </h1>
-      <div className="flex flex-col items-center gap-0-5">
-        <h2 className="text-center">
-          The Oxford 3000 is the list of the 3000 most important words to learn in
-          English, <br /> from A1 to B2 level.
-        </h2>
-        <div className="flex w-full gap-2">
-          <input
-            type="text"
-            placeholder="Search words..."
-            className="w-full p-0-5 rounded-lg border border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <div className="flex gap-1 justify-center">
-            {['A1', 'A2', 'B1', 'B2'].map(level => (
-              <button
-                key={level}
-                onClick={() => toggleLevel(level)}
-                className={`px-2 py-0-5 rounded-full text-sm font-semibold transition-colors ${
-                  selectedLevels.includes(level)
-                    ? 'bg-amber-300 text-gray-800'
-                    : 'bg-amber-100 text-gray-600 hover:bg-amber-200'
-                }`}
-              >
-                {level}
-              </button>
-            ))}
-          </div>
+      <div className="flex w-full gap-2">
+        <input
+          type="text"
+          placeholder="Search words..."
+          className="w-full p-0-5 rounded-lg border border-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <div className="flex gap-0-5 justify-center">
+          {["A1", "A2", "B1", "B2"].map((level) => (
+            <button
+              key={level}
+              onClick={() => toggleLevel(level)}
+              className={`px-2 py-0-5 rounded-full text-sm font-semibold transition-colors ${
+                selectedLevels.includes(level)
+                  ? "bg-amber-300 text-gray-800"
+                  : "bg-amber-100 text-gray-600 hover:bg-amber-200"
+              }`}
+            >
+              {level}
+            </button>
+          ))}
         </div>
       </div>
       {isLoading ? (
