@@ -81,21 +81,35 @@ const BookPage = () => {
   const { mutate: CreateBookMark } = useCreateUserBook();
   const { mutate: toggleBookmark } = useToggleBookmark();
 
-  const handleTextSelection = useCallback(() => {
-    setPopupPosition(null);
-    const selection = window.getSelection();
-    if (!selection?.toString().trim()) return;
+  const handleTextSelection = useCallback((e?: React.TouchEvent | React.MouseEvent) => {
+    // Prevent default touch behavior (like scroll or context menu)
+    if (e?.type === "touchend") {
+      e.preventDefault();
+    }
 
-    const newText = selection.toString().trim();
-    const range = selection.getRangeAt(0);
-    const rect = range.getBoundingClientRect();
+    // Mobile browsers need a frame to finalize selection
+    requestAnimationFrame(() => {
+      setPopupPosition(null);
+      const selection = window.getSelection();
 
-    setSelectedText(newText);
-    setPopupPosition((prev) =>
-      prev?.top === rect.top && prev?.left === rect.left
-        ? prev
-        : { top: rect.top + window.scrollY + 20, left: rect.left }
-    );
+      // Validate selection
+      if (!selection?.rangeCount || !selection.toString().trim()) return;
+
+      // Get accurate position considering scroll and zoom
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      const newText = selection.toString().trim();
+
+      // Calculate position with scroll offsets
+      const scrollX = window.scrollX || document.documentElement.scrollLeft;
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+      setSelectedText(newText);
+      setPopupPosition({
+        top: rect.top + scrollY + 20,
+        left: rect.left + scrollX
+      });
+    });
   }, []);
 
   const generateChapterId = () => Date.now();
@@ -369,9 +383,13 @@ const BookPage = () => {
             ) : (
               <p
                 onMouseUp={handleTextSelection}
-								onTouchEnd={handleTextSelection}
+                onTouchEnd={(e) => handleTextSelection(e)}
                 key={j}
-                className="text-gray-800 hover:text-black selection:text-white selection:bg-amber-800 text-justify touch-manipulation select-text"
+                className="
+									text-gray-800
+									hover:text-black selection:text-white selection:bg-amber-800 text-justify 
+									select-text touch-manipulation
+									[-webkit-user-select:text] [user-select:text] [-webkit-touch-callout:default]"
               >
                 {processText(value, j)}
               </p>
