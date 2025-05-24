@@ -10,6 +10,7 @@ import {
   useUserBook,
   useCreateUserBook,
   useToggleBookmark,
+  useUpdateLastPage,
 } from "@/hooks/useUserBooks";
 import { useUserVocab } from "@/hooks/useUsersVocab";
 import { Chapter, word_statuses } from "@/types/dbTypes";
@@ -17,7 +18,7 @@ import { useParams } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 const BookPage = () => {
-	const { user } = useAuth();
+  const { user } = useAuth();
   const [localChapters, setLocalChapters] = useState<Chapter[]>([]);
   const { id } = useParams();
   const {
@@ -25,10 +26,11 @@ const BookPage = () => {
     updateBook,
     isMutating,
   } = useBooks(id as string);
-	const { data: vocab, isLoading: isVocabLoading } = useUserVocab(user?.id!)
+  const { data: vocab, isLoading: isVocabLoading } = useUserVocab(user?.id!);
   const { data: role, isLoading: isRoleLoading } = useRole();
+  const updateLastPage = useUpdateLastPage();
 
-	const vocabMap = useMemo(() => {
+  const vocabMap = useMemo(() => {
     const map: { [key: string]: word_statuses } = {};
     if (vocab) {
       vocab.forEach((item) => {
@@ -181,7 +183,12 @@ const BookPage = () => {
   const handleNextChapter = () => {
     if (!book?.chapters || selectedChapterIndex >= book.chapters.length - 1)
       return;
-    setSelectedChapterIndex((prev) => prev + 1);
+    setSelectedChapterIndex((prev) => {
+      const nextPage = prev + 1;
+      updateLastPage.mutate({ id: data?.id as string, page: nextPage });
+
+      return nextPage;
+    });
   };
 
   const handlePrevChapter = () => {
@@ -215,6 +222,22 @@ const BookPage = () => {
       });
     }
   }, [isMutating]);
+
+  useEffect(() => {
+    if (!data && book && user) {
+      CreateBookMark({
+        book: book.id,
+        user: user.id!,
+        last_page: selectedChapterIndex,
+      });
+    } else if (
+      role != "admin" &&
+      data?.last_page &&
+      data.last_page > selectedChapterIndex
+    ) {
+      setSelectedChapterIndex(data.last_page);
+    }
+  }, [data, book, user]);
 
   useEffect(() => {
     if (book?.chapters) {
@@ -312,6 +335,7 @@ const BookPage = () => {
                   : CreateBookMark({
                       book: book.id,
                       user: user?.id!,
+                      last_page: selectedChapterIndex,
                     })
               }
             >
@@ -345,6 +369,7 @@ const BookPage = () => {
             ) : (
               <p
                 onMouseUp={handleTextSelection}
+								onTouchEnd={handleTextSelection}
                 key={j}
                 className="text-gray-800 hover:text-black selection:text-white selection:bg-amber-800 text-justify"
               >

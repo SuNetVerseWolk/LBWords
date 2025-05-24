@@ -61,7 +61,7 @@ export class UsersBooksController {
     @Param('id') id: string,
     @Param('page') page: number,
   ) {
-    return this.usersBooksService.updateLastPage(id, page);
+    return this.usersBooksService.updateLastPage(id, +page);
   }
 
   @Patch(':id/toggle-bookmark')
