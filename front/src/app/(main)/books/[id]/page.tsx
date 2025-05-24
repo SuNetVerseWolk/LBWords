@@ -370,9 +370,8 @@ const BookPage = () => {
               <p
                 onMouseUp={handleTextSelection}
 								onTouchEnd={handleTextSelection}
-								onSelect={handleTextSelection}
                 key={j}
-                className="text-gray-800 hover:text-black selection:text-white selection:bg-amber-800 text-justify touch-manipulation"
+                className="text-gray-800 hover:text-black selection:text-white selection:bg-amber-800 text-justify touch-manipulation select-text"
               >
                 {processText(value, j)}
               </p>
