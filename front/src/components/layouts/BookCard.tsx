@@ -73,9 +73,9 @@ const BookCard = ({
     : book.image || EmptyCover.src;
 
   return (
-    <motion.div className="grid grid-cols-3 place-items-stretch bg-amber-50 p-1 rounded-3xl">
-      <div className="c flex-col justify-end gap-0-5">
-        <label className="cursor-pointer">
+    <motion.div className="grid md:grid-cols-3 place-items-stretch bg-amber-50 p-1 rounded-3xl">
+      <div className="c flex-col justify-end gap-0-5 row-end-3 md:row-end-1">
+        <label className="cursor-pointer w-full">
           <Image
             src={imageSrc}
             alt="Book cover"
@@ -103,7 +103,7 @@ const BookCard = ({
         </button>
       </div>
 
-      <div className="flex flex-col items-stretch ml-1 col-span-2 gap-0-5">
+      <div className="flex flex-col items-stretch ml-1 md:col-span-2 gap-0-5">
         {role === Roles.admin ? (
           <>
             <input
@@ -121,27 +121,31 @@ const BookCard = ({
           </>
         ) : (
           <>
-            <div className="c justify-between pr-1">
-              <h3 className="text-lg font-medium">{book.title}</h3>
+            <div className="c justify-between pr-1 mb-2">
+              <h3 className="text-3xl md:text-lg font-medium">{book.title}</h3>
               <div
-                className={`p-0-5 rounded cp ${data?.is_book_marked ? "bg-gray-600" : ""}`}
+                className={`p-0-5 rounded cp ${
+                  data?.is_book_marked ? "bg-gray-600" : ""
+                }`}
                 onClick={() =>
                   data
                     ? toggleBookmark(data?.id!)
                     : CreateBookMark({
                         book: book.id,
-                        user: user?.id!
+                        user: user?.id!,
                       })
                 }
               >
                 <MarkedBook
-                  className={`w-2 ${
-                    data?.is_book_marked ? "fill-gold" : "fill-black hover:fill-dark-gold"
+                  className={`w-9 md:w-2 ${
+                    data?.is_book_marked
+                      ? "fill-gold"
+                      : "fill-black hover:fill-dark-gold"
                   }`}
                 />
               </div>
             </div>
-            <p className="text-gray-700 text-justify border-r-2 pr-0-5 rounded-br-sm">
+            <p className="text-gray-700 text-justify border-r-2 pr-0-5 rounded-br-sm hidden md:block">
               {book.description}
             </p>
           </>

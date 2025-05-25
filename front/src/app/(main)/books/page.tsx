@@ -74,7 +74,7 @@ const BooksPage = () => {
         )}
       </div>
 
-      <div className="flex flex-col gap-1 ml-2 pr-0-5 h-full overflow-y-scroll thin-scrollbar rounded-3xl">
+      <div className="flex flex-col gap-1 ml-2 pr-2 md:pr-0-5 h-full overflow-y-scroll thin-scrollbar rounded-3xl">
         {books?.length ? (
           books.map((book) => (
             <BookCard

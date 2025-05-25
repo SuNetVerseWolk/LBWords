@@ -20,12 +20,12 @@ const VocabCard = ({ item }: { item: UsersVocab }) => {
 
   return (
     <div
-      className="p-2 border rounded-lg c justify-between items-stretch cp"
+      className="p-2 md:p-1 border-2 border-main-darken rounded-lg c justify-between items-stretch cp bg-main-2"
       onClick={handleDivClick}
     >
       <div className="c gap-1 items-stretch relative">
         <h3
-          className={`c px-1 font-semibold text-xl uppercase bg-white rounded text-${item.status}`}
+          className={`c px-1 font-semibold text-xl uppercase rounded-md bg-${item.status} text-white`}
         >
           {item.term}
         </h3>
@@ -63,13 +63,13 @@ const VocabCard = ({ item }: { item: UsersVocab }) => {
               handleInnerClick(e);
               updateStatus({ id: item.id!, status: "learned" });
             }}
-            className="px-3 py-1 bg-learned text-white rounded"
+            className="px-3 py-1 bg-cat-beige-light rounded"
           >
             Уже не забуду
           </button>
         )}
         <button
-          className="px-2 py-1 bg-red-500 text-white rounded"
+          className="px-2 py-1 bg-cat-coral-light text-white rounded"
           onClick={(e) => {
             handleInnerClick(e);
             deleteVocabItem(item.id!);

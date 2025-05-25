@@ -340,7 +340,7 @@ const BookPage = () => {
               {currentChapter?.name}
             </h1>
             <div
-              className={`p-0-5 rounded cp ${
+              className={`p-1 md:p-0-5 rounded cp ${
                 data?.is_book_marked ? "bg-gray-600" : ""
               }`}
               onClick={() =>
@@ -354,7 +354,7 @@ const BookPage = () => {
               }
             >
               <MarkedBook
-                className={`w-2 ${
+                className={`w-5 md:w-2 ${
                   data?.is_book_marked
                     ? "fill-gold"
                     : "fill-black hover:fill-dark-gold"

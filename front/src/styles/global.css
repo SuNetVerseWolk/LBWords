@@ -109,6 +109,18 @@
 	.text-upto {
 		color: var(--color-upto);
 	}
+	.bg-unknown {
+		color: var(--color-unknown);
+	}
+	.bg-learned {
+		color: var(--color-learned);
+	}
+	.bg-learning {
+		color: var(--color-learning);
+	}
+	.bg-upto {
+		color: var(--color-upto);
+	}
 
 	.prose {
 		h3 {

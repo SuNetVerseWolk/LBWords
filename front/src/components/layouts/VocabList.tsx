@@ -36,14 +36,14 @@ const VocabList = () => {
   if (error) return <div className="c">Error: {error.message}</div>;
 
   return (
-    <div className="flex flex-col h-full w-full space-y-2 mt-1">
-      <h2 className="text-center text-xl font-bold">Your Vocabulary - {filteredVocabItems?.length}</h2>
+    <div className="flex flex-col h-full w-full space-y-2 md:space-y-1">
+      <h2 className="text-center text-xl font-bold mt-1">Your Vocabulary - {filteredVocabItems?.length}</h2>
       
-      <div className="flex gap-2">
+      <div className="flex flex-col md:flex-row gap-2 md:gap-0-5">
         <input
           type="text"
           placeholder="Search vocabulary..."
-          className="w-full px-0-5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-300"
+          className="w-full p-2 md:p-0-5 rounded-lg border border-main-darken focus:outline-none focus:ring-2 focus:ring-main-accent"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -52,7 +52,7 @@ const VocabList = () => {
             <button
               key={status}
               onClick={() => toggleStatus(status)}
-              className={`px-2 py-0-5 rounded-2xl text-sm font-semibold transition-colors ${
+              className={`px-2 py-1-5 md:px-1 md:py-0-5 rounded-2xl text-sm font-semibold transition-colors ${
                 selectedStatuses.includes(status)
                   ? `bg-${status} text-white`
                   : `bg-gray-100 text-${status} hover:bg-gray-200`
