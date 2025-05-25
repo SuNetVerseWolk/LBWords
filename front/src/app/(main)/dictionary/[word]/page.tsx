@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import AskAi from "@/services/askAi";
 import ReactMarkdown from "react-markdown";
@@ -28,7 +28,7 @@ export default function WordPage() {
   const { user } = useAuth();
   const {
     data: vocabItem,
-    isLoading,
+    isLoading: isVocabLoading,
     error: vocabError,
   } = useVocabItemByTerm(word as string, user?.id!);
   const { mutate: deleteMark } = useDeleteVocabItem();
@@ -39,38 +39,56 @@ export default function WordPage() {
     [word]
   );
   const { mutate: updateStatus } = useUpdateVocabStatus();
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  useEffect(() => {
+  const fetchAnalysis = useCallback(async () => {
     if (!convertedWord) return;
 
+    // Abort previous request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
     const abortController = new AbortController();
+    abortControllerRef.current = abortController;
 
-    const fetchAnalysis = async () => {
-      try {
-        await AskAi(
-          convertedWord,
-          "Проанализируй это слово/выражение по американскому английскому, следуя подробной схеме",
-          (data) => {
-            setAnalysis({
-              word: convertedWord,
-              analysis: data.definition,
-            });
-          },
-          abortController
-        );
-      } catch (err) {
+    setLoading(true);
+    setError(null);
+    try {
+      await AskAi(
+        convertedWord,
+        "Проанализируй это слово/выражение по американскому английскому, следуя подробной схеме",
+        (data) => {
+          setAnalysis({
+            word: convertedWord,
+            analysis: data.definition,
+          });
+        },
+        abortController
+      );
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') {
+        console.log('Fetch aborted');
+      } else {
         setError(err instanceof Error ? err.message : "Unknown error");
-      } finally {
-        setLoading(false);
       }
-    };
-
-    fetchAnalysis();
-
-    return () => abortController.abort();
+    } finally {
+      setLoading(false);
+      abortControllerRef.current = null;
+    }
   }, [convertedWord]);
 
-  if (error) return <div>Error: {error}</div>;
+  useEffect(() => {
+    fetchAnalysis();
+
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, [fetchAnalysis]);
+
+  if (vocabError) return <div>Error: {vocabError.message}</div>;
 
   return (
     <div className="c flex-col px-2 py-1 w-full">
@@ -115,33 +133,48 @@ export default function WordPage() {
             </option>
           </select>
         </div>
-        <div
-          className={`p-1 md:p-0-5 rounded cp ${vocabItem ? "bg-gray-600" : ""}`}
-          onClick={() =>
-            vocabItem
-              ? deleteMark(vocabItem?.id!)
-              : addMark({
-                  user: user?.id,
-                  term: convertedWord,
-                  status: "upto",
-                })
-          }
-        >
-          <BookMark
-            className={`w-5 md:w-2 ${
-              vocabItem ? "fill-gold" : "fill-black hover:fill-dark-gold"
-            }`}
-          />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={fetchAnalysis}
+            className="bg-blue-500 text-white px-2 py-1 rounded disabled:opacity-50"
+            disabled={loading}
+          >
+            {loading ? 'Refreshing...' : analysis ? 'Reload' : 'Refetch'}
+          </button>
+          <div
+            className={`p-1 md:p-0-5 rounded cp ${vocabItem ? "bg-gray-600" : ""}`}
+            onClick={() =>
+              vocabItem
+                ? deleteMark(vocabItem?.id!)
+                : addMark({
+                    user: user?.id,
+                    term: convertedWord,
+                    status: "upto",
+                  })
+            }
+          >
+            <BookMark
+              className={`w-5 md:w-2 ${
+                vocabItem ? "fill-gold" : "fill-black hover:fill-dark-gold"
+              }`}
+            />
+          </div>
         </div>
       </div>
 
-      {!loading && analysis?.analysis ? (
-        <div className="prose overflow-y-scroll thin-scrollbar h-full w-full">
-          <ReactMarkdown>{analysis.analysis}</ReactMarkdown>
-        </div>
-      ) : (
-        <SpinerLoading className="relative top-0 left-0 h-full" />
-      )}
+      <div className="flex-1 overflow-y-auto thin-scrollbar">
+        {error && (
+          <div className="text-red-500 p-2">
+            Error: {error}
+          </div>
+        )}
+        {loading && !analysis?.analysis && <SpinerLoading className="h-full" />}
+        {analysis?.analysis && (
+          <div className="prose max-w-none">
+            <ReactMarkdown>{analysis.analysis}</ReactMarkdown>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
