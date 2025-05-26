@@ -67,8 +67,8 @@ export default function WordPage() {
         abortController
       );
     } catch (err) {
-      if (err instanceof Error && err.name === 'AbortError') {
-        console.log('Fetch aborted');
+      if (err instanceof Error && err.name === "AbortError") {
+        console.log("Fetch aborted");
       } else {
         setError(err instanceof Error ? err.message : "Unknown error");
       }
@@ -101,9 +101,7 @@ export default function WordPage() {
         </button>
         <div className="c gap-1 items-stretch relative">
           <h1
-            className={`text-3xl font-bold text-center uppercase text-${
-              vocabItem?.status == "upto" ? "black" : vocabItem?.status
-            }`}
+            className={`text-3xl font-bold text-center uppercase text-${vocabItem?.status}`}
           >
             {convertedWord}
           </h1>
@@ -139,10 +137,12 @@ export default function WordPage() {
             className="bg-blue-500 text-white px-2 py-1 rounded disabled:opacity-50"
             disabled={loading}
           >
-            {loading ? 'Refreshing...' : analysis ? 'Reload' : 'Refetch'}
+            {loading ? "Refreshing..." : analysis ? "Reload" : "Refetch"}
           </button>
           <div
-            className={`p-1 md:p-0-5 rounded cp ${vocabItem ? "bg-gray-600" : ""}`}
+            className={`p-1 md:p-0-5 rounded cp ${
+              vocabItem ? "bg-gray-600" : ""
+            }`}
             onClick={() =>
               vocabItem
                 ? deleteMark(vocabItem?.id!)
@@ -163,11 +163,7 @@ export default function WordPage() {
       </div>
 
       <div className="flex-1 overflow-y-auto thin-scrollbar">
-        {error && (
-          <div className="text-red-500 p-2">
-            Error: {error}
-          </div>
-        )}
+        {error && <div className="text-red-500 p-2">Error: {error}</div>}
         {loading && !analysis?.analysis && <SpinerLoading className="h-full" />}
         {analysis?.analysis && (
           <div className="prose max-w-none">

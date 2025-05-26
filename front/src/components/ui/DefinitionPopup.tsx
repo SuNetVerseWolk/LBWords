@@ -110,7 +110,7 @@ export default function DefinitionPopup({
     >
       <div className="flex justify-between items-center gap-1">
         <Link href={"/dictionary/" + selectedText} className="truncate">
-          <h3 className={`font-semibold text-lg truncate cp uppercase text-${vocabItem?.status == "upto" ? "black" : vocabItem?.status}`}>{selectedText}</h3>
+          <h3 className={`font-semibold text-lg truncate cp uppercase text-${vocabItem?.status}`}>{selectedText}</h3>
         </Link>
         <div className="c gap-0-5">
           <div className={`p-0-5 rounded cp ${vocabItem ? "bg-gray-600" : ""}`}>
