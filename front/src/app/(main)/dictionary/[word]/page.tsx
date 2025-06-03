@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import AskAi from "@/services/askAi";
 import ReactMarkdown from "react-markdown";
 import SpinerLoading from "@/components/layouts/SpinerLoading";
 import { BookMark } from "@/components/svgs/BookMark";
@@ -14,15 +13,33 @@ import {
 } from "@/hooks/useUsersVocab";
 import { useAuth } from "@/hooks/useAuth";
 import { word_statuses } from "@/types/dbTypes";
+import axios from "axios";
 
-interface WordAnalysis {
-  word: string;
-  analysis: string;
-}
+const ANALYSIS_SECTIONS = [
+  'pronunciation',
+  'frequency',
+  'wordForms',
+  'mainMeanings',
+  'possibleMeanings',
+  'synonymsAntonyms',
+  'collocations',
+  'idioms',
+  'commonMistakes',
+  'grammarRule',
+  'grammarExamples',
+  'relatedRules',
+  'grammarFrequency',
+  'pronunciationTips',
+  'taboos',
+  'examples',
+  'additionalNotes',
+] as const;
+
+type AnalysisSection = typeof ANALYSIS_SECTIONS[number];
+type AnalysisData = Partial<Record<AnalysisSection, string>>;
 
 export default function WordPage() {
   const { word } = useParams();
-  const [analysis, setAnalysis] = useState<WordAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
@@ -40,11 +57,14 @@ export default function WordPage() {
   );
   const { mutate: updateStatus } = useUpdateVocabStatus();
   const abortControllerRef = useRef<AbortController | null>(null);
+	const [analysis, setAnalysis] = useState<AnalysisData>({});
+  const [completedSections, setCompletedSections] = useState(0);
+  const totalSections = ANALYSIS_SECTIONS.length;
 
   const fetchAnalysis = useCallback(async () => {
     if (!convertedWord) return;
 
-    // Abort previous request
+    // Abort previous requests
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -54,29 +74,46 @@ export default function WordPage() {
 
     setLoading(true);
     setError(null);
+    setAnalysis({});
+    setCompletedSections(0);
+
     try {
-      await AskAi(
-        convertedWord,
-        "Проанализируй это слово/выражение по американскому английскому, следуя подробной схеме",
-        (data) => {
-          setAnalysis({
-            word: convertedWord,
-            analysis: data.definition,
-          });
-        },
-        abortController
+      const requests = ANALYSIS_SECTIONS.map(section => 
+        axios.post<Record<AnalysisSection, string>>('/api/askai', {
+          word: convertedWord,
+          section
+        }, {
+          signal: abortController.signal
+        })
       );
+
+      const responses = await Promise.allSettled(requests);
+      
+      const newAnalysis: AnalysisData = {};
+      responses.forEach((response, index) => {
+        const section = ANALYSIS_SECTIONS[index];
+        if (response.status === 'fulfilled') {
+          newAnalysis[section] = response.value.data[section];
+        } else {
+          newAnalysis[section] = `**Error loading section**: ${response.reason instanceof Error ? response.reason.message : 'Unknown error'}`;
+        }
+        setCompletedSections(prev => prev + 1);
+      });
+      
+      setAnalysis(newAnalysis);
     } catch (err) {
-      if (err instanceof Error && err.name === "AbortError") {
-        console.log("Fetch aborted");
-      } else {
-        setError(err instanceof Error ? err.message : "Unknown error");
-      }
+      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setLoading(false);
       abortControllerRef.current = null;
     }
   }, [convertedWord]);
+
+	const formatSectionTitle = (section: string) => {
+    return section
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/\b\w/g, l => l.toUpperCase());
+  };
 
   useEffect(() => {
     fetchAnalysis();
@@ -164,10 +201,28 @@ export default function WordPage() {
 
       <div className="flex-1 overflow-y-auto thin-scrollbar">
         {error && <div className="text-red-500 p-2">Error: {error}</div>}
-        {loading && !analysis?.analysis && <SpinerLoading className="h-full" />}
-        {analysis?.analysis && (
+        
+        {loading && (
+          <div className="c flex-col items-center p-4">
+            <SpinerLoading />
+            <p className="mt-2">
+              Loading... ({completedSections}/{totalSections} sections)
+            </p>
+          </div>
+        )}
+
+        {!loading && Object.keys(analysis).length > 0 && (
           <div className="prose max-w-none">
-            <ReactMarkdown>{analysis.analysis}</ReactMarkdown>
+            {ANALYSIS_SECTIONS.map(section => (
+              analysis[section] && (
+                <div key={section} className="mb-6">
+                  <h2 className="text-xl font-bold capitalize border-b pb-1">
+                    {formatSectionTitle(section)}
+                  </h2>
+                  <ReactMarkdown>{analysis[section]!}</ReactMarkdown>
+                </div>
+              )
+            ))}
           </div>
         )}
       </div>

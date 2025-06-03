@@ -63,7 +63,7 @@ const VocabCard = ({ item }: { item: UsersVocab }) => {
               handleInnerClick(e);
               updateStatus({ id: item.id!, status: "learned" });
             }}
-            className="px-3 py-1 bg-cat-beige-light rounded"
+            className="px-3 py-1 bg-cat-beige-light rounded hidden"
           >
             Уже не забуду
           </button>

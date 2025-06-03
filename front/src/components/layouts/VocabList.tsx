@@ -6,10 +6,10 @@ import SpinerLoading from "./SpinerLoading";
 import { useState } from "react";
 
 const statusLabels = {
-  unknown: 'Не знаю',
-  learned: 'Знаю',
-  learning: 'Учу',
-  upto: 'В планах',
+  unknown: "Не знаю",
+  learned: "Знаю",
+  learning: "Учу",
+  upto: "В планах",
 };
 
 const VocabList = () => {
@@ -19,26 +19,30 @@ const VocabList = () => {
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
 
   const toggleStatus = (status: string) => {
-    setSelectedStatuses(prev =>
+    setSelectedStatuses((prev) =>
       prev.includes(status)
-        ? prev.filter(s => s !== status)
+        ? prev.filter((s) => s !== status)
         : [...prev, status]
     );
   };
 
-  const filteredVocabItems = vocabItems?.filter(item => {
-    const matchesSearch = item.term.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.includes(item.status);
+  const filteredVocabItems = vocabItems?.filter((item) => {
+    const matchesSearch = item.term
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesStatus =
+      selectedStatuses.length === 0 || selectedStatuses.includes(item.status);
     return matchesSearch && matchesStatus;
   });
 
-  if (isLoading) return <SpinerLoading />;
   if (error) return <div className="c">Error: {error.message}</div>;
 
   return (
     <div className="flex flex-col h-full w-full space-y-2 md:space-y-1">
-      <h2 className="text-center text-xl font-bold mt-1">Your Vocabulary - {filteredVocabItems?.length}</h2>
-      
+      <h2 className="text-center text-xl font-bold mt-1">
+        Ваш словарь - {isLoading ? 0 : filteredVocabItems?.length}
+      </h2>
+
       <div className="flex flex-col md:flex-row gap-2 md:gap-0-5">
         <input
           type="text"
@@ -65,8 +69,12 @@ const VocabList = () => {
       </div>
 
       <div className="h-full overflow-y-scroll pr-0-5 thin-scrollbar space-y-1">
-        {filteredVocabItems?.length === 0 ? (
-          <div className="text-center text-gray-500 py-4">No vocabulary items found</div>
+        {isLoading ? (
+          <SpinerLoading />
+        ) : filteredVocabItems?.length === 0 ? (
+          <div className="text-center text-gray-500 py-4">
+            No vocabulary items found
+          </div>
         ) : (
           filteredVocabItems?.map((item) => (
             <VocabCard key={item.id} item={item} />
