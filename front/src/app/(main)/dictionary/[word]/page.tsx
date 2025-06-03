@@ -215,7 +215,7 @@ export default function WordPage() {
           <div className="prose max-w-none">
             {ANALYSIS_SECTIONS.map(section => (
               analysis[section] && (
-                <div key={section} className="mb-6">
+                <div key={section} className="mb-3">
                   <h2 className="text-xl font-bold capitalize border-b pb-1">
                     {formatSectionTitle(section)}
                   </h2>
