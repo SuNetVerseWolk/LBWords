@@ -3,7 +3,6 @@ import SpinerLoading from "@/components/layouts/SpinerLoading";
 import { useAuth } from "@/hooks/useAuth";
 import { UseDictionary } from "@/hooks/useDictionary";
 import { useUserVocab } from "@/hooks/useUsersVocab";
-import { words } from "@/types/wordList";
 import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from "react";
 
